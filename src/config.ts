@@ -9,4 +9,8 @@ export class Config {
   static get Env (): Env {
     return dotenv.config().parsed as unknown as Env
   }
+
+  static isDebug (): boolean {
+    return this.Env.DEBUG === '1'
+  }
 }
