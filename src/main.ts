@@ -1,4 +1,3 @@
-import dotenv, { DotenvParseOutput } from 'dotenv'
+import { Config } from './config'
 
-const dpo = dotenv.config().parsed as DotenvParseOutput
-console.log(dpo.DEBUG)
+console.log(Config.Env.DEBUG)
