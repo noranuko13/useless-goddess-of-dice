@@ -2,7 +2,9 @@
   "private": true,
   "name": "useless-goddess-of-dice",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.27",
