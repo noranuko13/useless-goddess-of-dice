@@ -8,7 +8,8 @@
     "start": "node .",
     "debug": "nodemon",
     "lint": "eslint . --ext .ts,.js",
-    "lint:fix": "eslint . --ext .ts,.js --fix"
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "test": "mocha --require ts-node/register test/**/*.ts"
   },
   "license": "MIT",
   "devDependencies": {
