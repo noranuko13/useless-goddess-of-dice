@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 export interface Env {
   DEBUG: string;
   TOKEN: string;
+  PREFIX: string;
 }
 
 export class Config {

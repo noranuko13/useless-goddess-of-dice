@@ -1,5 +1,5 @@
 import * as readline from 'readline'
-import discord from 'discord.js'
+import discord, { Message } from 'discord.js'
 import { Config } from './config'
 
 export interface Client {
@@ -33,6 +33,10 @@ export class DiscordClient implements Client {
     })
 
     client.on('message', message => {
+      if (!this.isValid(message)) {
+        return
+      }
+
       if (fn) {
         const content = fn(message.content)
         message.channel.send(content).then()
@@ -40,5 +44,10 @@ export class DiscordClient implements Client {
     })
 
     client.login(Config.Env.TOKEN).then()
+  }
+
+  private isValid (message: Message): boolean {
+    return message.content.startsWith(Config.Env.PREFIX) &&
+      !message.author.bot
   }
 }
