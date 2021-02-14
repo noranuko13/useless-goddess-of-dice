@@ -7,11 +7,9 @@ export interface Env {
 }
 
 export class Config {
-  static get Env (): Env {
-    return dotenv.config().parsed as unknown as Env
-  }
+  env: Env = dotenv.config().parsed as unknown as Env
 
-  static isDebug (): boolean {
-    return this.Env.DEBUG === '1'
+  isDebug (): boolean {
+    return this.env.DEBUG === '1'
   }
 }
