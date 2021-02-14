@@ -2,6 +2,27 @@ import assert from 'assert'
 import { MessageConverter } from '../src/converter'
 
 describe('MessageConverter', function () {
+  describe('#removeWhiteSpace()', function () {
+    it('Extra space: Simple dice roll', function () {
+      const expected = '/ugd 1d100'
+      assert.strictEqual(MessageConverter.removeWhiteSpace('/ugd 1d100'), expected)
+      assert.strictEqual(MessageConverter.removeWhiteSpace('  /ugd 1d100'), expected)
+      assert.strictEqual(MessageConverter.removeWhiteSpace('/ugd  1d100'), expected)
+      assert.strictEqual(MessageConverter.removeWhiteSpace('/ugd 1d100  '), expected)
+    })
+
+    it('Extra space: Complex dice roll', function () {
+      const expected = '/ugd 2d6 + 6'
+      assert.strictEqual(MessageConverter.removeWhiteSpace('/ugd 2d6 + 6'), expected)
+      assert.strictEqual(MessageConverter.removeWhiteSpace('/ugd  2d6  +   6'), expected)
+    })
+
+    it('Other', function () {
+      assert.strictEqual(MessageConverter.removeWhiteSpace(''), '')
+      assert.strictEqual(MessageConverter.removeWhiteSpace('ダイスの駄女神'), 'ダイスの駄女神')
+    })
+  })
+
   describe('#toHalfWidth()', function () {
     const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'
     const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
