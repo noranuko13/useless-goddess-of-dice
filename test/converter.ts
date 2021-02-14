@@ -18,6 +18,7 @@ describe('MessageConverter', function () {
     it('All in', function () {
       assert.strictEqual(converter.run('/ugd 1d100'), '1d100')
       assert.strictEqual(converter.run('/ugd 2d6 + 6'), '2d6 + 6')
+      assert.strictEqual(converter.run('/ugd 2d6 -6'), '2d6 - 6')
     })
   })
 
@@ -47,6 +48,25 @@ describe('MessageConverter', function () {
     it('Other', function () {
       assert.strictEqual(converter.removePrefix(''), '')
       assert.strictEqual(converter.removePrefix('ダイスの駄女神'), 'ダイスの駄女神')
+    })
+  })
+
+  describe('#addWhiteSpace()', function () {
+    it('Addition symbol', function () {
+      const expected = '/ugd 2d6 + 6'
+      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6 +6'), expected)
+      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6+ 6'), expected)
+    })
+
+    it('Subtraction symbol', function () {
+      const expected = '/ugd 2d6 - 6'
+      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6 -6'), expected)
+      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6- 6'), expected)
+    })
+
+    it('Other', function () {
+      assert.strictEqual(converter.addWhiteSpace(''), '')
+      assert.strictEqual(converter.addWhiteSpace('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 

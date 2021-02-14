@@ -11,6 +11,7 @@ export class MessageConverter {
 
   run (text: string): string {
     text = this.toHalfWidth(text)
+    text = this.addWhiteSpace(text)
     text = this.removeWhiteSpace(text)
     text = this.removePrefix(text)
     return text
@@ -19,6 +20,13 @@ export class MessageConverter {
   private removePrefix (text: string) {
     text = text.replace(this.config.getPrefix(), '')
     return text.trimLeft()
+  }
+
+  private addWhiteSpace (text: string) {
+    text = text.replace(/\+/g, ' + ')
+    text = text.replace(/-/g, ' - ')
+    text = text.replace(/ +([+-]) +/g, ' $1 ')
+    return text
   }
 
   private removeWhiteSpace (text: string) {
