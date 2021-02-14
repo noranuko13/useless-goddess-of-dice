@@ -2,9 +2,10 @@ import * as readline from 'readline'
 import discord, { Message } from 'discord.js'
 import { Config } from './config'
 import { injectable } from 'tsyringe'
+import { DiceRoller } from './rollers'
 
 export interface Client {
-  waitInput(fn: (text: string) => string): void
+  waitInput(roller: DiceRoller): void
 }
 
 export class DebugClient implements Client {
@@ -14,13 +15,11 @@ export class DebugClient implements Client {
     terminal: false
   })
 
-  waitInput (fn: (answer: string) => string): void {
+  waitInput (roller: DiceRoller): void {
     this.rl.question('入力: ', (answer) => {
-      if (fn) {
-        const content = fn(answer)
-        console.log('出力: ' + content)
-      }
-      this.waitInput(fn)
+      const content = roller.roll(answer)
+      console.log('出力: ' + content)
+      this.waitInput(roller)
     })
   };
 }
@@ -33,7 +32,7 @@ export class DiscordClient implements Client {
     this.config = config
   }
 
-  waitInput (fn: (answer: string) => string): void {
+  waitInput (roller: DiceRoller): void {
     const client = new discord.Client()
 
     client.once('ready', () => {
@@ -45,10 +44,8 @@ export class DiscordClient implements Client {
         return
       }
 
-      if (fn) {
-        const content = fn(message.content)
-        message.channel.send(content).then()
-      }
+      const content = roller.roll(message.content)
+      message.channel.send(content).then()
     })
 
     client.login(this.config.getToken()).then()

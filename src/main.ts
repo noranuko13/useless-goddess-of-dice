@@ -2,17 +2,11 @@ import 'reflect-metadata'
 import { Config } from './config'
 import { Client, DebugClient, DiscordClient } from './clients'
 import { container } from 'tsyringe'
+import { PlayerDiceRoller } from './rollers'
 
-const config = container.resolve(Config)
-if (config.isDebug()) {
-  console.log('DEBUG MODE')
-}
-
-const fn = function (answer: string): string {
-  return answer + answer
-}
-
-const client: Client = config.isDebug()
-  ? new DebugClient()
+const client: Client = container.resolve(Config).isDebug()
+  ? container.resolve(DebugClient)
   : container.resolve(DiscordClient)
-client.waitInput(fn)
+
+const roller = container.resolve(PlayerDiceRoller)
+client.waitInput(roller)
