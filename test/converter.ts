@@ -12,7 +12,14 @@ describe('MessageConverter', function () {
       }
     } as Config
   })
-  const converter = container.resolve(MessageConverter)
+  const converter = container.resolve(MessageConverter) as any
+
+  describe('#run()', function () {
+    it('All in', function () {
+      assert.strictEqual(converter.run('/ugd 1d100'), '1d100')
+      assert.strictEqual(converter.run('/ugd 2d6 + 6'), '2d6 + 6')
+    })
+  })
 
   describe('#removePrefix()', function () {
     it('Remove prefix', function () {
@@ -29,7 +36,7 @@ describe('MessageConverter', function () {
           }
         } as Config
       })
-      const another = container.resolve(MessageConverter)
+      const another = container.resolve(MessageConverter) as any
 
       assert.strictEqual(another.removePrefix('/prefix 1d100'), '1d100')
       assert.strictEqual(another.removePrefix('/prefix 2d6 + 6'), '2d6 + 6')

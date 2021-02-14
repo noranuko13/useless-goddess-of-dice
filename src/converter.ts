@@ -9,17 +9,24 @@ export class MessageConverter {
     this.config = config
   }
 
-  removePrefix (text: string) {
+  run (text: string): string {
+    text = this.toHalfWidth(text)
+    text = this.removeWhiteSpace(text)
+    text = this.removePrefix(text)
+    return text
+  }
+
+  private removePrefix (text: string) {
     text = text.replace(this.config.getPrefix(), '')
     return text.trimLeft()
   }
 
-  removeWhiteSpace (text: string) {
+  private removeWhiteSpace (text: string) {
     text = text.replace(/ +/g, ' ')
     return text.trim()
   }
 
-  toHalfWidth (text: string) {
+  private toHalfWidth (text: string) {
     return text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (text) {
       return String.fromCharCode(text.charCodeAt(0) - 0xFEE0)
     })
