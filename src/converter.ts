@@ -1,4 +1,19 @@
+import { injectable } from 'tsyringe'
+import { Config } from './config'
+
+@injectable()
 export class MessageConverter {
+  private config: Config;
+
+  constructor (config: Config) {
+    this.config = config
+  }
+
+  removePrefix (text: string) {
+    text = text.replace(this.config.getPrefix(), '')
+    return text.trimLeft()
+  }
+
   removeWhiteSpace (text: string) {
     text = text.replace(/ +/g, ' ')
     return text.trim()

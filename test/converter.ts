@@ -1,8 +1,47 @@
+import 'reflect-metadata'
 import assert from 'assert'
 import { MessageConverter } from '../src/converter'
+import { container } from 'tsyringe'
+import { Config } from '../src/config'
 
 describe('MessageConverter', function () {
-  const converter = new MessageConverter()
+  container.register(Config, {
+    useValue: {
+      getPrefix (): string {
+        return '/ugd'
+      }
+    } as Config
+  })
+  const converter = container.resolve(MessageConverter)
+
+  describe('#removePrefix()', function () {
+    it('Remove prefix', function () {
+      assert.strictEqual(converter.removePrefix('/ugd 1d100'), '1d100')
+      assert.strictEqual(converter.removePrefix('/ugd 2d6 + 6'), '2d6 + 6')
+      assert.strictEqual(converter.removePrefix('/sphinx 1d100'), '/sphinx 1d100')
+    })
+
+    it('Another prefix', function () {
+      container.register(Config, {
+        useValue: {
+          getPrefix (): string {
+            return '/prefix'
+          }
+        } as Config
+      })
+      const another = container.resolve(MessageConverter)
+
+      assert.strictEqual(another.removePrefix('/prefix 1d100'), '1d100')
+      assert.strictEqual(another.removePrefix('/prefix 2d6 + 6'), '2d6 + 6')
+      assert.strictEqual(another.removePrefix('/ugd 1d100'), '/ugd 1d100')
+      assert.strictEqual(another.removePrefix('/sphinx 1d100'), '/sphinx 1d100')
+    })
+
+    it('Other', function () {
+      assert.strictEqual(converter.removePrefix(''), '')
+      assert.strictEqual(converter.removePrefix('ダイスの駄女神'), 'ダイスの駄女神')
+    })
+  })
 
   describe('#removeWhiteSpace()', function () {
     it('Extra space: Simple dice roll', function () {

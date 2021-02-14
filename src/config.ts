@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { injectable } from 'tsyringe'
 
 export interface Env {
   DEBUG: string;
@@ -6,10 +7,23 @@ export interface Env {
   PREFIX: string;
 }
 
+@injectable()
 export class Config {
-  env: Env = dotenv.config().parsed as unknown as Env
+  private env: Env
+
+  constructor () {
+    this.env = dotenv.config().parsed as unknown as Env
+  }
 
   isDebug (): boolean {
     return this.env.DEBUG === '1'
+  }
+
+  getToken (): string {
+    return this.env.TOKEN
+  }
+
+  getPrefix (): string {
+    return this.env.PREFIX
   }
 }

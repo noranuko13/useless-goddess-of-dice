@@ -1,6 +1,7 @@
 import * as readline from 'readline'
 import discord, { Message } from 'discord.js'
 import { Config } from './config'
+import { injectable } from 'tsyringe'
 
 export interface Client {
   waitInput(fn: (text: string) => string): void
@@ -24,7 +25,14 @@ export class DebugClient implements Client {
   };
 }
 
+@injectable()
 export class DiscordClient implements Client {
+  private config: Config;
+
+  constructor (config: Config) {
+    this.config = config
+  }
+
   waitInput (fn: (answer: string) => string): void {
     const client = new discord.Client()
 
@@ -43,11 +51,11 @@ export class DiscordClient implements Client {
       }
     })
 
-    client.login(Config.Env.TOKEN).then()
+    client.login(this.config.getToken()).then()
   }
 
   private isValid (message: Message): boolean {
-    return message.content.startsWith(Config.Env.PREFIX) &&
+    return message.content.startsWith(this.config.getPrefix()) &&
       !message.author.bot
   }
 }

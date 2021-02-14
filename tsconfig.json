@@ -15,6 +15,10 @@
     /* Module Resolution Options */
     "esModuleInterop": true,
 
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
