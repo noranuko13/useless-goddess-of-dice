@@ -1,12 +1,34 @@
 import { injectable } from 'tsyringe'
 
+export interface DiceCommand {
+  time: number
+  side: number
+}
+
+@injectable()
 export class Command {
-  addDices: string[];
-  subDices: string[];
+  addDices: DiceCommand[];
+  subDices: DiceCommand[];
 
   constructor () {
     this.addDices = []
     this.subDices = []
+  }
+
+  addAddDice (str: string) {
+    this.addDices.push(this.createDiceCommand(str))
+  }
+
+  addSubDice (str: string) {
+    this.subDices.push(this.createDiceCommand(str))
+  }
+
+  private createDiceCommand (str: string): DiceCommand {
+    const numbers = str.match(/^(\d+)d(\d+)$/) || []
+    return {
+      time: parseInt(numbers[1]),
+      side: parseInt(numbers[2])
+    } as DiceCommand
   }
 }
 
@@ -20,8 +42,8 @@ export class MessageParser {
     args.forEach(arg => {
       switch (true) {
         case /^\d+d\d+$/.test(arg):
-          if (symbol === '+') command.addDices.push(arg)
-          if (symbol === '-') command.subDices.push(arg)
+          if (symbol === '+') command.addAddDice(arg)
+          if (symbol === '-') command.addSubDice(arg)
           break
         case /\+/.test(arg):
           symbol = '+'
