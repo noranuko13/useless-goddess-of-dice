@@ -3,11 +3,7 @@ import { Config } from './config'
 
 @injectable()
 export class MessageConverter {
-  private config: Config;
-
-  constructor (config: Config) {
-    this.config = config
-  }
+  constructor (private config: Config) {}
 
   run (text: string): string {
     text = this.toHalfWidth(text)

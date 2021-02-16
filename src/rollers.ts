@@ -7,13 +7,7 @@ export interface DiceRoller {
 }
 
 export abstract class AbstractDiceRoller implements DiceRoller {
-  protected converter: MessageConverter
-  protected parser: MessageParser
-
-  protected constructor (converter: MessageConverter, parser: MessageParser) {
-    this.converter = converter
-    this.parser = parser
-  }
+  protected constructor (protected converter: MessageConverter, protected parser: MessageParser) {}
 
   roll (text: string): string {
     text = this.converter.run(text)
@@ -26,7 +20,6 @@ export abstract class AbstractDiceRoller implements DiceRoller {
 
 @injectable()
 export class PlayerDiceRoller extends AbstractDiceRoller {
-  // eslint-disable-next-line no-useless-constructor
   constructor (converter: MessageConverter, parser: MessageParser) {
     super(converter, parser)
   }

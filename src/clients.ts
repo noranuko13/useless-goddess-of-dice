@@ -26,11 +26,7 @@ export class DebugClient implements Client {
 
 @injectable()
 export class DiscordClient implements Client {
-  private config: Config;
-
-  constructor (config: Config) {
-    this.config = config
-  }
+  constructor (private config: Config) {}
 
   waitInput (roller: DiceRoller): void {
     const client = new discord.Client()
