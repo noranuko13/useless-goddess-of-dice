@@ -7,20 +7,28 @@ export interface DiceCommand {
 
 @injectable()
 export class Command {
-  addDices: DiceCommand[];
-  subDices: DiceCommand[];
+  private readonly addDices: DiceCommand[];
+  private readonly subDices: DiceCommand[];
 
   constructor () {
     this.addDices = []
     this.subDices = []
   }
 
-  addAddDice (str: string) {
+  addAddDice (str: string): void {
     this.addDices.push(this.createDiceCommand(str))
   }
 
-  addSubDice (str: string) {
+  getAddDices () {
+    return this.addDices
+  }
+
+  addSubDice (str: string): void {
     this.subDices.push(this.createDiceCommand(str))
+  }
+
+  getSubDices () {
+    return this.subDices
   }
 
   private createDiceCommand (str: string): DiceCommand {

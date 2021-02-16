@@ -6,6 +6,24 @@ import { Command, DiceCommand, MessageParser } from '../src/parser'
 describe('Command', function () {
   const command = container.resolve(Command) as any
 
+  describe('#addAddDice(), #getAddDices()', function () {
+    it('String value', function () {
+      command.addAddDice('1d100')
+      assert.deepStrictEqual(command.getAddDices(), [{ time: 1, side: 100 }])
+      command.addAddDice('2d6')
+      assert.deepStrictEqual(command.getAddDices(), [{ time: 1, side: 100 }, { time: 2, side: 6 }])
+    })
+  })
+
+  describe('#addSubDice(), #getSubDices()', function () {
+    it('String value', function () {
+      command.addSubDice('1d100')
+      assert.deepStrictEqual(command.getSubDices(), [{ time: 1, side: 100 }])
+      command.addSubDice('2d6')
+      assert.deepStrictEqual(command.getSubDices(), [{ time: 1, side: 100 }, { time: 2, side: 6 }])
+    })
+  })
+
   describe('#createDiceCommand()', function () {
     it('Normal diceCommand', function () {
       assert.deepStrictEqual(command.createDiceCommand('1d100'), { time: 1, side: 100 } as DiceCommand)
