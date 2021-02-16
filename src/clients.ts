@@ -2,7 +2,7 @@ import * as readline from 'readline'
 import discord, { Message } from 'discord.js'
 import { Config } from './config'
 import { injectable } from 'tsyringe'
-import { PlayerDiceRoller } from './rollers'
+import { DiceRoller } from './rollers'
 
 export interface Client {
   waitInput(): void
@@ -10,7 +10,7 @@ export interface Client {
 
 @injectable()
 export class DebugClient implements Client {
-  constructor (private roller: PlayerDiceRoller) {}
+  constructor (private roller: DiceRoller) {}
 
   rl: readline.Interface = readline.createInterface({
     input: process.stdin,
@@ -29,7 +29,7 @@ export class DebugClient implements Client {
 
 @injectable()
 export class DiscordClient implements Client {
-  constructor (private config: Config, private roller: PlayerDiceRoller) {}
+  constructor (private config: Config, private roller: DiceRoller) {}
 
   waitInput (): void {
     const client = new discord.Client()
