@@ -2,33 +2,36 @@ import * as readline from 'readline'
 import discord, { Message } from 'discord.js'
 import { Config } from './config'
 import { injectable } from 'tsyringe'
-import { DiceRoller } from './rollers'
+import { PlayerDiceRoller } from './rollers'
 
 export interface Client {
-  waitInput(roller: DiceRoller): void
+  waitInput(): void
 }
 
+@injectable()
 export class DebugClient implements Client {
+  constructor (private roller: PlayerDiceRoller) {}
+
   rl: readline.Interface = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
     terminal: false
   })
 
-  waitInput (roller: DiceRoller): void {
+  waitInput (): void {
     this.rl.question('入力: ', (answer) => {
-      const content = roller.roll(answer)
+      const content = this.roller.roll(answer)
       console.log('出力: ' + content)
-      this.waitInput(roller)
+      this.waitInput()
     })
   };
 }
 
 @injectable()
 export class DiscordClient implements Client {
-  constructor (private config: Config) {}
+  constructor (private config: Config, private roller: PlayerDiceRoller) {}
 
-  waitInput (roller: DiceRoller): void {
+  waitInput (): void {
     const client = new discord.Client()
 
     client.once('ready', () => {
@@ -40,7 +43,7 @@ export class DiscordClient implements Client {
         return
       }
 
-      const content = roller.roll(message.content)
+      const content = this.roller.roll(message.content)
       message.channel.send(content).then()
     })
 
