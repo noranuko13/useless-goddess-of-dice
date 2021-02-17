@@ -7,6 +7,10 @@ export class NSidedDice {
     this.deme = this.korokoro()
   }
 
+  getDeme (): number {
+    return this.deme
+  }
+
   private korokoro (): number {
     return Math.floor(Math.random() * this.side) + 1
   }
