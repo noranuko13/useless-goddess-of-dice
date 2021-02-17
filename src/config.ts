@@ -2,9 +2,9 @@ import dotenv from 'dotenv'
 import { injectable } from 'tsyringe'
 
 export interface Env {
-  DEBUG: string;
-  TOKEN: string;
-  PREFIX: string;
+  UGD_DEBUG: string;
+  UGD_DISCORD_TOKEN: string;
+  UGD_CMD_PREFIX: string;
 }
 
 @injectable()
@@ -16,14 +16,14 @@ export class Config {
   }
 
   isDebug (): boolean {
-    return this.env.DEBUG === '1'
+    return this.env.UGD_DEBUG === '1'
   }
 
   getToken (): string {
-    return this.env.TOKEN
+    return this.env.UGD_DISCORD_TOKEN
   }
 
   getPrefix (): string {
-    return this.env.PREFIX
+    return this.env.UGD_CMD_PREFIX
   }
 }
