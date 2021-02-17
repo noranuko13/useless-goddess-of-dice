@@ -12,7 +12,12 @@ export class Config {
   private env: Env
 
   constructor () {
-    this.env = dotenv.config().parsed as unknown as Env
+    dotenv.config()
+    this.env = {
+      UGD_DEBUG: process.env.UGD_DEBUG,
+      UGD_DISCORD_TOKEN: process.env.UGD_DISCORD_TOKEN,
+      UGD_CMD_PREFIX: process.env.UGD_CMD_PREFIX
+    } as Env
   }
 
   isDebug (): boolean {
