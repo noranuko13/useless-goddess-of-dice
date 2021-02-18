@@ -1,31 +1,8 @@
-import * as readline from 'readline'
-import discord, { Message } from 'discord.js'
-import { Config } from './config'
 import { injectable } from 'tsyringe'
-import { DiceRoller } from './rollers'
-
-export interface Client {
-  waitInput(): void
-}
-
-@injectable()
-export class DebugClient implements Client {
-  constructor (private roller: DiceRoller) {}
-
-  rl: readline.Interface = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  })
-
-  waitInput (): void {
-    this.rl.question('入力: ', (answer) => {
-      const content = this.roller.roll(answer)
-      console.log('出力: ' + content)
-      this.waitInput()
-    })
-  };
-}
+import { Config } from '../config'
+import { DiceRoller } from '../rollers'
+import discord, { Message } from 'discord.js'
+import { Client } from '../clients'
 
 @injectable()
 export class DiscordClient implements Client {
