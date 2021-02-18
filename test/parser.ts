@@ -61,6 +61,31 @@ describe('MessageParser', function () {
       assert.deepStrictEqual(parser.run('1d100 - 1d6'), expected)
     })
 
+    it('Additional dice', function () {
+      const expected = new Command()
+      expected.addAddNumber('5')
+      assert.deepStrictEqual(parser.run('+ 5'), expected)
+
+      expected.addAddNumber('7')
+      assert.deepStrictEqual(parser.run('5 + 7'), expected)
+    })
+
+    it('Reduction dice', function () {
+      const expected = new Command()
+      expected.addSubNumber('8')
+      assert.deepStrictEqual(parser.run('- 8'), expected)
+
+      expected.addSubNumber('11')
+      assert.deepStrictEqual(parser.run('- 8 - 11'), expected)
+    })
+
+    it('Composite dice', function () {
+      const expected = new Command()
+      expected.addAddNumber('100')
+      expected.addSubNumber('6')
+      assert.deepStrictEqual(parser.run('100 - 6'), expected)
+    })
+
     it('Other', function () {
       const expected = new Command()
       assert.deepStrictEqual(parser.run(''), expected)

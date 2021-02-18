@@ -14,17 +14,21 @@ describe('DiceResult', function () {
     subDices: [
       { side: 3, deme: 2, getDeme () { return 2 } } as unknown as NSidedDice,
       { side: 4, deme: 1, getDeme () { return 1 } } as unknown as NSidedDice
-    ]
+    ],
+    addNumbers: [3, 6],
+    subNumbers: [7, 8]
   }) as any
 
   const emptyResult = new DiceResult({
     addDices: [],
-    subDices: []
+    subDices: [],
+    addNumbers: [],
+    subNumbers: []
   }) as any
 
   describe('#toString()', function () {
     it('Number of dice is the total number of times', function () {
-      assert.strictEqual(diceResult.toString(), '+ ( 4 + 5 ) - ( 2 + 1 ) = 6')
+      assert.strictEqual(diceResult.toString(), '+ ( 4 + 5 ) - ( 2 + 1 ) + ( 3 + 6 ) - ( 7 + 8 ) = 0')
     })
 
     it('Empty Dices', function () {
@@ -49,9 +53,26 @@ describe('DiceResult', function () {
     })
   })
 
+  describe('#toStringNumbers()', function () {
+    it('Normal', function () {
+      assert.deepStrictEqual(
+        diceResult.toStringNumbers('+', diceResult.addNumbers),
+        ['+', '(', '3 + 6', ')']
+      )
+      assert.deepStrictEqual(
+        diceResult.toStringNumbers('-', diceResult.subNumbers),
+        ['-', '(', '7 + 8', ')']
+      )
+    })
+
+    it('Empty Numbers', function () {
+      assert.deepStrictEqual(emptyResult.toStringNumbers('+', []), [])
+    })
+  })
+
   describe('#getTotal()', function () {
     it('Normal', function () {
-      assert.strictEqual(diceResult.getTotal(), 6)
+      assert.strictEqual(diceResult.getTotal(), 0)
     })
 
     it('Empty Dices', function () {
@@ -66,6 +87,17 @@ describe('DiceResult', function () {
 
     it('Empty Dices', function () {
       assert.strictEqual(emptyResult.getDiceTotal([]), 0)
+    })
+  })
+
+  describe('#getNumberTotal()', function () {
+    it('Normal', function () {
+      assert.strictEqual(diceResult.getNumberTotal(diceResult.addNumbers), 9)
+      assert.strictEqual(diceResult.getNumberTotal(diceResult.subNumbers), 15)
+    })
+
+    it('Empty Numbers', function () {
+      assert.strictEqual(emptyResult.getNumberTotal([]), 0)
     })
   })
 })

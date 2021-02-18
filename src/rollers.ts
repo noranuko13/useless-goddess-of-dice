@@ -7,8 +7,10 @@ import { NSidedDice } from './dices'
 export class DiceResult {
   private addDices: NSidedDice[] = [];
   private subDices: NSidedDice[] = [];
+  private addNumbers: number[] = [];
+  private subNumbers: number[] = [];
 
-  constructor (result?: { subDices: NSidedDice[]; addDices: NSidedDice[] }) {
+  constructor (result?: { subDices: NSidedDice[]; addDices: NSidedDice[]; addNumbers: number[]; subNumbers: number[]; }) {
     Object.assign(this, result)
   }
 
@@ -16,6 +18,9 @@ export class DiceResult {
     const contents: string[] = []
     Array.prototype.push.apply(contents, this.toStringDices('+', this.addDices))
     Array.prototype.push.apply(contents, this.toStringDices('-', this.subDices))
+
+    Array.prototype.push.apply(contents, this.toStringNumbers('+', this.addNumbers))
+    Array.prototype.push.apply(contents, this.toStringNumbers('-', this.subNumbers))
 
     if (contents.length) {
       contents.push('=')
@@ -36,12 +41,28 @@ export class DiceResult {
     return contents
   }
 
+  private toStringNumbers (symbol: string, numbers: number[]): string[] {
+    const contents: string[] = []
+    if (numbers.length) {
+      contents.push(symbol)
+      contents.push('(')
+      contents.push(numbers.map(num => num.toString()).join(' + '))
+      contents.push(')')
+    }
+    return contents
+  }
+
   private getTotal (): number {
-    return this.getDiceTotal(this.addDices) - this.getDiceTotal(this.subDices)
+    return this.getDiceTotal(this.addDices) - this.getDiceTotal(this.subDices) +
+      this.getNumberTotal(this.addNumbers) - this.getNumberTotal(this.subNumbers)
   }
 
   private getDiceTotal (dices: NSidedDice[]): number {
     return dices.reduce((acc, dice) => acc + dice.getDeme(), 0)
+  }
+
+  private getNumberTotal (numbers: number[]) {
+    return numbers.reduce((acc, num) => acc + num, 0)
   }
 }
 
@@ -54,7 +75,9 @@ export class DiceRoller {
     const command = this.parser.run(text)
     const result = new DiceResult({
       addDices: this.rollNSidedDice(command.getAddDices()),
-      subDices: this.rollNSidedDice(command.getSubDices())
+      subDices: this.rollNSidedDice(command.getSubDices()),
+      addNumbers: command.getAddNumbers(),
+      subNumbers: command.getSubNumbers()
     })
     return result.toString()
   }

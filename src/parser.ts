@@ -9,6 +9,8 @@ export interface DiceCommand {
 export class Command {
   private readonly addDices: DiceCommand[];
   private readonly subDices: DiceCommand[];
+  private addNumbers: number[] = [];
+  private subNumbers: number[] = [];
 
   constructor () {
     this.addDices = []
@@ -29,6 +31,22 @@ export class Command {
 
   getSubDices () {
     return this.subDices
+  }
+
+  addAddNumber (str: string) {
+    this.addNumbers.push(parseInt(str))
+  }
+
+  getAddNumbers () {
+    return this.addNumbers
+  }
+
+  addSubNumber (str: string) {
+    this.subNumbers.push(parseInt(str))
+  }
+
+  getSubNumbers () {
+    return this.subNumbers
   }
 
   private createDiceCommand (str: string): DiceCommand {
@@ -52,6 +70,10 @@ export class MessageParser {
         case /^\d+d\d+$/.test(arg):
           if (symbol === '+') command.addAddDice(arg)
           if (symbol === '-') command.addSubDice(arg)
+          break
+        case /^\d+$/.test(arg):
+          if (symbol === '+') command.addAddNumber(arg)
+          if (symbol === '-') command.addSubNumber(arg)
           break
         case /\+/.test(arg):
           symbol = '+'

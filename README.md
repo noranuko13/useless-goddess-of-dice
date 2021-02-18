@@ -7,6 +7,8 @@
 /ugd 1d100
 /ugd 2d6 + 1d3
 /ugd 2d6 - 1d3
+/ugd 2d6 + 6
+/ugd 1d6 - 3
 ```
 
 
