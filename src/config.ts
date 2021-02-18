@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { injectable } from 'tsyringe'
 
-export interface Env {
+interface Env {
   UGD_DEBUG: string;
   UGD_DISCORD_TOKEN: string;
   UGD_CMD_PREFIX: string;
