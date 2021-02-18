@@ -1,10 +1,10 @@
 import { injectable } from 'tsyringe'
 import { DiceRoller } from '../rollers'
 import readline from 'readline'
-import { Client } from '../clients'
+import { ClientInterface } from '../clients'
 
 @injectable()
-export class DebugClient implements Client {
+export class DebugClient implements ClientInterface {
   constructor (private roller: DiceRoller) {}
 
   rl: readline.Interface = readline.createInterface({

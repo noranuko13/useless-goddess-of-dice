@@ -2,10 +2,10 @@ import { injectable } from 'tsyringe'
 import { Config } from '../config'
 import { DiceRoller } from '../rollers'
 import discord, { Message } from 'discord.js'
-import { Client } from '../clients'
+import { ClientInterface } from '../clients'
 
 @injectable()
-export class DiscordClient implements Client {
+export class DiscordClient implements ClientInterface {
   constructor (private config: Config, private roller: DiceRoller) {}
 
   waitInput (): void {
