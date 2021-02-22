@@ -4,6 +4,10 @@ import readline from 'readline'
 import { ClientInterface } from '../clients'
 import { Config } from '../config'
 
+class Message {
+  public content: string = '';
+}
+
 @injectable()
 export class DebugClient implements ClientInterface {
   constructor (private config: Config, private roller: DiceRoller) {}
@@ -15,18 +19,27 @@ export class DebugClient implements ClientInterface {
   })
 
   waitInput (): void {
-    this.rl.question('入力: ', (answer) => {
-      if (!this.isValid(answer)) {
+    this.rl.question('入力: ', (answer: string) => {
+      const message = {
+        content: answer
+      } as Message
+
+      if (!this.isValid(message)) {
         return
       }
 
-      const content = this.roller.roll(answer)
-      console.log('出力: ' + content)
+      this.output(message)
+
       this.waitInput()
     })
   };
 
-  private isValid (content: string): boolean {
-    return content.startsWith(this.config.getPrefix())
+  private output (message: Message): void {
+    const content = this.roller.roll(message.content)
+    console.log('出力: ' + content)
+  }
+
+  private isValid (message: Message): boolean {
+    return message.content.startsWith(this.config.getPrefix())
   }
 }

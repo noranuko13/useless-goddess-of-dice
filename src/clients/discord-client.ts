@@ -15,16 +15,20 @@ export class DiscordClient implements ClientInterface {
       console.log('Ready!')
     })
 
-    client.on('message', message => {
+    client.on('message', (message: Message) => {
       if (!this.isValid(message)) {
         return
       }
 
-      const content = this.roller.roll(message.content)
-      message.channel.send(content).then()
+      this.output(message)
     })
 
     client.login(this.config.getToken()).then()
+  }
+
+  private output (message: Message): void {
+    const content = this.roller.roll(message.content)
+    message.channel.send(content).then()
   }
 
   private isValid (message: Message): boolean {
