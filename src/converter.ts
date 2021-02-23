@@ -7,24 +7,24 @@ export class MessageConverter {
 
   run (text: string): string {
     text = this.toHalfWidth(text)
-    text = this.addWhiteSpace(text)
-    text = this.removeWhiteSpace(text)
-    text = this.removePrefix(text)
+    text = this.addWhitespaceToBothEnds(text)
+    text = this.removeDuplicateWhitespace(text)
+    text = this.removeCommandPrefix(text)
     return text
   }
 
-  private removePrefix (text: string) {
+  private removeCommandPrefix (text: string) {
     text = text.replace(this.config.getPrefix(), '')
     return text.trimLeft()
   }
 
-  private addWhiteSpace (text: string, pattern: string = '+-') {
+  private addWhitespaceToBothEnds (text: string, pattern: string = '+-') {
     text = text.replace(new RegExp(`([${pattern}])`, 'g'), ' $1 ')
     text = text.replace(new RegExp(` +([${pattern}]) +`, 'g'), ' $1 ')
     return text
   }
 
-  private removeWhiteSpace (text: string) {
+  private removeDuplicateWhitespace (text: string) {
     text = text.replace(/ +/g, ' ')
     return text.trim()
   }

@@ -22,11 +22,11 @@ describe('MessageConverter', function () {
     })
   })
 
-  describe('#removePrefix()', function () {
+  describe('#removeCommandPrefix()', function () {
     it('Remove prefix', function () {
-      assert.strictEqual(converter.removePrefix('/ugd 1d100'), '1d100')
-      assert.strictEqual(converter.removePrefix('/ugd 2d6 + 6'), '2d6 + 6')
-      assert.strictEqual(converter.removePrefix('/sphinx 1d100'), '/sphinx 1d100')
+      assert.strictEqual(converter.removeCommandPrefix('/ugd 1d100'), '1d100')
+      assert.strictEqual(converter.removeCommandPrefix('/ugd 2d6 + 6'), '2d6 + 6')
+      assert.strictEqual(converter.removeCommandPrefix('/sphinx 1d100'), '/sphinx 1d100')
     })
 
     it('Another prefix', function () {
@@ -39,55 +39,55 @@ describe('MessageConverter', function () {
       })
       const another = container.resolve(MessageConverter) as any
 
-      assert.strictEqual(another.removePrefix('/prefix 1d100'), '1d100')
-      assert.strictEqual(another.removePrefix('/prefix 2d6 + 6'), '2d6 + 6')
-      assert.strictEqual(another.removePrefix('/ugd 1d100'), '/ugd 1d100')
-      assert.strictEqual(another.removePrefix('/sphinx 1d100'), '/sphinx 1d100')
+      assert.strictEqual(another.removeCommandPrefix('/prefix 1d100'), '1d100')
+      assert.strictEqual(another.removeCommandPrefix('/prefix 2d6 + 6'), '2d6 + 6')
+      assert.strictEqual(another.removeCommandPrefix('/ugd 1d100'), '/ugd 1d100')
+      assert.strictEqual(another.removeCommandPrefix('/sphinx 1d100'), '/sphinx 1d100')
     })
 
     it('Other', function () {
-      assert.strictEqual(converter.removePrefix(''), '')
-      assert.strictEqual(converter.removePrefix('ダイスの駄女神'), 'ダイスの駄女神')
+      assert.strictEqual(converter.removeCommandPrefix(''), '')
+      assert.strictEqual(converter.removeCommandPrefix('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 
-  describe('#addWhiteSpace()', function () {
+  describe('#addWhitespaceToBothEnds()', function () {
     it('Addition symbol', function () {
       const expected = '/ugd 2d6 + 6'
-      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6 +6'), expected)
-      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6+ 6'), expected)
+      assert.strictEqual(converter.addWhitespaceToBothEnds('/ugd 2d6 +6'), expected)
+      assert.strictEqual(converter.addWhitespaceToBothEnds('/ugd 2d6+ 6'), expected)
     })
 
     it('Subtraction symbol', function () {
       const expected = '/ugd 2d6 - 6'
-      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6 -6'), expected)
-      assert.strictEqual(converter.addWhiteSpace('/ugd 2d6- 6'), expected)
+      assert.strictEqual(converter.addWhitespaceToBothEnds('/ugd 2d6 -6'), expected)
+      assert.strictEqual(converter.addWhitespaceToBothEnds('/ugd 2d6- 6'), expected)
     })
 
     it('Other', function () {
-      assert.strictEqual(converter.addWhiteSpace(''), '')
-      assert.strictEqual(converter.addWhiteSpace('ダイスの駄女神'), 'ダイスの駄女神')
+      assert.strictEqual(converter.addWhitespaceToBothEnds(''), '')
+      assert.strictEqual(converter.addWhitespaceToBothEnds('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 
-  describe('#removeWhiteSpace()', function () {
+  describe('#removeDuplicateWhitespace()', function () {
     it('Extra space: Simple dice roll', function () {
       const expected = '/ugd 1d100'
-      assert.strictEqual(converter.removeWhiteSpace('/ugd 1d100'), expected)
-      assert.strictEqual(converter.removeWhiteSpace('  /ugd 1d100'), expected)
-      assert.strictEqual(converter.removeWhiteSpace('/ugd  1d100'), expected)
-      assert.strictEqual(converter.removeWhiteSpace('/ugd 1d100  '), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('/ugd 1d100'), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('  /ugd 1d100'), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('/ugd  1d100'), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('/ugd 1d100  '), expected)
     })
 
     it('Extra space: Complex dice roll', function () {
       const expected = '/ugd 2d6 + 6'
-      assert.strictEqual(converter.removeWhiteSpace('/ugd 2d6 + 6'), expected)
-      assert.strictEqual(converter.removeWhiteSpace('/ugd  2d6  +   6'), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('/ugd 2d6 + 6'), expected)
+      assert.strictEqual(converter.removeDuplicateWhitespace('/ugd  2d6  +   6'), expected)
     })
 
     it('Other', function () {
-      assert.strictEqual(converter.removeWhiteSpace(''), '')
-      assert.strictEqual(converter.removeWhiteSpace('ダイスの駄女神'), 'ダイスの駄女神')
+      assert.strictEqual(converter.removeDuplicateWhitespace(''), '')
+      assert.strictEqual(converter.removeDuplicateWhitespace('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 
