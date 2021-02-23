@@ -18,10 +18,9 @@ export class MessageConverter {
     return text.trimLeft()
   }
 
-  private addWhiteSpace (text: string) {
-    text = text.replace(/\+/g, ' + ')
-    text = text.replace(/-/g, ' - ')
-    text = text.replace(/ +([+-]) +/g, ' $1 ')
+  private addWhiteSpace (text: string, pattern: string = '+-') {
+    text = text.replace(new RegExp(`([${pattern}])`, 'g'), ' $1 ')
+    text = text.replace(new RegExp(` +([${pattern}]) +`, 'g'), ' $1 ')
     return text
   }
 
