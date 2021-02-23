@@ -4,7 +4,7 @@ import { injectable } from 'tsyringe'
 interface Env {
   UGD_DEBUG: string;
   UGD_DISCORD_TOKEN: string;
-  UGD_CMD_PREFIX: string;
+  UGD_COMMAND_PREFIX: string;
 }
 
 @injectable()
@@ -16,7 +16,7 @@ export class Config {
     this.env = {
       UGD_DEBUG: process.env.UGD_DEBUG,
       UGD_DISCORD_TOKEN: process.env.UGD_DISCORD_TOKEN,
-      UGD_CMD_PREFIX: process.env.UGD_CMD_PREFIX
+      UGD_COMMAND_PREFIX: process.env.UGD_COMMAND_PREFIX
     } as Env
   }
 
@@ -29,6 +29,6 @@ export class Config {
   }
 
   getPrefix (): string {
-    return this.env.UGD_CMD_PREFIX
+    return this.env.UGD_COMMAND_PREFIX
   }
 }
