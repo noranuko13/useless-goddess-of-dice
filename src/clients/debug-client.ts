@@ -1,45 +1,60 @@
+import readline from 'readline'
 import { injectable } from 'tsyringe'
 import { DiceRoller } from '../rollers'
-import readline from 'readline'
 import { ClientInterface } from '../clients'
 import { Config } from '../config'
-
-class Message {
-  public content: string = '';
-}
+import { Message } from 'discord.js'
+import { MessageService } from '../services'
 
 @injectable()
 export class DebugClient implements ClientInterface {
-  constructor (private config: Config, private roller: DiceRoller) {}
-
-  rl: readline.Interface = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  })
+  constructor (private config: Config, private ms: MessageService, private roller: DiceRoller) {}
 
   waitInput (): void {
-    this.rl.question('入力: ', (answer: string) => {
-      const message = {
-        content: answer
-      } as Message
+    const client = new Client()
 
-      if (!this.isValid(message)) {
+    client.on((message: Message) => {
+      if (!this.ms.isValid(message)) {
         return
       }
 
-      this.output(message)
-
-      this.waitInput()
+      const content = this.roller.roll(message.content)
+      message.channel.send(content).then()
     })
-  };
+  }
+}
 
-  private output (message: Message): void {
-    const content = this.roller.roll(message.content)
-    console.log('出力: ' + content)
+class Client {
+  private rl: readline.Interface;
+
+  constructor () {
+    this.rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false
+    })
   }
 
-  private isValid (message: Message): boolean {
-    return message.content.startsWith(this.config.getPrefix())
+  public on (fn: (message: Message) => void) {
+    this.rl.question('入力: ', (answer: string) => {
+      const message = this.getMessage(answer)
+
+      fn(message)
+
+      this.on(fn)
+    })
+  }
+
+  private getMessage (answer: string): Message {
+    return {
+      content: answer,
+      author: { bot: false },
+      channel: {
+        send: (content: string) => {
+          console.log('出力: ' + content)
+          return new Promise((resolve) => { resolve(null) })
+        }
+      }
+    } as Message
   }
 }

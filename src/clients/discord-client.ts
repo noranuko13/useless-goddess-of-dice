@@ -3,10 +3,11 @@ import { Config } from '../config'
 import { DiceRoller } from '../rollers'
 import discord, { Message } from 'discord.js'
 import { ClientInterface } from '../clients'
+import { MessageService } from '../services'
 
 @injectable()
 export class DiscordClient implements ClientInterface {
-  constructor (private config: Config, private roller: DiceRoller) {}
+  constructor (private config: Config, private ms: MessageService, private roller: DiceRoller) {}
 
   waitInput (): void {
     const client = new discord.Client()
@@ -16,23 +17,14 @@ export class DiscordClient implements ClientInterface {
     })
 
     client.on('message', (message: Message) => {
-      if (!this.isValid(message)) {
+      if (!this.ms.isValid(message)) {
         return
       }
 
-      this.output(message)
+      const content = this.roller.roll(message.content)
+      message.channel.send(content).then()
     })
 
     client.login(this.config.getToken()).then()
-  }
-
-  private output (message: Message): void {
-    const content = this.roller.roll(message.content)
-    message.channel.send(content).then()
-  }
-
-  private isValid (message: Message): boolean {
-    return message.content.startsWith(this.config.getPrefix()) &&
-      !message.author.bot
   }
 }
