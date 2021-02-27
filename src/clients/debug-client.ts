@@ -1,9 +1,9 @@
+import { Message } from 'discord.js'
 import readline from 'readline'
 import { injectable } from 'tsyringe'
-import { DiceRoller } from '../rollers'
 import { ClientInterface } from '../clients'
 import { Config } from '../config'
-import { Message } from 'discord.js'
+import { DiceRoller } from '../rollers'
 import { MessageService } from '../services'
 
 @injectable()

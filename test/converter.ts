@@ -1,8 +1,8 @@
-import 'reflect-metadata'
 import assert from 'assert'
-import { MessageConverter } from '../src/converter'
+import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { Config } from '../src/config'
+import { MessageConverter } from '../src/converter'
 
 describe('MessageConverter', function () {
   container.register(Config, {

@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 import { injectable } from 'tsyringe'
 import { MessageConverter } from './converter'
-import { DiceCommand, MessageParser } from './parser'
 import { NSidedDice } from './dices'
+import { DiceCommand, MessageParser } from './parser'
 
 export class DiceResult {
   private addDices: NSidedDice[] = [];

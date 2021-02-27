@@ -1,6 +1,6 @@
+import assert from 'assert'
 import 'reflect-metadata'
 import { NSidedDice } from '../src/dices'
-import assert from 'assert'
 
 describe('NSidedDice', function () {
   describe('#korokoro(), #getAddDices()', function () {

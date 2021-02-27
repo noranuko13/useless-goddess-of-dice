@@ -1,7 +1,7 @@
 import 'reflect-metadata'
-import { Config } from './config'
-import { ClientInterface, DebugClient, DiscordClient } from './clients'
 import { container } from 'tsyringe'
+import { ClientInterface, DebugClient, DiscordClient } from './clients'
+import { Config } from './config'
 
 const client: ClientInterface = container.resolve(Config).isDebug()
   ? container.resolve(DebugClient)

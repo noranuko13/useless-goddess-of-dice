@@ -1,8 +1,8 @@
-import 'reflect-metadata'
-import { NSidedDice } from '../src/dices'
 import assert from 'assert'
-import { DiceCommand } from '../src/parser'
+import 'reflect-metadata'
 import { container } from 'tsyringe'
+import { NSidedDice } from '../src/dices'
+import { DiceCommand } from '../src/parser'
 import { DiceResult, DiceRoller } from '../src/rollers'
 
 describe('DiceResult', function () {

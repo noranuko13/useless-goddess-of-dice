@@ -1,5 +1,5 @@
-import 'reflect-metadata'
 import assert from 'assert'
+import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { Command, DiceCommand, MessageParser } from '../src/parser'
 

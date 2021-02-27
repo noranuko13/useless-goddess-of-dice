@@ -1,6 +1,6 @@
 import { Message } from 'discord.js'
-import { Config } from '../config'
 import { injectable } from 'tsyringe'
+import { Config } from '../config'
 
 @injectable()
 export class MessageService {
