@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { injectable } from 'tsyringe'
-import { MessageConverter } from './converter'
+import { ContentService } from './services'
 import { NSidedDice } from './dices'
 import { DiceCommand, MessageParser } from './parser'
 
@@ -68,11 +68,11 @@ export class DiceResult {
 
 @injectable()
 export class DiceRoller {
-  constructor (private converter: MessageConverter, private parser: MessageParser) {}
+  constructor (private cs: ContentService, private parser: MessageParser) {}
 
-  roll (text: string): string {
-    text = this.converter.run(text)
-    const command = this.parser.run(text)
+  roll (content: string): string {
+    content = this.autoFormatContext(content)
+    const command = this.parser.run(content)
     const result = new DiceResult({
       addDices: this.rollNSidedDice(command.getAddDices()),
       subDices: this.rollNSidedDice(command.getSubDices()),
@@ -80,6 +80,14 @@ export class DiceRoller {
       subNumbers: command.getSubNumbers()
     })
     return result.toString()
+  }
+
+  private autoFormatContext (content: string): string {
+    content = this.cs.toHalfWidth(content)
+    content = this.cs.addWhitespaceToBothEnds(content)
+    content = this.cs.removeDuplicateWhitespace(content)
+    content = this.cs.removeCommandPrefix(content)
+    return content
   }
 
   private rollNSidedDice (diceCommands: DiceCommand[]): NSidedDice[] {
