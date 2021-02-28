@@ -22,8 +22,10 @@ export class ContentService {
   }
 
   public toHalfWidth (text: string) {
-    return text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (text) {
+    text = text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (text) {
       return String.fromCharCode(text.charCodeAt(0) - 0xFEE0)
     })
+    text = text.replace(/\s+/g, ' ')
+    return text
   }
 }

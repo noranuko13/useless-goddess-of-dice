@@ -84,11 +84,11 @@ describe('ContentService', function () {
   })
 
   describe('#toHalfWidth()', function () {
-    const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'
-    const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
+    const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭ　ＮＯＰＱＲＳＴＵＶＷＸＹＺ'
+    const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍ　ｎｏｐｑｒｓｔｕｖｗｘｙｚ'
 
-    const UPPER_HALF = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    const LOWER_HALF = 'abcdefghijklmnopqrstuvwxyz'
+    const UPPER_HALF = 'ABCDEFGHIJKLM NOPQRSTUVWXYZ'
+    const LOWER_HALF = 'abcdefghijklm nopqrstuvwxyz'
     const NUMBER = '0123456789'
 
     it('Already half-width', function () {
