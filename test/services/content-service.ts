@@ -86,20 +86,22 @@ describe('ContentService', function () {
   describe('#toHalfWidth()', function () {
     const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭ　ＮＯＰＱＲＳＴＵＶＷＸＹＺ'
     const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍ　ｎｏｐｑｒｓｔｕｖｗｘｙｚ'
+    const NUMBER_FULL = '０１２３４５６７８９'
 
     const UPPER_HALF = 'ABCDEFGHIJKLM NOPQRSTUVWXYZ'
     const LOWER_HALF = 'abcdefghijklm nopqrstuvwxyz'
-    const NUMBER = '0123456789'
+    const NUMBER_HALF = '0123456789'
 
     it('Already half-width', function () {
       assert.strictEqual(cs.toHalfWidth(UPPER_HALF), UPPER_HALF)
       assert.strictEqual(cs.toHalfWidth(LOWER_HALF), LOWER_HALF)
-      assert.strictEqual(cs.toHalfWidth(NUMBER), NUMBER)
+      assert.strictEqual(cs.toHalfWidth(NUMBER_HALF), NUMBER_HALF)
     })
 
     it('Full-width', function () {
       assert.strictEqual(cs.toHalfWidth(UPPER_FULL), UPPER_HALF)
       assert.strictEqual(cs.toHalfWidth(LOWER_FULL), LOWER_HALF)
+      assert.strictEqual(cs.toHalfWidth(NUMBER_FULL), NUMBER_HALF)
     })
 
     it('Other', function () {
