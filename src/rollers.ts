@@ -1,10 +1,11 @@
 import 'reflect-metadata'
 import { injectable } from 'tsyringe'
-import { ContentService } from './services'
+import { DiceCommandInterface } from './commands'
 import { NSidedDice } from './dices'
-import { DiceCommand, MessageParser } from './parser'
+import { NSidedDiceParser } from './parser'
+import { ContentService } from './services'
 
-export class DiceResult {
+export class NSidedDiceResult {
   private addDices: NSidedDice[] = [];
   private subDices: NSidedDice[] = [];
   private addNumbers: number[] = [];
@@ -68,12 +69,12 @@ export class DiceResult {
 
 @injectable()
 export class DiceRoller {
-  constructor (private cs: ContentService, private parser: MessageParser) {}
+  constructor (private cs: ContentService, private parser: NSidedDiceParser) {}
 
   roll (content: string): string {
     content = this.autoFormatContext(content)
     const command = this.parser.run(content)
-    const result = new DiceResult({
+    const result = new NSidedDiceResult({
       addDices: this.rollNSidedDice(command.getAddDices()),
       subDices: this.rollNSidedDice(command.getSubDices()),
       addNumbers: command.getAddNumbers(),
@@ -90,7 +91,7 @@ export class DiceRoller {
     return content
   }
 
-  private rollNSidedDice (diceCommands: DiceCommand[]): NSidedDice[] {
+  private rollNSidedDice (diceCommands: DiceCommandInterface[]): NSidedDice[] {
     const dices: NSidedDice[] = []
     diceCommands.forEach(diceCommand => {
       for (let i = 1; i <= diceCommand.time; i++) {

@@ -1,12 +1,12 @@
 import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
+import { DiceCommandInterface } from '../src/commands'
 import { NSidedDice } from '../src/dices'
-import { DiceCommand } from '../src/parser'
-import { DiceResult, DiceRoller } from '../src/rollers'
+import { NSidedDiceResult, DiceRoller } from '../src/rollers'
 
-describe('DiceResult', function () {
-  const diceResult = new DiceResult({
+describe('NSidedDiceResult', function () {
+  const diceResult = new NSidedDiceResult({
     addDices: [
       { side: 10, deme: 4, getDeme () { return 4 } } as unknown as NSidedDice,
       { side: 6, deme: 5, getDeme () { return 5 } } as unknown as NSidedDice
@@ -19,7 +19,7 @@ describe('DiceResult', function () {
     subNumbers: [7, 8]
   }) as any
 
-  const emptyResult = new DiceResult({
+  const emptyResult = new NSidedDiceResult({
     addDices: [],
     subDices: [],
     addNumbers: [],
@@ -106,7 +106,7 @@ describe('DiceRoller', function () {
   describe('#rollNSidedDice()', function () {
     const diceRoller = container.resolve(DiceRoller) as any
     let dices: NSidedDice[] = []
-    const diceCommands: DiceCommand[] = []
+    const diceCommands: DiceCommandInterface[] = []
 
     it('Number of dice is the total number of times', function () {
       diceCommands.push({ time: 2, side: 4 })
