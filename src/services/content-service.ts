@@ -5,27 +5,27 @@ import { Config } from '../config'
 export class ContentService {
   constructor (private config: Config) {}
 
-  public removeCommandPrefix (text: string) {
-    text = text.replace(this.config.getPrefix(), '')
-    return text.trimLeft()
+  public removeCommandPrefix (content: string) {
+    content = content.replace(this.config.getPrefix(), '')
+    return content.trimLeft()
   }
 
-  public addWhitespaceToBothEnds (text: string, pattern: string = '+-') {
-    text = text.replace(new RegExp(`([${pattern}])`, 'g'), ' $1 ')
-    text = text.replace(new RegExp(` +([${pattern}]) +`, 'g'), ' $1 ')
-    return text
+  public addWhitespaceToBothEnds (content: string, pattern: string = '+-') {
+    content = content.replace(new RegExp(`([${pattern}])`, 'g'), ' $1 ')
+    content = content.replace(new RegExp(` +([${pattern}]) +`, 'g'), ' $1 ')
+    return content
   }
 
-  public removeDuplicateWhitespace (text: string) {
-    text = text.replace(/ +/g, ' ')
-    return text.trim()
+  public removeDuplicateWhitespace (content: string) {
+    content = content.replace(/ +/g, ' ')
+    return content.trim()
   }
 
-  public toHalfWidth (text: string) {
-    text = text.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (text) {
+  public toHalfWidth (content: string) {
+    content = content.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (text) {
       return String.fromCharCode(text.charCodeAt(0) - 0xFEE0)
     })
-    text = text.replace(/\s+/g, ' ')
-    return text
+    content = content.replace(/\s+/g, ' ')
+    return content
   }
 }
