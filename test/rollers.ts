@@ -2,7 +2,7 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { DiceCommandInterface } from '../src/commands'
-import { NSidedDice } from '../src/dices'
+import { NSidedDice } from '../src/dices/n-sided-dice'
 import { NSidedDiceResult, DiceRoller } from '../src/rollers'
 
 describe('NSidedDiceResult', function () {

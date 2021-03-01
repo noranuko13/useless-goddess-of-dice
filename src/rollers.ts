@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { injectable } from 'tsyringe'
 import { DiceCommandInterface } from './commands'
-import { NSidedDice } from './dices'
+import { NSidedDice } from './dices/n-sided-dice'
 import { NSidedDiceParser } from './parser'
 import { ContentService } from './services'
 
