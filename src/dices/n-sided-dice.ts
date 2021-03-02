@@ -11,7 +11,7 @@ export class NSidedDice {
     return this.deme
   }
 
-  private korokoro (): number {
+  korokoro (): number {
     return Math.floor(Math.random() * this.side) + 1
   }
 }
