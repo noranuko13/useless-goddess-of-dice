@@ -1,2 +1,2 @@
-export { DiceCommandInterface } from './dice-command.interface'
+export { DiceCommand } from './dice.command'
 export { NSidedDiceCommand } from './n-sided-dice-command'

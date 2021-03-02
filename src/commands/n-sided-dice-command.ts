@@ -1,15 +1,15 @@
 import { injectable } from 'tsyringe'
-import { DiceCommandInterface } from './dice-command.interface'
+import { DiceCommand } from './dice.command'
 
 @injectable()
 export class NSidedDiceCommand {
-  private readonly addDices: DiceCommandInterface[] = [];
-  private readonly subDices: DiceCommandInterface[] = [];
+  private readonly addDices: DiceCommand[] = [];
+  private readonly subDices: DiceCommand[] = [];
   private addNumbers: number[] = [];
   private subNumbers: number[] = [];
 
   addAddDice (str: string): void {
-    this.addDices.push(this.createDiceCommand(str))
+    this.addDices.push(new DiceCommand(str))
   }
 
   getAddDices () {
@@ -17,7 +17,7 @@ export class NSidedDiceCommand {
   }
 
   addSubDice (str: string): void {
-    this.subDices.push(this.createDiceCommand(str))
+    this.subDices.push(new DiceCommand(str))
   }
 
   getSubDices () {
@@ -38,13 +38,5 @@ export class NSidedDiceCommand {
 
   getSubNumbers () {
     return this.subNumbers
-  }
-
-  private createDiceCommand (str: string): DiceCommandInterface {
-    const numbers = str.match(/^(\d+)d(\d+)$/) || []
-    return {
-      time: parseInt(numbers[1]),
-      side: parseInt(numbers[2])
-    } as DiceCommandInterface
   }
 }

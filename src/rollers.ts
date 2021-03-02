@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { injectable } from 'tsyringe'
-import { DiceCommandInterface } from './commands'
+import { DiceCommand } from './commands'
 import { NSidedDice } from './dices/n-sided-dice'
 import { NSidedDiceParser } from './parser'
 import { ContentService } from './services'
@@ -91,11 +91,11 @@ export class DiceRoller {
     return content
   }
 
-  private rollNSidedDice (diceCommands: DiceCommandInterface[]): NSidedDice[] {
+  private rollNSidedDice (diceCommands: DiceCommand[]): NSidedDice[] {
     const dices: NSidedDice[] = []
     diceCommands.forEach(diceCommand => {
-      for (let i = 1; i <= diceCommand.time; i++) {
-        dices.push(new NSidedDice(diceCommand.side))
+      for (let i = 1; i <= diceCommand.getTime(); i++) {
+        dices.push(new NSidedDice(diceCommand.getSide()))
       }
     })
     return dices

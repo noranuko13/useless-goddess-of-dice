@@ -1,7 +1,7 @@
 import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { DiceCommandInterface } from '../src/commands'
+import { DiceCommand } from '../src/commands'
 import { NSidedDice } from '../src/dices/n-sided-dice'
 import { NSidedDiceResult, DiceRoller } from '../src/rollers'
 
@@ -106,15 +106,15 @@ describe('DiceRoller', function () {
   describe('#rollNSidedDice()', function () {
     const diceRoller = container.resolve(DiceRoller) as any
     let dices: NSidedDice[] = []
-    const diceCommands: DiceCommandInterface[] = []
+    const diceCommands: DiceCommand[] = []
 
     it('Number of dice is the total number of times', function () {
-      diceCommands.push({ time: 2, side: 4 })
-      diceCommands.push({ time: 1, side: 5 })
+      diceCommands.push(new DiceCommand('2d4'))
+      diceCommands.push(new DiceCommand('1d5'))
       dices = diceRoller.rollNSidedDice(diceCommands)
       assert.strictEqual(dices.length, 3)
 
-      diceCommands.push({ time: 4, side: 4 })
+      diceCommands.push(new DiceCommand('4d4'))
       dices = diceRoller.rollNSidedDice(diceCommands)
       assert.strictEqual(dices.length, 7)
     })
