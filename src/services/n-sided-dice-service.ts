@@ -1,9 +1,9 @@
 import { injectable } from 'tsyringe'
-import { NSidedDiceCommand } from './commands'
+import { NSidedDiceCommand } from '../commands'
 
 @injectable()
-export class NSidedDiceParser {
-  run (input: string): NSidedDiceCommand {
+export class NSidedDiceService {
+  parse (input: string): NSidedDiceCommand {
     const args = input.split(/ +/)
     const command = new NSidedDiceCommand()
     let symbol = '+'
