@@ -2,6 +2,7 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { NSidedDiceCommand } from '../../src/commands'
+import { NSidedDiceResult } from '../../src/results'
 import { NSidedDiceService } from '../../src/services'
 
 describe('NSidedDiceService', function () {
@@ -73,6 +74,25 @@ describe('NSidedDiceService', function () {
       const expected = new NSidedDiceCommand()
       assert.deepStrictEqual(service.parse(''), expected)
       assert.deepStrictEqual(service.parse('ダイスの駄女神'), expected)
+    })
+  })
+
+  describe('#cast()', function () {
+    it('All', function () {
+      const expected = new NSidedDiceCommand()
+      expected.addAddDice('2d6')
+      expected.addSubDice('1d3')
+      expected.addAddNumber('10')
+      expected.addSubNumber('7')
+      assert.doesNotThrow(() => { service.cast(expected) })
+    })
+
+    it('Empty NSidedDiceCommand', function () {
+      assert.doesNotThrow(() => { service.cast(new NSidedDiceCommand()) })
+      assert.deepStrictEqual(
+        JSON.stringify(service.cast(new NSidedDiceCommand())),
+        JSON.stringify(new NSidedDiceResult())
+      )
     })
   })
 })
