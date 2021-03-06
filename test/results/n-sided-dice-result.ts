@@ -30,11 +30,11 @@ describe('NSidedDiceResult', function () {
 
   describe('#getTotal()', function () {
     it('Normal', function () {
-      assert.strictEqual(diceResult.getTotal(), 0)
+      assert.strictEqual(diceResult.total(), 0)
     })
 
     it('Empty Dices', function () {
-      assert.strictEqual(emptyResult.getTotal(), 0)
+      assert.strictEqual(emptyResult.total(), 0)
     })
   })
 })

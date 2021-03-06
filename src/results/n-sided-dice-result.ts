@@ -46,13 +46,13 @@ export class NSidedDiceResult extends Result {
 
     if (contents.length) {
       contents.push('=')
-      contents.push(this.getTotal().toString())
+      contents.push(this.total().toString())
     }
 
     return contents.join(' ')
   }
 
-  getTotal (): number {
+  total (): number {
     return this.addDices.total() - this.subDices.total() +
       this.addNumbers.total() - this.subNumbers.total()
   }
