@@ -1,8 +1,6 @@
-import { injectable } from 'tsyringe'
 import { Command } from './command'
 import { DiceCommand } from './dice-command'
 
-@injectable()
 export class NSidedDiceCommand extends Command {
   private readonly addDices: DiceCommand[] = [];
   private readonly subDices: DiceCommand[] = [];
