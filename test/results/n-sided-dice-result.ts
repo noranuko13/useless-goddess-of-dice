@@ -4,20 +4,19 @@ import { NSidedDice } from '../../src/dices/n-sided-dice'
 import { NSidedDiceResult } from '../../src/results'
 
 describe('NSidedDiceResult', function () {
-  const dr = new NSidedDiceResult()
-  dr.setAddDices([
+  const diceResult = new NSidedDiceResult()
+  diceResult.setAddDices([
     new NSidedDice(10, 4),
     new NSidedDice(6, 5)
   ])
-  dr.setSubDices([
+  diceResult.setSubDices([
     new NSidedDice(3, 2),
     new NSidedDice(4, 1)
   ])
-  dr.setAddNumbers([3, 6])
-  dr.setSubNumbers([7, 8])
-  const diceResult = dr as any
+  diceResult.setAddNumbers([3, 6])
+  diceResult.setSubNumbers([7, 8])
 
-  const emptyResult = new NSidedDiceResult() as any
+  const emptyResult = new NSidedDiceResult()
 
   describe('#toString()', function () {
     it('Number of dice is the total number of times', function () {
@@ -26,40 +25,6 @@ describe('NSidedDiceResult', function () {
 
     it('Empty Dices', function () {
       assert.strictEqual(emptyResult.toString(), '')
-    })
-  })
-
-  describe('#toStringDices()', function () {
-    it('Normal', function () {
-      assert.deepStrictEqual(
-        diceResult.toStringDices('+', diceResult.addDices),
-        ['+', '(', '4 + 5', ')']
-      )
-      assert.deepStrictEqual(
-        diceResult.toStringDices('-', diceResult.subDices),
-        ['-', '(', '2 + 1', ')']
-      )
-    })
-
-    it('Empty Dices', function () {
-      assert.deepStrictEqual(emptyResult.toStringDices('+', []), [])
-    })
-  })
-
-  describe('#toStringNumbers()', function () {
-    it('Normal', function () {
-      assert.deepStrictEqual(
-        diceResult.toStringNumbers('+', diceResult.addNumbers),
-        ['+', '(', '3 + 6', ')']
-      )
-      assert.deepStrictEqual(
-        diceResult.toStringNumbers('-', diceResult.subNumbers),
-        ['-', '(', '7 + 8', ')']
-      )
-    })
-
-    it('Empty Numbers', function () {
-      assert.deepStrictEqual(emptyResult.toStringNumbers('+', []), [])
     })
   })
 

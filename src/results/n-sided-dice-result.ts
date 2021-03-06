@@ -25,12 +25,24 @@ export class NSidedDiceResult extends Result {
   }
 
   toString = () : string => {
-    const contents: string[] = []
-    Array.prototype.push.apply(contents, this.toStringDices('+', this.addDices))
-    Array.prototype.push.apply(contents, this.toStringDices('-', this.subDices))
+    const formatWithBrackets = (symbol: string, numbers: number[]): string[] => {
+      const contents: string[] = []
+      if (numbers.length) {
+        contents.push(symbol)
+        contents.push('(')
+        contents.push(numbers.map(num => num.toString()).join(' + '))
+        contents.push(')')
+      }
+      return contents
+    }
 
-    Array.prototype.push.apply(contents, this.toStringNumbers('+', this.addNumbers))
-    Array.prototype.push.apply(contents, this.toStringNumbers('-', this.subNumbers))
+    let contents: string[] = []
+    contents = contents.concat(
+      formatWithBrackets('+', this.addDices.map(dice => dice.getDeme())),
+      formatWithBrackets('-', this.subDices.map(dice => dice.getDeme())),
+      formatWithBrackets('+', this.addNumbers),
+      formatWithBrackets('-', this.subNumbers)
+    )
 
     if (contents.length) {
       contents.push('=')
@@ -38,21 +50,6 @@ export class NSidedDiceResult extends Result {
     }
 
     return contents.join(' ')
-  }
-
-  private toStringDices (symbol: string, dices: NSidedDice[]): string[] {
-    return this.toStringNumbers(symbol, dices.map(dice => dice.getDeme()))
-  }
-
-  private toStringNumbers (symbol: string, numbers: number[]): string[] {
-    const contents: string[] = []
-    if (numbers.length) {
-      contents.push(symbol)
-      contents.push('(')
-      contents.push(numbers.map(num => num.toString()).join(' + '))
-      contents.push(')')
-    }
-    return contents
   }
 
   getTotal (): number {
