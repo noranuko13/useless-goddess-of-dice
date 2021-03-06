@@ -2,9 +2,9 @@ export class NSidedDice {
   private readonly side: number;
   private readonly deme: number;
 
-  constructor (side: number) {
+  constructor (side: number, deme?: number) {
     this.side = side
-    this.deme = this.korokoro()
+    this.deme = deme ?? this.korokoro()
   }
 
   getDeme (): number {

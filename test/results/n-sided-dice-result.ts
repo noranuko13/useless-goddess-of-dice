@@ -6,12 +6,12 @@ import { NSidedDiceResult } from '../../src/results'
 describe('NSidedDiceResult', function () {
   const dr = new NSidedDiceResult()
   dr.setAddDices([
-    { side: 10, deme: 4, getDeme () { return 4 } } as unknown as NSidedDice,
-    { side: 6, deme: 5, getDeme () { return 5 } } as unknown as NSidedDice
+    new NSidedDice(10, 4),
+    new NSidedDice(6, 5)
   ])
   dr.setSubDices([
-    { side: 3, deme: 2, getDeme () { return 2 } } as unknown as NSidedDice,
-    { side: 4, deme: 1, getDeme () { return 1 } } as unknown as NSidedDice
+    new NSidedDice(3, 2),
+    new NSidedDice(4, 1)
   ])
   dr.setAddNumbers([3, 6])
   dr.setSubNumbers([7, 8])
