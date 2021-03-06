@@ -35,7 +35,7 @@ class Client {
     })
   }
 
-  public on (fn: (message: Message) => void) {
+  on (fn: (message: Message) => void) {
     this.rl.question('入力: ', (answer: string) => {
       const message = this.getMessage(answer)
 

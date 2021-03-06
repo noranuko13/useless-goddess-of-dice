@@ -6,7 +6,7 @@ import { Config } from '../config'
 export class MessageService {
   constructor (private config: Config) {}
 
-  public isValid (message: Message): boolean {
+  isValid (message: Message): boolean {
     return message.content.startsWith(this.config.getPrefix()) &&
       !message.author.bot
   }
