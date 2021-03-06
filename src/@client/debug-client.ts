@@ -4,11 +4,11 @@ import { injectable } from 'tsyringe'
 import { ClientInterface } from '../@client'
 import { MessageService } from '../@service'
 import { Config } from '../config'
-import { DiceRoller } from '../rollers'
+import { Central } from '../central'
 
 @injectable()
 export class DebugClient implements ClientInterface {
-  constructor (private config: Config, private ms: MessageService, private roller: DiceRoller) {}
+  constructor (private config: Config, private ms: MessageService, private central: Central) {}
 
   waitInput (): void {
     const client = new Client()
@@ -18,7 +18,7 @@ export class DebugClient implements ClientInterface {
         return
       }
 
-      const content = this.roller.roll(message.content)
+      const content = this.central.process(message.content)
       message.channel.send(content).then()
     })
   }

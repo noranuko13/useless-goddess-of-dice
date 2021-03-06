@@ -6,10 +6,10 @@ import { Constant } from './constant'
 import { Service } from './services'
 
 @injectable()
-export class DiceRoller {
+export class Central {
   constructor (private cs: ContentService) {}
 
-  roll (content: string): string {
+  process (content: string): string {
     content = this.autoFormatContext(content)
 
     let service = {} as Service

@@ -3,11 +3,11 @@ import { injectable } from 'tsyringe'
 import { ClientInterface } from '../@client'
 import { MessageService } from '../@service'
 import { Config } from '../config'
-import { DiceRoller } from '../rollers'
+import { Central } from '../central'
 
 @injectable()
 export class DiscordClient implements ClientInterface {
-  constructor (private config: Config, private ms: MessageService, private roller: DiceRoller) {}
+  constructor (private config: Config, private ms: MessageService, private roller: Central) {}
 
   waitInput (): void {
     const client = new discord.Client()
@@ -21,7 +21,7 @@ export class DiscordClient implements ClientInterface {
         return
       }
 
-      const content = this.roller.roll(message.content)
+      const content = this.roller.process(message.content)
       message.channel.send(content).then()
     })
 
