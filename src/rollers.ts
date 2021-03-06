@@ -3,7 +3,7 @@ import { container, injectable } from 'tsyringe'
 import { BadCommandError, NotFoundError, ReplyError } from './@error'
 import { ContentService } from './@service'
 import { Constant } from './constant'
-import { DiceService } from './services'
+import { Service } from './services'
 
 @injectable()
 export class DiceRoller {
@@ -12,7 +12,7 @@ export class DiceRoller {
   roll (content: string): string {
     content = this.autoFormatContext(content)
 
-    let service = {} as DiceService
+    let service = {} as Service
     try {
       service = container.resolve(this.getDiceType(content))
     } catch (error) {

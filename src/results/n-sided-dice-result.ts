@@ -1,7 +1,7 @@
 import { NSidedDice } from '../dices/n-sided-dice'
-import { DiceResult } from './dice-result'
+import { Result } from './result'
 
-export class NSidedDiceResult extends DiceResult {
+export class NSidedDiceResult extends Result {
   private addDices: NSidedDice[] = [];
   private subDices: NSidedDice[] = [];
   private addNumbers: number[] = [];
