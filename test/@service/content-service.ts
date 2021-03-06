@@ -1,8 +1,8 @@
 import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { Config } from '../../src/config'
 import { ContentService } from '../../src/@service'
+import { Config } from '../../src/config'
 
 describe('ContentService', function () {
   container.register(Config, {

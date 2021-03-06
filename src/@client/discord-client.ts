@@ -1,9 +1,9 @@
 import discord, { Message } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { ClientInterface } from '../@client'
+import { MessageService } from '../@service'
 import { Config } from '../config'
 import { DiceRoller } from '../rollers'
-import { MessageService } from '../@service'
 
 @injectable()
 export class DiscordClient implements ClientInterface {

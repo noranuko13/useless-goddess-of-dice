@@ -2,8 +2,8 @@ import assert from 'assert'
 import { Message } from 'discord.js'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { Config } from '../../src/config'
 import { MessageService } from '../../src/@service'
+import { Config } from '../../src/config'
 
 describe('MessageService', function () {
   container.register(Config, {
