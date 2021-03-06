@@ -4,7 +4,7 @@ import { injectable } from 'tsyringe'
 import { ClientInterface } from '../@client'
 import { Config } from '../config'
 import { DiceRoller } from '../rollers'
-import { MessageService } from '../services'
+import { MessageService } from '../@service'
 
 @injectable()
 export class DebugClient implements ClientInterface {

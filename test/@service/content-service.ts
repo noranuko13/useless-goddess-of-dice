@@ -2,7 +2,7 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { Config } from '../../src/config'
-import { ContentService } from '../../src/services'
+import { ContentService } from '../../src/@service'
 
 describe('ContentService', function () {
   container.register(Config, {

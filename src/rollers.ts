@@ -1,8 +1,9 @@
 import 'reflect-metadata'
 import { container, injectable } from 'tsyringe'
+import { ContentService } from './@service'
 import { Constant } from './constant'
 import { BadCommandError, NotFoundError, ReplyError } from './@error'
-import { ContentService, DiceService } from './services'
+import { DiceService } from './services'
 
 @injectable()
 export class DiceRoller {

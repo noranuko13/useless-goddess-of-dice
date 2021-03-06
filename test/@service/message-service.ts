@@ -3,7 +3,7 @@ import { Message } from 'discord.js'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { Config } from '../../src/config'
-import { MessageService } from '../../src/services'
+import { MessageService } from '../../src/@service'
 
 describe('MessageService', function () {
   container.register(Config, {
