@@ -69,28 +69,7 @@ describe('NSidedDiceResult', function () {
     })
 
     it('Empty Dices', function () {
-      assert.strictEqual((emptyResult as any).getTotal(), 0)
-    })
-  })
-
-  describe('#getDiceTotal()', function () {
-    it('Normal', function () {
-      assert.strictEqual(diceResult.getDiceTotal(diceResult.addDices), 9)
-    })
-
-    it('Empty Dices', function () {
-      assert.strictEqual(emptyResult.getDiceTotal([]), 0)
-    })
-  })
-
-  describe('#getNumberTotal()', function () {
-    it('Normal', function () {
-      assert.strictEqual(diceResult.getNumberTotal(diceResult.addNumbers), 9)
-      assert.strictEqual(diceResult.getNumberTotal(diceResult.subNumbers), 15)
-    })
-
-    it('Empty Numbers', function () {
-      assert.strictEqual(emptyResult.getNumberTotal([]), 0)
+      assert.strictEqual(emptyResult.getTotal(), 0)
     })
   })
 })

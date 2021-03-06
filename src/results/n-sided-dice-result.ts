@@ -1,3 +1,4 @@
+import '../@extension/array.extensions'
 import { NSidedDice } from '../dices/n-sided-dice'
 import { Result } from './result'
 
@@ -40,14 +41,7 @@ export class NSidedDiceResult extends Result {
   }
 
   private toStringDices (symbol: string, dices: NSidedDice[]): string[] {
-    const contents: string[] = []
-    if (dices.length) {
-      contents.push(symbol)
-      contents.push('(')
-      contents.push(dices.map(dice => dice.getDeme().toString()).join(' + '))
-      contents.push(')')
-    }
-    return contents
+    return this.toStringNumbers(symbol, dices.map(dice => dice.getDeme()))
   }
 
   private toStringNumbers (symbol: string, numbers: number[]): string[] {
@@ -61,16 +55,8 @@ export class NSidedDiceResult extends Result {
     return contents
   }
 
-  private getTotal (): number {
-    return this.getDiceTotal(this.addDices) - this.getDiceTotal(this.subDices) +
-      this.getNumberTotal(this.addNumbers) - this.getNumberTotal(this.subNumbers)
-  }
-
-  private getDiceTotal (dices: NSidedDice[]): number {
-    return dices.reduce((acc, dice) => acc + dice.getDeme(), 0)
-  }
-
-  private getNumberTotal (numbers: number[]) {
-    return numbers.reduce((acc, num) => acc + num, 0)
+  getTotal (): number {
+    return this.addDices.total() - this.subDices.total() +
+      this.addNumbers.total() - this.subNumbers.total()
   }
 }
