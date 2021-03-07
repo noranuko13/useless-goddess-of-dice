@@ -1,3 +1,5 @@
+import { Logger } from 'tslog'
+import { TLogLevelName } from 'tslog/src/interfaces'
 import { BadCommandError, NotFoundError } from './@error'
 import { NSidedDiceService } from './services'
 
@@ -21,4 +23,6 @@ export module Constant {
 
     throw new BadCommandError()
   }
+
+  export const LogLevels: TLogLevelName[] = (new Logger() as any)._logLevels
 }
