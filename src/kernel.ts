@@ -2,6 +2,8 @@ import discord, { Message } from 'discord.js'
 import { container, injectable } from 'tsyringe'
 import { ReplyError } from './@error'
 import { ContentService, MessageService } from './@service'
+import { LoggerService } from './@service/logger-service'
+import { Command } from './commands'
 import { Config } from './config'
 import { Constant } from './constant'
 import { Service } from './services'
@@ -11,7 +13,8 @@ export class Kernel {
   constructor (
     private config: Config,
     private ms: MessageService,
-    private cs: ContentService
+    private cs: ContentService,
+    private ls: LoggerService
   ) {}
 
   waitInput (client: discord.Client): void {
@@ -26,19 +29,32 @@ export class Kernel {
 
       const content = this.autoFormatContext(message.content)
 
-      let service = {} as Service
+      let service: Service
       try {
-        service = container.resolve(Constant.diceTypeOf(content))
+        const type = Constant.diceTypeOf(content)
+        service = container.resolve(type)
       } catch (error) {
         if (error instanceof ReplyError) {
+          this.ls.getLogger().warn(error)
           message.channel.send(error.message).then()
           return
         }
+        throw error
       }
 
-      const command = service.parse(content)
-      const result = service.cast(command)
+      let command: Command
+      try {
+        command = service.parse(content)
+      } catch (error) {
+        if (error instanceof ReplyError) {
+          this.ls.getLogger().warn(error)
+          message.channel.send(error.message).then()
+          return
+        }
+        throw error
+      }
 
+      const result = service.cast(command)
       message.channel.send(result.toString()).then()
     })
 
