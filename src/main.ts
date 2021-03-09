@@ -1,10 +1,12 @@
+import discord from 'discord.js'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { ClientInterface, DebugClient, DiscordClient } from './@client'
 import { Config } from './config'
+import { debug } from './debug'
+import { Kernel } from './kernel'
 
-const client: ClientInterface = container.resolve(Config).isDebug()
-  ? container.resolve(DebugClient)
-  : container.resolve(DiscordClient)
+const client: discord.Client = container.resolve(Config).isDebug()
+  ? new debug.Client()
+  : new discord.Client()
 
-client.waitInput()
+container.resolve(Kernel).waitInput(client)
