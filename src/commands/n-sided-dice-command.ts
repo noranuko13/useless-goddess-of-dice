@@ -1,7 +1,7 @@
-import { Command } from './command'
+import { Command } from './command.interface'
 import { DiceCommand } from './dice-command'
 
-export class NSidedDiceCommand extends Command {
+export class NSidedDiceCommand implements Command {
   private readonly addDices: DiceCommand[] = [];
   private readonly subDices: DiceCommand[] = [];
   private addNumbers: number[] = [];

@@ -2,7 +2,7 @@ import { injectable } from 'tsyringe'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
 import { NSidedDice } from '../dices/n-sided-dice'
 import { NSidedDiceResult } from '../results'
-import { Service } from './service'
+import { Service } from './service.interface'
 
 @injectable()
 export class NSidedDiceService implements Service {

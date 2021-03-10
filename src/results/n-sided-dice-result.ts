@@ -1,8 +1,8 @@
 import '../@extension/array.extensions'
 import { NSidedDice } from '../dices/n-sided-dice'
-import { Result } from './result'
+import { Result } from './result.interface'
 
-export class NSidedDiceResult extends Result {
+export class NSidedDiceResult implements Result {
   private addDices: NSidedDice[] = [];
   private subDices: NSidedDice[] = [];
   private addNumbers: number[] = [];

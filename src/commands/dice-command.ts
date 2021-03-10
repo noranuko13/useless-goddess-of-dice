@@ -1,14 +1,12 @@
 import { BadCommandError } from '../@error'
-import { Command } from './command'
+import { Command } from './command.interface'
 
-export class DiceCommand extends Command {
+export class DiceCommand implements Command {
   private readonly ndm: string;
   private readonly time: number;
   private readonly side: number;
 
   constructor (ndm: string) {
-    super()
-
     const numbers = ndm.match(/^(\d+)d(\d+)$/)
     if (!numbers) {
       throw new BadCommandError()
