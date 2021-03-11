@@ -1,4 +1,5 @@
-import '../@extension/array.extensions'
+import { Calc } from '../@static/calc'
+
 import { NSidedDice } from '../dices/n-sided-dice'
 import { Result } from './result.interface'
 
@@ -53,7 +54,7 @@ export class NSidedDiceResult implements Result {
   }
 
   total (): number {
-    return this.addDices.total() - this.subDices.total() +
-      this.addNumbers.total() - this.subNumbers.total()
+    return Calc.sumOfNSidedDice(this.addDices) - Calc.sumOfNSidedDice(this.subDices) +
+      Calc.sumOfNumbers(this.addNumbers) - Calc.sumOfNumbers(this.subNumbers)
   }
 }
