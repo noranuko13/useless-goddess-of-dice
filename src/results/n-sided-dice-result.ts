@@ -1,5 +1,4 @@
-import { Calc } from '../@static/calc'
-
+import { Calc } from '../@static'
 import { NSidedDice } from '../dices'
 import { Result } from './result.interface'
 

@@ -1,6 +1,6 @@
 import assert from 'assert'
 import 'reflect-metadata'
-import { Calc } from '../../src/@static/calc'
+import { Calc } from '../../src/@static'
 import { NSidedDice } from '../../src/dices'
 
 describe('Calc', function () {
