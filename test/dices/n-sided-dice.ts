@@ -1,6 +1,6 @@
 import assert from 'assert'
 import 'reflect-metadata'
-import { NSidedDice } from '../../src/dices/n-sided-dice'
+import { NSidedDice } from '../../src/dices'
 
 describe('NSidedDice', function () {
   it('Create instance', function () {

@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
-import { NSidedDice } from '../dices/n-sided-dice'
+import { NSidedDice } from '../dices'
 import { NSidedDiceResult } from '../results'
 import { Service } from './service.interface'
 

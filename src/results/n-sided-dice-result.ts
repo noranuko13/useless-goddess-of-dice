@@ -1,6 +1,6 @@
 import { Calc } from '../@static/calc'
 
-import { NSidedDice } from '../dices/n-sided-dice'
+import { NSidedDice } from '../dices'
 import { Result } from './result.interface'
 
 export class NSidedDiceResult implements Result {

@@ -1,4 +1,4 @@
-import { NSidedDice } from '../dices/n-sided-dice'
+import { NSidedDice } from '../dices'
 
 export class Calc {
   static sumOfNumbers (numbers: number[]): number {

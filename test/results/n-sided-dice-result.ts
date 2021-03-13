@@ -1,6 +1,6 @@
 import assert from 'assert'
 import 'reflect-metadata'
-import { NSidedDice } from '../../src/dices/n-sided-dice'
+import { NSidedDice } from '../../src/dices'
 import { NSidedDiceResult } from '../../src/results'
 
 describe('NSidedDiceResult', function () {

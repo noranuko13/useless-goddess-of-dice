@@ -1,7 +1,7 @@
 import assert from 'assert'
 import 'reflect-metadata'
 import { Calc } from '../../src/@static/calc'
-import { NSidedDice } from '../../src/dices/n-sided-dice'
+import { NSidedDice } from '../../src/dices'
 
 describe('Calc', function () {
   describe('#sumOfNumbers()', function () {
