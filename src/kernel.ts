@@ -17,7 +17,9 @@ export class Kernel {
     private ls: LoggerService
   ) {}
 
-  waitInput (client: discord.Client): void {
+  waitInput (): void {
+    const client = new discord.Client()
+
     client.once('ready', () => {
       console.log('Ready!')
     })
