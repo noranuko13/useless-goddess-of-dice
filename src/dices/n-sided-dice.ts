@@ -1,4 +1,6 @@
-export class NSidedDice {
+import { Dice } from './dise.interface'
+
+export class NSidedDice implements Dice {
   private readonly side: number;
   private readonly deme: number;
 
