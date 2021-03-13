@@ -1,20 +1,19 @@
 import discord, { Message } from 'discord.js'
 import { container, injectable } from 'tsyringe'
 import { ReplyError } from './@error'
-import { ContentService, MessageService } from './@service'
-import { LoggerService } from './@service/logger-service'
+import { ContentService, LoggerService, MessageService } from './@service'
+import { Action } from './actions'
 import { Command } from './commands'
 import { Config } from './config'
 import { Constant } from './constant'
-import { Service } from './services'
 
 @injectable()
 export class Kernel {
   constructor (
     private config: Config,
-    private ms: MessageService,
-    private cs: ContentService,
-    private ls: LoggerService
+    private messageService: MessageService,
+    private contentService: ContentService,
+    private loggerService: LoggerService
   ) {}
 
   waitInput (): void {
@@ -25,19 +24,19 @@ export class Kernel {
     })
 
     client.on('message', (message: Message) => {
-      if (!this.ms.isValid(message)) {
+      if (!this.messageService.isValid(message)) {
         return
       }
 
       const content = this.autoFormatContext(message.content)
 
-      let service: Service
+      let action: Action
       try {
         const type = Constant.diceTypeOf(content)
-        service = container.resolve(type)
+        action = container.resolve(type)
       } catch (error) {
         if (error instanceof ReplyError) {
-          this.ls.getLogger().warn(error)
+          this.loggerService.getLogger().warn(error)
           message.channel.send(error.message).then()
           return
         }
@@ -46,17 +45,17 @@ export class Kernel {
 
       let command: Command
       try {
-        command = service.parse(content)
+        command = action.parse(content)
       } catch (error) {
         if (error instanceof ReplyError) {
-          this.ls.getLogger().warn(error)
+          this.loggerService.getLogger().warn(error)
           message.channel.send(error.message).then()
           return
         }
         throw error
       }
 
-      const result = service.cast(command)
+      const result = action.cast(command)
       message.channel.send(result.toString()).then()
     })
 
@@ -64,10 +63,10 @@ export class Kernel {
   }
 
   private autoFormatContext (content: string): string {
-    content = this.cs.toHalfWidth(content)
-    content = this.cs.addWhitespaceToBothEnds(content)
-    content = this.cs.removeDuplicateWhitespace(content)
-    content = this.cs.removeCommandPrefix(content)
+    content = this.contentService.toHalfWidth(content)
+    content = this.contentService.addWhitespaceToBothEnds(content)
+    content = this.contentService.removeDuplicateWhitespace(content)
+    content = this.contentService.removeCommandPrefix(content)
     return content
   }
 }

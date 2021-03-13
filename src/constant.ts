@@ -1,11 +1,11 @@
 import { Logger } from 'tslog'
 import { TLogLevelName } from 'tslog/src/interfaces'
 import { BadCommandError, NotFoundError } from './@error'
-import { NSidedDiceService } from './services'
+import { NSidedDiceAction } from './actions'
 
 export module Constant {
   export const DiceType = {
-    NSidedDice: NSidedDiceService
+    NSidedDice: NSidedDiceAction
   } as const
 
   export type Values<T> = T[keyof T];

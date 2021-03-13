@@ -2,10 +2,10 @@ import { injectable } from 'tsyringe'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
 import { NSidedDice } from '../dices'
 import { NSidedDiceResult } from '../results'
-import { Service } from './service.interface'
+import { Action } from './action.interface'
 
 @injectable()
-export class NSidedDiceService implements Service {
+export class NSidedDiceAction implements Action {
   parse (content: string): NSidedDiceCommand {
     const args = content.split(/ +/).filter(Boolean)
     const command = new NSidedDiceCommand()

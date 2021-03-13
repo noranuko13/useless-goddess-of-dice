@@ -84,24 +84,26 @@ describe('ContentService', function () {
   })
 
   describe('#toHalfWidth()', function () {
-    const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭ　ＮＯＰＱＲＳＴＵＶＷＸＹＺ'
-    const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍ　ｎｏｐｑｒｓｔｕｖｗｘｙｚ'
+    const UPPER_FULL = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'
+    const LOWER_FULL = 'ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
     const NUMBER_FULL = '０１２３４５６７８９'
 
-    const UPPER_HALF = 'ABCDEFGHIJKLM NOPQRSTUVWXYZ'
-    const LOWER_HALF = 'abcdefghijklm nopqrstuvwxyz'
+    const UPPER_HALF = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const LOWER_HALF = 'abcdefghijklmnopqrstuvwxyz'
     const NUMBER_HALF = '0123456789'
 
     it('Already half-width', function () {
       assert.strictEqual(cs.toHalfWidth(UPPER_HALF), UPPER_HALF)
       assert.strictEqual(cs.toHalfWidth(LOWER_HALF), LOWER_HALF)
       assert.strictEqual(cs.toHalfWidth(NUMBER_HALF), NUMBER_HALF)
+      assert.strictEqual(cs.toHalfWidth(' '), ' ')
     })
 
     it('Full-width', function () {
       assert.strictEqual(cs.toHalfWidth(UPPER_FULL), UPPER_HALF)
       assert.strictEqual(cs.toHalfWidth(LOWER_FULL), LOWER_HALF)
       assert.strictEqual(cs.toHalfWidth(NUMBER_FULL), NUMBER_HALF)
+      assert.strictEqual(cs.toHalfWidth('　'), ' ')
     })
 
     it('Other', function () {

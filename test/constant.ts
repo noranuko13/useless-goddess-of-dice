@@ -4,7 +4,7 @@ import { BadCommandError, NotFoundError } from '../src/@error'
 import { Constant } from '../src/constant'
 import DiceType = Constant.DiceType
 
-describe('MessageService', function () {
+describe('Constant', function () {
   describe('#diceTypeOf()', function () {
     it('DiceType.NSidedDice', function () {
       assert.strictEqual(Constant.diceTypeOf('1d100'), DiceType.NSidedDice)
