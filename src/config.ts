@@ -1,8 +1,7 @@
 import dotenv from 'dotenv'
+import { Logger } from 'tslog'
 import { TLogLevelName } from 'tslog/src/interfaces'
 import { injectable } from 'tsyringe'
-import { Constant } from './constant'
-import LogLevels = Constant.LogLevels
 
 interface Env {
   UGD_DEBUG: string;
@@ -14,6 +13,7 @@ interface Env {
 @injectable()
 export class Config {
   private env: Env
+  private logLevels: TLogLevelName[] = (new Logger() as any)._logLevels
 
   constructor () {
     dotenv.config()
@@ -38,7 +38,7 @@ export class Config {
   }
 
   getLogLevel (): TLogLevelName {
-    if (LogLevels.includes(this.env.UGD_LOG_LEVEL as TLogLevelName)) {
+    if (this.logLevels.includes(this.env.UGD_LOG_LEVEL as TLogLevelName)) {
       return this.env.UGD_LOG_LEVEL as TLogLevelName
     }
     return this.isDebug() ? 'debug' : 'error'

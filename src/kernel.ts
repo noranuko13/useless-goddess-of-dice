@@ -1,11 +1,10 @@
 import discord, { Message } from 'discord.js'
-import { container, injectable } from 'tsyringe'
+import { injectable } from 'tsyringe'
 import { ReplyError } from './@error'
-import { ContentService, LoggerService, MessageService } from './@service'
+import { ContentService, LoggerService, MessageService, ResolverService } from './@service'
 import { Action } from './actions'
 import { Command } from './commands'
 import { Config } from './config'
-import { Constant } from './constant'
 
 @injectable()
 export class Kernel {
@@ -13,7 +12,8 @@ export class Kernel {
     private config: Config,
     private messageService: MessageService,
     private contentService: ContentService,
-    private loggerService: LoggerService
+    private loggerService: LoggerService,
+    private resolver: ResolverService
   ) {}
 
   waitInput (): void {
@@ -32,8 +32,7 @@ export class Kernel {
 
       let action: Action
       try {
-        const type = Constant.diceTypeOf(content)
-        action = container.resolve(type)
+        action = this.resolver.getAction(content)
       } catch (error) {
         if (error instanceof ReplyError) {
           this.loggerService.getLogger().warn(error)

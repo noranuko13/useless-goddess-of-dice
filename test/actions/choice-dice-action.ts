@@ -1,0 +1,41 @@
+import assert from 'assert'
+import 'reflect-metadata'
+import { container } from 'tsyringe'
+import { ChoiceDiceAction } from '../../src/actions'
+import { ChoiceDiceCommand } from '../../src/commands'
+import { ChoiceDiceResult } from '../../src/results'
+
+describe('ChoiceDiceAction', function () {
+  const action = container.resolve(ChoiceDiceAction)
+
+  describe('#parse()', function () {
+    it('All', function () {
+      assert.deepStrictEqual(
+        JSON.stringify(action.parse('choice 餃子 カレー')),
+        JSON.stringify({
+          words: ['餃子', 'カレー']
+        }))
+    })
+
+    it('Other', function () {
+      const expected = new ChoiceDiceCommand([])
+      assert.deepStrictEqual(action.parse(''), expected)
+    })
+  })
+
+  describe('#cast()', function () {
+    it('All', function () {
+      const expected = new ChoiceDiceCommand(['餃子', 'カレー'])
+      assert.doesNotThrow(() => { action.cast(expected) })
+    })
+
+    it('Empty ChoiceDiceCommand', function () {
+      const expected = new ChoiceDiceCommand([])
+      assert.doesNotThrow(() => { action.cast(expected) })
+      assert.deepStrictEqual(
+        JSON.stringify(action.cast(expected)),
+        JSON.stringify(new ChoiceDiceResult())
+      )
+    })
+  })
+})
