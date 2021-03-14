@@ -12,7 +12,8 @@ export class LoggerService {
       displayDateTime: false,
       displayFunctionName: false,
       minLevel: config.getLogLevel(),
-      colorizePrettyLogs: config.isDebug()
+      colorizePrettyLogs: config.isDebug(),
+      type: config.isDebug() ? 'pretty' : 'json'
     })
   }
 

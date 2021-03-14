@@ -1,26 +1,24 @@
 import assert from 'assert'
 import 'reflect-metadata'
-import { TLogLevelName } from 'tslog'
-import { container } from 'tsyringe'
 import { LoggerService } from '../../src/@service'
 import { Config } from '../../src/config'
 
 describe('LoggerService', function () {
-  container.register(Config, {
-    useValue: {
-      getLogLevel (): TLogLevelName {
-        return 'debug'
-      },
-      isDebug (): boolean {
-        return true
+  describe('Create instance.', function () {
+    it('UGD_DEBUG=0', function () {
+      process.env = {
+        UGD_DEBUG: '0'
       }
-    } as Config
-  })
-  const service = container.resolve(LoggerService)
+      const service = new LoggerService(new Config())
+      assert.strictEqual(service.getLogger().settings.type, 'json')
+    })
 
-  describe('#getLogger()', function () {
-    it('Get instance.', function () {
-      assert.doesNotThrow(() => { return service.getLogger() })
+    it('UGD_DEBUG=1', function () {
+      process.env = {
+        UGD_DEBUG: '1'
+      }
+      const service = new LoggerService(new Config())
+      assert.strictEqual(service.getLogger().settings.type, 'pretty')
     })
   })
 })

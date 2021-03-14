@@ -54,8 +54,10 @@ export class Kernel {
         }
         throw error
       }
+      this.loggerService.getLogger().silly(command)
 
       const result = action.cast(command)
+      this.loggerService.getLogger().silly(result)
       message.channel.send(result.toString()).then()
     })
 
