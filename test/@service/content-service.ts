@@ -111,4 +111,20 @@ describe('ContentService', function () {
       assert.strictEqual(cs.toHalfWidth('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
+
+  describe('#removeSubsequentLines()', function () {
+    it('With line breaks', function () {
+      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6\n/ugd 1d3'), '/ugd 2d6 + 6')
+      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6\r\n/ugd 1d3'), '/ugd 2d6 + 6')
+    })
+
+    it('No line breaks', function () {
+      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6'), '/ugd 2d6 + 6')
+    })
+
+    it('Other', function () {
+      assert.strictEqual(cs.removeSubsequentLines(''), '')
+      assert.strictEqual(cs.removeSubsequentLines('ダイスの駄女神'), 'ダイスの駄女神')
+    })
+  })
 })

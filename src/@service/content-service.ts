@@ -28,4 +28,10 @@ export class ContentService {
     content = content.replace(/\s+/g, ' ')
     return content
   }
+
+  removeSubsequentLines (content: string) {
+    return /\r?\n/.test(content)
+      ? content.replace(/\r?\n.*/, '')
+      : content
+  }
 }
