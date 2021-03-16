@@ -1,4 +1,4 @@
-import discord, { Message } from 'discord.js'
+import discord, { Message, MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { ReplyError } from './@error'
 import { ContentService, LoggerService, MessageService, ResolverService } from './@service'
@@ -57,7 +57,15 @@ export class Kernel {
 
       const result = action.cast(command)
       this.loggerService.getLogger().silly(result)
-      message.channel.send(result.toString()).then()
+
+      const embed: MessageEmbed = new MessageEmbed()
+      if (message.member?.displayHexColor) {
+        embed.setColor(message.member?.displayHexColor)
+      }
+
+      embed.setDescription(':black_circle: ' + result.toString())
+
+      message.channel.send({ embed: embed }).then()
     })
 
     client.login(this.config.getToken()).then()
