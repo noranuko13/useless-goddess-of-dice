@@ -1,23 +1,18 @@
-import { NSidedDice } from '../dices'
 import { Result } from './result.interface'
 
 export class ChoiceDiceResult implements Result {
-  private words: string[] = [];
-  private dice: NSidedDice = new NSidedDice(0);
-
-  setWords (words: string[]): void {
-    this.words = words
-    this.dice = new NSidedDice(words.length)
-  }
+  constructor (
+    private word: string,
+    private contents: string[] = []
+  ) {}
 
   toString = () : string => {
-    const word = this.words[this.dice.getDeme() - 1]
+    this.contents.push(':black_circle:')
 
-    const contents: string[] = []
-    contents.push(':black_circle:')
-    contents.push('( ＝Д＝)')
-    contents.push(word)
-    contents.push('！')
-    return contents.join(' ')
+    this.contents.push('( ＝Д＝)')
+    this.contents.push(this.word)
+    this.contents.push('！')
+
+    return this.contents.join(' ')
   }
 }

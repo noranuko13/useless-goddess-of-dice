@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { ChoiceDiceCommand } from '../commands'
+import { NSidedDice } from '../dices'
 import { ChoiceDiceResult } from '../results'
 import { Action } from './action.interface'
 
@@ -13,9 +14,10 @@ export class ChoiceDiceAction implements Action {
   }
 
   cast (command: ChoiceDiceCommand): MessageEmbed {
-    const result = new ChoiceDiceResult()
-    result.setWords(command.getWords())
+    const dice: NSidedDice = new NSidedDice(command.getSide())
+    const word = command.getWords()[dice.getDeme() - 1]
 
+    const result = new ChoiceDiceResult(word)
     return new MessageEmbed({
       description: result.toString()
     })

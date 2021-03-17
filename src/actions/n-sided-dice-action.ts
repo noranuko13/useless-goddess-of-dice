@@ -36,22 +36,23 @@ export class NSidedDiceAction implements Action {
   }
 
   cast (command: NSidedDiceCommand): MessageEmbed {
-    const castDices = (diceCommands: DiceCommand[]) => {
-      const dices: NSidedDice[] = []
+    const castDices = (diceCommands: DiceCommand[]): number[] => {
+      const dices: number[] = []
       diceCommands.forEach(diceCommand => {
         for (let i = 1; i <= diceCommand.getTime(); i++) {
-          dices.push(new NSidedDice(diceCommand.getSide()))
+          const nSidedDice = new NSidedDice(diceCommand.getSide())
+          dices.push(nSidedDice.korokoro())
         }
       })
       return dices
     }
 
-    const result = new NSidedDiceResult()
-    result.setAddDices(castDices(command.getAddDices()))
-    result.setSubDices(castDices(command.getSubDices()))
-    result.setAddNumbers(command.getAddNumbers())
-    result.setSubNumbers(command.getSubNumbers())
-
+    const result = new NSidedDiceResult(
+      castDices(command.getAddDices()),
+      castDices(command.getSubDices()),
+      command.getAddNumbers(),
+      command.getSubNumbers()
+    )
     return new MessageEmbed({
       description: result.toString()
     })

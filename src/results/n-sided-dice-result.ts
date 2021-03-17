@@ -1,28 +1,13 @@
 import { Calc } from '../@static'
-import { NSidedDice } from '../dices'
 import { Result } from './result.interface'
 
 export class NSidedDiceResult implements Result {
-  private addDices: NSidedDice[] = [];
-  private subDices: NSidedDice[] = [];
-  private addNumbers: number[] = [];
-  private subNumbers: number[] = [];
-
-  setAddDices (nSidedDices: NSidedDice[]): void {
-    this.addDices = nSidedDices
-  }
-
-  setSubDices (nSidedDices: NSidedDice[]): void {
-    this.subDices = nSidedDices
-  }
-
-  setAddNumbers (numbers: number[]) {
-    this.addNumbers = numbers
-  }
-
-  setSubNumbers (numbers: number[]) {
-    this.subNumbers = numbers
-  }
+  constructor (
+    private addDices: number[],
+    private subDices: number[],
+    private addNumbers: number[],
+    private subNumbers: number[]
+  ) {}
 
   toString = () : string => {
     const formatWithBrackets = (symbol: string, numbers: number[]): string[] => {
@@ -40,8 +25,8 @@ export class NSidedDiceResult implements Result {
     contents.push(':black_circle:')
 
     contents = contents.concat(
-      formatWithBrackets('+', this.addDices.map(dice => dice.getDeme())),
-      formatWithBrackets('-', this.subDices.map(dice => dice.getDeme())),
+      formatWithBrackets('+', this.addDices),
+      formatWithBrackets('-', this.subDices),
       formatWithBrackets('+', this.addNumbers),
       formatWithBrackets('-', this.subNumbers)
     )
@@ -53,7 +38,7 @@ export class NSidedDiceResult implements Result {
   }
 
   total (): number {
-    return Calc.sumOfNSidedDice(this.addDices) - Calc.sumOfNSidedDice(this.subDices) +
+    return Calc.sumOfNumbers(this.addDices) - Calc.sumOfNumbers(this.subDices) +
       Calc.sumOfNumbers(this.addNumbers) - Calc.sumOfNumbers(this.subNumbers)
   }
 }
