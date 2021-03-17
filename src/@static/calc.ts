@@ -6,4 +6,8 @@ export class Calc {
 
     return numbers.reduce((acc: number, num: number) => acc + num, 0)
   }
+
+  static getIntByRange (min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
 }

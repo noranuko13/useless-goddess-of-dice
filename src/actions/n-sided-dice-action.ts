@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
+import { Calc } from '../@static'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
-import { NSidedDice } from '../dices'
 import { NSidedDiceResult } from '../results'
 import { Action } from './action.interface'
 
@@ -40,8 +40,7 @@ export class NSidedDiceAction implements Action {
       const dices: number[] = []
       diceCommands.forEach(diceCommand => {
         for (let i = 1; i <= diceCommand.getTime(); i++) {
-          const nSidedDice = new NSidedDice(diceCommand.getSide())
-          dices.push(nSidedDice.korokoro())
+          dices.push(Calc.getIntByRange(1, diceCommand.getSide()))
         }
       })
       return dices

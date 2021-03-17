@@ -13,4 +13,17 @@ describe('Calc', function () {
       assert.strictEqual(Calc.sumOfNumbers([]), 0)
     })
   })
+
+  describe('#getIntByRange()', function () {
+    it('Expected value that all eyes can see from 1 to 6: 14.7', function () {
+      let numbers = []
+      for (let i = 1; i <= 15; i++) {
+        numbers.push(Calc.getIntByRange(1, 6))
+      }
+      numbers = numbers.filter(num => {
+        return num < 1 || num > 15
+      })
+      assert.strictEqual(numbers.length, 0)
+    })
+  })
 })
