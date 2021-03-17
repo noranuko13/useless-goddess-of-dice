@@ -37,6 +37,8 @@ export class NSidedDiceResult implements Result {
     }
 
     let contents: string[] = []
+    contents.push(':black_circle:')
+
     contents = contents.concat(
       formatWithBrackets('+', this.addDices.map(dice => dice.getDeme())),
       formatWithBrackets('-', this.subDices.map(dice => dice.getDeme())),
@@ -44,10 +46,8 @@ export class NSidedDiceResult implements Result {
       formatWithBrackets('-', this.subNumbers)
     )
 
-    if (contents.length) {
-      contents.push('=')
-      contents.push(this.total().toString())
-    }
+    contents.push('=')
+    contents.push(this.total().toString())
 
     return contents.join(' ')
   }

@@ -1,9 +1,9 @@
 import assert from 'assert'
 import 'reflect-metadata'
+import { MessageEmbed } from 'discord.js'
 import { container } from 'tsyringe'
 import { NSidedDiceAction } from '../../src/actions'
 import { NSidedDiceCommand } from '../../src/commands'
-import { NSidedDiceResult } from '../../src/results'
 
 describe('NSidedDiceAction', function () {
   const action = container.resolve(NSidedDiceAction)
@@ -91,7 +91,9 @@ describe('NSidedDiceAction', function () {
       assert.doesNotThrow(() => { action.cast(new NSidedDiceCommand()) })
       assert.deepStrictEqual(
         JSON.stringify(action.cast(new NSidedDiceCommand())),
-        JSON.stringify(new NSidedDiceResult())
+        JSON.stringify(new MessageEmbed({
+          description: ':black_circle: = 0'
+        }))
       )
     })
   })

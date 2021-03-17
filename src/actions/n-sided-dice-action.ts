@@ -1,3 +1,4 @@
+import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
 import { NSidedDice } from '../dices'
@@ -34,7 +35,7 @@ export class NSidedDiceAction implements Action {
     return command
   }
 
-  cast (command: NSidedDiceCommand): NSidedDiceResult {
+  cast (command: NSidedDiceCommand): MessageEmbed {
     const castDices = (diceCommands: DiceCommand[]) => {
       const dices: NSidedDice[] = []
       diceCommands.forEach(diceCommand => {
@@ -50,6 +51,9 @@ export class NSidedDiceAction implements Action {
     result.setSubDices(castDices(command.getSubDices()))
     result.setAddNumbers(command.getAddNumbers())
     result.setSubNumbers(command.getSubNumbers())
-    return result
+
+    return new MessageEmbed({
+      description: result.toString()
+    })
   }
 }

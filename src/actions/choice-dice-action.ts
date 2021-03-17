@@ -1,3 +1,4 @@
+import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { ChoiceDiceCommand } from '../commands'
 import { ChoiceDiceResult } from '../results'
@@ -11,9 +12,12 @@ export class ChoiceDiceAction implements Action {
     return new ChoiceDiceCommand(args)
   }
 
-  cast (command: ChoiceDiceCommand): ChoiceDiceResult {
+  cast (command: ChoiceDiceCommand): MessageEmbed {
     const result = new ChoiceDiceResult()
     result.setWords(command.getWords())
-    return result
+
+    return new MessageEmbed({
+      description: result.toString()
+    })
   }
 }

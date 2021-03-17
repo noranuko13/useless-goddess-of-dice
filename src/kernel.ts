@@ -55,15 +55,12 @@ export class Kernel {
       }
       this.loggerService.getLogger().silly(command)
 
-      const result = action.cast(command)
-      this.loggerService.getLogger().silly(result)
+      const embed: MessageEmbed = action.cast(command)
+      this.loggerService.getLogger().silly(embed)
 
-      const embed: MessageEmbed = new MessageEmbed()
       if (message.member?.displayHexColor) {
         embed.setColor(message.member?.displayHexColor)
       }
-
-      embed.setDescription(':black_circle: ' + result.toString())
 
       message.channel.send({ embed: embed }).then()
     })

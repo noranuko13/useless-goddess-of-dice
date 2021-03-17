@@ -8,15 +8,15 @@ describe('ChoiceDiceResult', function () {
   describe('#setWords(), #toString()', function () {
     it('No duplication.', function () {
       const words: string[] = ['餃子', 'カレー']
-      const expects = ['( ＝Д＝) 餃子 ！', '( ＝Д＝) カレー ！']
+      const expects = [':black_circle: ( ＝Д＝) 餃子 ！', ':black_circle: ( ＝Д＝) カレー ！']
       diceResult.setWords(words)
-      console.log(diceResult.toString())
       assert.strictEqual(expects.includes(diceResult.toString()), true)
     })
 
     it('There is duplication.', function () {
       const words: string[] = ['男', '女', '男', 'オカマ']
-      const expects = ['( ＝Д＝) 男 ！', '( ＝Д＝) 女 ！', '( ＝Д＝) オカマ ！']
+      const expects = [':black_circle: ( ＝Д＝) 男 ！', ':black_circle: ( ＝Д＝) 女 ！',
+        ':black_circle: ( ＝Д＝) オカマ ！']
       diceResult.setWords(words)
       assert.strictEqual(expects.includes(diceResult.toString()), true)
     })

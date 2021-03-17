@@ -20,11 +20,11 @@ describe('NSidedDiceResult', function () {
 
   describe('#toString()', function () {
     it('Number of dice is the total number of times', function () {
-      assert.strictEqual(diceResult.toString(), '+ ( 4 + 5 ) - ( 2 + 1 ) + ( 3 + 6 ) - ( 7 + 8 ) = 0')
+      assert.strictEqual(diceResult.toString(), ':black_circle: + ( 4 + 5 ) - ( 2 + 1 ) + ( 3 + 6 ) - ( 7 + 8 ) = 0')
     })
 
     it('Empty Dices', function () {
-      assert.strictEqual(emptyResult.toString(), '')
+      assert.strictEqual(emptyResult.toString(), ':black_circle: = 0')
     })
   })
 

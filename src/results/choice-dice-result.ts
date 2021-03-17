@@ -14,9 +14,10 @@ export class ChoiceDiceResult implements Result {
     const word = this.words[this.dice.getDeme() - 1]
 
     const contents: string[] = []
-    contents.push('( ＝Д＝) ')
+    contents.push(':black_circle:')
+    contents.push('( ＝Д＝)')
     contents.push(word)
-    contents.push(' ！')
-    return contents.join('')
+    contents.push('！')
+    return contents.join(' ')
   }
 }
