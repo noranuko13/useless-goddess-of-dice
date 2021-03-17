@@ -2,6 +2,7 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { MessageEmbed } from 'discord.js'
 import { container } from 'tsyringe'
+import { BadCommandError } from '../../src/@error'
 import { ChoiceDiceAction } from '../../src/actions'
 import { ChoiceDiceCommand } from '../../src/commands'
 
@@ -18,8 +19,7 @@ describe('ChoiceDiceAction', function () {
     })
 
     it('Other', function () {
-      const expected = new ChoiceDiceCommand([])
-      assert.deepStrictEqual(action.parse(''), expected)
+      assert.throws(() => { action.parse('') }, BadCommandError)
     })
   })
 
