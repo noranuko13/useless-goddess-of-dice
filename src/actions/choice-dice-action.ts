@@ -15,7 +15,7 @@ export class ChoiceDiceAction implements Action {
 
   cast (command: ChoiceDiceCommand): MessageEmbed {
     const dice: NSidedDice = new NSidedDice(command.getSide())
-    const word = command.getWords()[dice.getDeme() - 1]
+    const word = command.getWords()[dice.korokoro() - 1]
 
     const result = new ChoiceDiceResult(word)
     return new MessageEmbed({
