@@ -35,8 +35,7 @@ export class Kernel {
         action = this.resolver.getAction(content)
       } catch (error) {
         if (error instanceof ReplyError) {
-          this.loggerService.getLogger().warn(error)
-          message.channel.send(error.message).then()
+          this.sendErrorMessage(message, error)
           return
         }
         throw error
@@ -47,8 +46,7 @@ export class Kernel {
         command = action.parse(content)
       } catch (error) {
         if (error instanceof ReplyError) {
-          this.loggerService.getLogger().warn(error)
-          message.channel.send(error.message).then()
+          this.sendErrorMessage(message, error)
           return
         }
         throw error
@@ -56,13 +54,12 @@ export class Kernel {
       this.loggerService.getLogger().silly(command)
 
       const embed: MessageEmbed = action.cast(command)
-      this.loggerService.getLogger().silly(embed)
-
       if (message.member?.displayHexColor) {
         embed.setColor(message.member?.displayHexColor)
       }
-
-      message.channel.send({ embed: embed }).then()
+      message.channel.send({ embed: embed }).catch((error) => {
+        this.loggerService.getLogger().error(error)
+      })
     })
 
     client.login(this.config.getToken()).then()
@@ -75,5 +72,16 @@ export class Kernel {
     content = this.contentService.removeDuplicateWhitespace(content)
     content = this.contentService.removeCommandPrefix(content)
     return content
+  }
+
+  private sendErrorMessage (message: Message, error: Error): void {
+    this.loggerService.getLogger().warn(error)
+
+    message.channel.send(new MessageEmbed({
+      color: 'RED',
+      description: error.message
+    })).catch((error) => {
+      this.loggerService.getLogger().error(error)
+    })
   }
 }
