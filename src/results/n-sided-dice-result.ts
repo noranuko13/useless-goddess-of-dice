@@ -10,6 +10,9 @@ export class NSidedDiceResult implements Result {
   ) {}
 
   toString = () : string => {
+    let contents: string[] = []
+    contents.push(':black_circle:')
+
     const formatWithBrackets = (symbol: string, numbers: number[]): string[] => {
       const contents: string[] = []
       if (numbers.length) {
@@ -20,10 +23,6 @@ export class NSidedDiceResult implements Result {
       }
       return contents
     }
-
-    let contents: string[] = []
-    contents.push(':black_circle:')
-
     contents = contents.concat(
       formatWithBrackets('+', this.addDices),
       formatWithBrackets('-', this.subDices),
@@ -31,14 +30,13 @@ export class NSidedDiceResult implements Result {
       formatWithBrackets('-', this.subNumbers)
     )
 
+    const total = (): number => {
+      return Calc.sumOfNumbers([...this.addDices, ...this.addNumbers]) -
+        Calc.sumOfNumbers([...this.subDices, ...this.subNumbers])
+    }
     contents.push('=')
-    contents.push(this.total().toString())
+    contents.push(total().toString())
 
     return contents.join(' ')
-  }
-
-  total (): number {
-    return Calc.sumOfNumbers(this.addDices) - Calc.sumOfNumbers(this.subDices) +
-      Calc.sumOfNumbers(this.addNumbers) - Calc.sumOfNumbers(this.subNumbers)
   }
 }

@@ -1,18 +1,16 @@
 import { Result } from './result.interface'
 
 export class ChoiceDiceResult implements Result {
-  constructor (
-    private word: string,
-    private contents: string[] = []
-  ) {}
+  constructor (private word: string) {}
 
   toString = () : string => {
-    this.contents.push(':black_circle:')
+    const contents: string[] = []
+    contents.push(':black_circle:')
 
-    this.contents.push('( ＝Д＝)')
-    this.contents.push(this.word)
-    this.contents.push('！')
+    contents.push('( ＝Д＝)')
+    contents.push(this.word)
+    contents.push('！')
 
-    return this.contents.join(' ')
+    return contents.join(' ')
   }
 }

@@ -17,14 +17,4 @@ describe('NSidedDiceResult', function () {
       assert.strictEqual(emptyResult.toString(), ':black_circle: = 0')
     })
   })
-
-  describe('#total()', function () {
-    it('Normal', function () {
-      assert.strictEqual(diceResult.total(), 0)
-    })
-
-    it('Empty Dices', function () {
-      assert.strictEqual(emptyResult.total(), 0)
-    })
-  })
 })
