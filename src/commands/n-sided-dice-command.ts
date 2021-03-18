@@ -1,3 +1,4 @@
+import { BadCommandError } from '../@error'
 import { Command } from './command.interface'
 import { DiceCommand } from './dice-command'
 
@@ -7,32 +8,40 @@ export class NSidedDiceCommand implements Command {
   private addNumbers: number[] = [];
   private subNumbers: number[] = [];
 
-  addAddDice (str: string): void {
-    this.addDices.push(new DiceCommand(str))
+  constructor (args: string[]) {
+    let symbol = '+'
+    args.forEach(arg => {
+      switch (true) {
+        case /^\d+d\d+$/.test(arg):
+          if (symbol === '+') this.addDices.push(new DiceCommand(arg))
+          if (symbol === '-') this.subDices.push(new DiceCommand(arg))
+          break
+        case /^\d+$/.test(arg):
+          if (symbol === '+') this.addNumbers.push(parseInt(arg))
+          if (symbol === '-') this.subNumbers.push(parseInt(arg))
+          break
+        case /\+/.test(arg):
+          symbol = '+'
+          break
+        case /-/.test(arg):
+          symbol = '-'
+          break
+        default:
+          throw new BadCommandError()
+      }
+    })
   }
 
   getAddDices () {
     return this.addDices
   }
 
-  addSubDice (str: string): void {
-    this.subDices.push(new DiceCommand(str))
-  }
-
   getSubDices () {
     return this.subDices
   }
 
-  addAddNumber (str: string) {
-    this.addNumbers.push(parseInt(str))
-  }
-
   getAddNumbers () {
     return this.addNumbers
-  }
-
-  addSubNumber (str: string) {
-    this.subNumbers.push(parseInt(str))
   }
 
   getSubNumbers () {

@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
+import { BadCommandError } from '../@error'
 import { Calc } from '../@static'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
 import { NSidedDiceResult } from '../results'
@@ -9,30 +10,11 @@ import { Action } from './action.interface'
 export class NSidedDiceAction implements Action {
   parse (content: string): NSidedDiceCommand {
     const args = content.split(/ +/).filter(Boolean)
-    const command = new NSidedDiceCommand()
-    let symbol = '+'
+    if (!args.length) {
+      throw new BadCommandError()
+    }
 
-    args.forEach(arg => {
-      switch (true) {
-        case /^\d+d\d+$/.test(arg):
-          if (symbol === '+') command.addAddDice(arg)
-          if (symbol === '-') command.addSubDice(arg)
-          break
-        case /^\d+$/.test(arg):
-          if (symbol === '+') command.addAddNumber(arg)
-          if (symbol === '-') command.addSubNumber(arg)
-          break
-        case /\+/.test(arg):
-          symbol = '+'
-          break
-        case /-/.test(arg):
-          symbol = '-'
-          break
-        default:
-      }
-    })
-
-    return command
+    return new NSidedDiceCommand(args)
   }
 
   cast (command: NSidedDiceCommand): MessageEmbed {
