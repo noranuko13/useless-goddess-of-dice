@@ -9,7 +9,7 @@ describe('ChoiceDiceCommand', function () {
       const command: ChoiceDiceCommand = new ChoiceDiceCommand(words)
 
       assert.deepStrictEqual(command.getWords(), words)
-      assert.deepStrictEqual(command.getSide(), words.length)
+      assert.deepStrictEqual(command.getRange(), [0, words.length - 1])
     })
   })
 })

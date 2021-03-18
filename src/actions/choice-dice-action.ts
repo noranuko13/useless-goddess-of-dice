@@ -20,7 +20,7 @@ export class ChoiceDiceAction implements Action {
   }
 
   cast (command: ChoiceDiceCommand): MessageEmbed {
-    const index = Calc.getIntByRange(0, command.getSide() - 1)
+    const index = Calc.getIntByRange(...command.getRange())
     const word = command.getWords()[index]
 
     const result = new ChoiceDiceResult(word)

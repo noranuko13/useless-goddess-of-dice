@@ -11,7 +11,7 @@ export class ChoiceDiceCommand implements Command {
     return this.words
   }
 
-  getSide (): number {
-    return this.words.length
+  getRange (): [min: number, max: number] {
+    return [0, this.words.length - 1]
   }
 }
