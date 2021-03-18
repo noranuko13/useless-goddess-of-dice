@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { BadCommandError, NotFoundError } from '../../src/@error'
 import { ResolverService } from '../../src/@service'
-import { ChoiceDiceAction, NSidedDiceAction } from '../../src/actions'
+import { ChoiceAction, NSidedDiceAction } from '../../src/actions'
 
 describe('ResolverService', function () {
   const resolver = container.resolve(ResolverService)
@@ -16,8 +16,8 @@ describe('ResolverService', function () {
       assert.strictEqual(resolver.getAction('-').constructor.name, NSidedDiceAction.name)
     })
 
-    it('ChoiceDiceAction', function () {
-      assert.strictEqual(resolver.getAction('choice 男 女').constructor.name, ChoiceDiceAction.name)
+    it('ChoiceAction', function () {
+      assert.strictEqual(resolver.getAction('choice 男 女').constructor.name, ChoiceAction.name)
     })
 
     it('NotFoundError, BadCommandError', function () {

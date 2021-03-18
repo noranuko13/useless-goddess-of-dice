@@ -1,6 +1,6 @@
 import { container, injectable } from 'tsyringe'
 import { BadCommandError, NotFoundError } from '../@error'
-import { Action, ChoiceDiceAction, NSidedDiceAction } from '../actions'
+import { Action, ChoiceAction, NSidedDiceAction } from '../actions'
 
 @injectable()
 export class ResolverService {
@@ -12,7 +12,7 @@ export class ResolverService {
     }
 
     if (/^choice$/.test(args[0])) {
-      return container.resolve(ChoiceDiceAction)
+      return container.resolve(ChoiceAction)
     }
 
     if (/^\d+d\d+$|^\d+$|^\+$|^-$/.test(args[0])) {

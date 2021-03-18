@@ -3,11 +3,11 @@ import 'reflect-metadata'
 import { MessageEmbed } from 'discord.js'
 import { container } from 'tsyringe'
 import { BadCommandError } from '../../src/@error'
-import { ChoiceDiceAction } from '../../src/actions'
-import { ChoiceDiceCommand } from '../../src/commands'
+import { ChoiceAction } from '../../src/actions'
+import { ChoiceCommand } from '../../src/commands'
 
-describe('ChoiceDiceAction', function () {
-  const action = container.resolve(ChoiceDiceAction)
+describe('ChoiceAction', function () {
+  const action = container.resolve(ChoiceAction)
 
   describe('#parse()', function () {
     it('All', function () {
@@ -25,12 +25,12 @@ describe('ChoiceDiceAction', function () {
 
   describe('#cast()', function () {
     it('All', function () {
-      const expected = new ChoiceDiceCommand(['餃子', 'カレー'])
+      const expected = new ChoiceCommand(['餃子', 'カレー'])
       assert.doesNotThrow(() => { action.cast(expected) })
     })
 
-    it('Empty ChoiceDiceCommand', function () {
-      const expected = new ChoiceDiceCommand([])
+    it('Empty ChoiceCommand', function () {
+      const expected = new ChoiceCommand([])
       assert.doesNotThrow(() => { action.cast(expected) })
       assert.deepStrictEqual(
         JSON.stringify(action.cast(expected)),

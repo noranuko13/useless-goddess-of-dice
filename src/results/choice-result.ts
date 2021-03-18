@@ -1,6 +1,6 @@
 import { Result } from './result.interface'
 
-export class ChoiceDiceResult implements Result {
+export class ChoiceResult implements Result {
   constructor (private word: string) {}
 
   toString = () : string => {

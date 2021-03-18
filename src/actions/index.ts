@@ -1,3 +1,3 @@
 export { Action } from './action.interface'
-export { ChoiceDiceAction } from './choice-dice-action'
+export { ChoiceAction } from './choice-action'
 export { NSidedDiceAction } from './n-sided-dice-action'

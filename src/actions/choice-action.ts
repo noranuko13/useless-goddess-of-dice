@@ -2,13 +2,13 @@ import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { BadCommandError } from '../@error'
 import { Calc } from '../@static'
-import { ChoiceDiceCommand } from '../commands'
-import { ChoiceDiceResult } from '../results'
+import { ChoiceCommand } from '../commands'
+import { ChoiceResult } from '../results'
 import { Action } from './action.interface'
 
 @injectable()
-export class ChoiceDiceAction implements Action {
-  parse (content: string): ChoiceDiceCommand {
+export class ChoiceAction implements Action {
+  parse (content: string): ChoiceCommand {
     content = content.replace(/^choice +/, '')
 
     const args = content.split(/ +/).filter(Boolean)
@@ -16,14 +16,14 @@ export class ChoiceDiceAction implements Action {
       throw new BadCommandError()
     }
 
-    return new ChoiceDiceCommand(args)
+    return new ChoiceCommand(args)
   }
 
-  cast (command: ChoiceDiceCommand): MessageEmbed {
+  cast (command: ChoiceCommand): MessageEmbed {
     const index = Calc.getIntByRange(...command.getRange())
     const word = command.getWords()[index]
 
-    const result = new ChoiceDiceResult(word)
+    const result = new ChoiceResult(word)
     return new MessageEmbed({
       description: result.toString()
     })

@@ -1,6 +1,6 @@
 import { Command } from './command.interface'
 
-export class ChoiceDiceCommand implements Command {
+export class ChoiceCommand implements Command {
   private readonly words: string[];
 
   constructor (words: string[]) {
