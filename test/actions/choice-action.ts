@@ -6,11 +6,11 @@ import { NotFoundError } from '../../src/@error'
 import { ChoiceAction } from '../../src/actions'
 import { ChoiceCommand } from '../../src/commands'
 
-describe('ChoiceAction', function () {
+describe('ChoiceAction', () => {
   const action = container.resolve(ChoiceAction)
 
-  describe('#parse()', function () {
-    it('All', function () {
+  describe('#parse()', () => {
+    it('All', () => {
       assert.deepStrictEqual(
         JSON.stringify(action.parse('choice 餃子 カレー')),
         JSON.stringify({
@@ -18,18 +18,18 @@ describe('ChoiceAction', function () {
         }))
     })
 
-    it('Other', function () {
+    it('Other', () => {
       assert.throws(() => { action.parse('') }, NotFoundError)
     })
   })
 
-  describe('#cast()', function () {
-    it('All', function () {
+  describe('#cast()', () => {
+    it('All', () => {
       const expected = new ChoiceCommand(['餃子', 'カレー'])
       assert.doesNotThrow(() => { action.cast(expected) })
     })
 
-    it('Empty ChoiceCommand', function () {
+    it('Empty ChoiceCommand', () => {
       const expected = new ChoiceCommand([])
       assert.doesNotThrow(() => { action.cast(expected) })
       assert.deepStrictEqual(

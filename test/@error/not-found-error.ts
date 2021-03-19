@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { NotFoundError, ReplyError } from '../../src/@error'
 
-describe('NotFoundError', function () {
-  describe('Handle exceptions.', function () {
-    it('Handle NotFoundError', function () {
+describe('NotFoundError', () => {
+  describe('Handle exceptions.', () => {
+    it('Handle NotFoundError', () => {
       let actual: Error = new Error('')
       const fn = () => {
         throw new NotFoundError()
@@ -22,7 +22,7 @@ describe('NotFoundError', function () {
       assert.strictEqual(actual.message, '疲れてるの？(´・д・)引数がないの・・・')
     })
 
-    it('Handle ReplyError', function () {
+    it('Handle ReplyError', () => {
       let actual: Error = new Error('')
       const fn = () => {
         throw new NotFoundError()

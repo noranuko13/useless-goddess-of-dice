@@ -2,15 +2,15 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { Config } from '../src/config'
 
-describe('Config', function () {
-  describe('Create instance', function () {
-    it('new Config()', function () {
+describe('Config', () => {
+  describe('Create instance', () => {
+    it('new Config()', () => {
       assert.doesNotThrow(() => { return new Config() })
     })
   })
 
-  describe('#isDebug()', function () {
-    it('UGD_DEBUG=0', function () {
+  describe('#isDebug()', () => {
+    it('UGD_DEBUG=0', () => {
       process.env = {
         UGD_DEBUG: '0'
       }
@@ -18,7 +18,7 @@ describe('Config', function () {
       assert.strictEqual(config.isDebug(), false)
     })
 
-    it('UGD_DEBUG=1', function () {
+    it('UGD_DEBUG=1', () => {
       process.env = {
         UGD_DEBUG: '1'
       }
@@ -27,8 +27,8 @@ describe('Config', function () {
     })
   })
 
-  describe('#getToken()', function () {
-    it('UGD_DISCORD_TOKEN=DUMMY_TOKEN', function () {
+  describe('#getToken()', () => {
+    it('UGD_DISCORD_TOKEN=DUMMY_TOKEN', () => {
       process.env = {
         UGD_DISCORD_TOKEN: 'DUMMY_TOKEN'
       }
@@ -37,8 +37,8 @@ describe('Config', function () {
     })
   })
 
-  describe('#getPrefix()', function () {
-    it('UGD_COMMAND_PREFIX=/prefix', function () {
+  describe('#getPrefix()', () => {
+    it('UGD_COMMAND_PREFIX=/prefix', () => {
       process.env = {
         UGD_COMMAND_PREFIX: '/prefix'
       }
@@ -47,8 +47,8 @@ describe('Config', function () {
     })
   })
 
-  describe('#getLogLevel()', function () {
-    it('UGD_LOG_LEVEL=TLogLevelName', function () {
+  describe('#getLogLevel()', () => {
+    it('UGD_LOG_LEVEL=TLogLevelName', () => {
       process.env = {
         UGD_LOG_LEVEL: 'trace'
       }
@@ -56,7 +56,7 @@ describe('Config', function () {
       assert.strictEqual(config.getLogLevel(), 'trace')
     })
 
-    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=0', function () {
+    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=0', () => {
       process.env = {
         UGD_DEBUG: '0',
         UGD_LOG_LEVEL: 'dummy'
@@ -65,7 +65,7 @@ describe('Config', function () {
       assert.strictEqual(config.getLogLevel(), 'error')
     })
 
-    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=1', function () {
+    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=1', () => {
       process.env = {
         UGD_DEBUG: '1',
         UGD_LOG_LEVEL: 'dummy'

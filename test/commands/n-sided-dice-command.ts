@@ -3,11 +3,11 @@ import 'reflect-metadata'
 import { BadCommandError } from '../../src/@error'
 import { DiceCommand, NSidedDiceCommand } from '../../src/commands'
 
-describe('NSidedDiceCommand', function () {
+describe('NSidedDiceCommand', () => {
   const command = new NSidedDiceCommand(['1d100', '+', '2d6', '-', '1d100', '-', '2d6', '+', '6', '+', '3', '-', '6', '-', '3'])
 
-  describe('Create instance.', function () {
-    it('String array value.', function () {
+  describe('Create instance.', () => {
+    it('String array value.', () => {
       assert.deepStrictEqual(
         JSON.stringify(new NSidedDiceCommand(['2d6', '-', '1d3', '+', '10', '-', '7'])),
         JSON.stringify({
@@ -19,31 +19,31 @@ describe('NSidedDiceCommand', function () {
       )
     })
 
-    it('Throw exception.', function () {
+    it('Throw exception.', () => {
       assert.throws(() => { return new NSidedDiceCommand(['']) }, BadCommandError)
     })
   })
 
-  describe('#getAddDices()', function () {
-    it('String value', function () {
+  describe('#getAddDices()', () => {
+    it('String value', () => {
       assert.deepStrictEqual(command.getAddDices(), [new DiceCommand('1d100'), new DiceCommand('2d6')])
     })
   })
 
-  describe('#getSubDices()', function () {
-    it('String value', function () {
+  describe('#getSubDices()', () => {
+    it('String value', () => {
       assert.deepStrictEqual(command.getSubDices(), [new DiceCommand('1d100'), new DiceCommand('2d6')])
     })
   })
 
-  describe('#getAddNumbers()', function () {
-    it('String value', function () {
+  describe('#getAddNumbers()', () => {
+    it('String value', () => {
       assert.deepStrictEqual(command.getAddNumbers(), [6, 3])
     })
   })
 
-  describe('#addSubNumber(), #getSubNumbers()', function () {
-    it('String value', function () {
+  describe('#addSubNumber(), #getSubNumbers()', () => {
+    it('String value', () => {
       assert.deepStrictEqual(command.getSubNumbers(), [6, 3])
     })
   })

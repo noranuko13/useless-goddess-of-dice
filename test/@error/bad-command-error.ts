@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { BadCommandError, ReplyError } from '../../src/@error'
 
-describe('BadCommandError', function () {
-  describe('Handle exceptions.', function () {
-    it('Handle BadCommandError', function () {
+describe('BadCommandError', () => {
+  describe('Handle exceptions.', () => {
+    it('Handle BadCommandError', () => {
       let actual: Error = new Error('')
       const fn = () => {
         throw new BadCommandError()
@@ -22,7 +22,7 @@ describe('BadCommandError', function () {
       assert.strictEqual(actual.message, '駄女神わかんにゃーい(´・ω・)')
     })
 
-    it('Handle ReplyError', function () {
+    it('Handle ReplyError', () => {
       let actual: Error = new Error('')
       const fn = () => {
         throw new BadCommandError()

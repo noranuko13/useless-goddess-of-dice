@@ -3,8 +3,8 @@ import 'reflect-metadata'
 import { BadCommandError } from '../../src/@error'
 import { DiceCommand } from '../../src/commands'
 
-describe('DiceCommand', function () {
-  it('Create instance', function () {
+describe('DiceCommand', () => {
+  it('Create instance', () => {
     const d100 = new DiceCommand('1d100')
     assert.strictEqual(d100.getNdm(), '1d100')
     assert.strictEqual(d100.getTime(), 1)
@@ -16,7 +16,7 @@ describe('DiceCommand', function () {
     assert.strictEqual(d6.getSide(), 6)
   })
 
-  it('Instance creation fails.', function () {
+  it('Instance creation fails.', () => {
     const fn = (str: string) => {
       return new DiceCommand(str)
     }

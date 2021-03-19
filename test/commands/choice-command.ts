@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { ChoiceCommand } from '../../src/commands'
 
-describe('ChoiceCommand', function () {
-  describe('#getWords(), #getSide()', function () {
-    it('String value', function () {
+describe('ChoiceCommand', () => {
+  describe('#getWords(), #getSide()', () => {
+    it('String value', () => {
       const words: string[] = ['餃子', 'カレー']
       const command: ChoiceCommand = new ChoiceCommand(words)
 
