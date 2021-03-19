@@ -16,53 +16,55 @@ export class Kernel {
     private resolver: ResolverService
   ) {}
 
-  waitInput (): void {
+  waitInput = (): void => {
     const client = new discord.Client()
 
     client.once('ready', () => {
       console.log('Ready!')
     })
 
-    client.on('message', (message: Message) => {
-      if (!this.messageService.isValid(message)) {
-        return
-      }
-
-      const content = this.autoFormatContext(message.content)
-
-      let action: Action
-      try {
-        action = this.resolver.getAction(content)
-      } catch (error) {
-        if (error instanceof ReplyError) {
-          this.sendErrorMessage(message, error)
-          return
-        }
-        throw error
-      }
-
-      let command: Command
-      try {
-        command = action.parse(content)
-      } catch (error) {
-        if (error instanceof ReplyError) {
-          this.sendErrorMessage(message, error)
-          return
-        }
-        throw error
-      }
-      this.loggerService.getLogger().silly(command)
-
-      const embed: MessageEmbed = action.cast(command)
-      if (message.member?.displayHexColor) {
-        embed.setColor(message.member?.displayHexColor)
-      }
-      message.channel.send({ embed: embed }).catch((error) => {
-        this.loggerService.getLogger().error(error)
-      })
-    })
+    client.on('message', this.listener)
 
     client.login(this.config.getToken()).then()
+  }
+
+  listener = (message: Message): void => {
+    if (!this.messageService.isValid(message)) {
+      return
+    }
+
+    const content = this.autoFormatContext(message.content)
+
+    let action: Action
+    try {
+      action = this.resolver.getAction(content)
+    } catch (error) {
+      if (error instanceof ReplyError) {
+        this.sendErrorMessage(message, error)
+        return
+      }
+      throw error
+    }
+
+    let command: Command
+    try {
+      command = action.parse(content)
+    } catch (error) {
+      if (error instanceof ReplyError) {
+        this.sendErrorMessage(message, error)
+        return
+      }
+      throw error
+    }
+    this.loggerService.getLogger().silly(command)
+
+    const embed: MessageEmbed = action.cast(command)
+    if (message.member?.displayHexColor) {
+      embed.setColor(message.member?.displayHexColor)
+    }
+    message.channel.send({ embed: embed }).catch((error) => {
+      this.loggerService.getLogger().error(error)
+    })
   }
 
   private autoFormatContext (content: string): string {
@@ -77,10 +79,12 @@ export class Kernel {
   private sendErrorMessage (message: Message, error: Error): void {
     this.loggerService.getLogger().warn(error)
 
-    message.channel.send(new MessageEmbed({
-      color: 'RED',
-      description: error.message
-    })).catch((error) => {
+    message.channel.send({
+      embed: new MessageEmbed({
+        color: 'RED',
+        description: error.message
+      })
+    }).catch((error) => {
       this.loggerService.getLogger().error(error)
     })
   }

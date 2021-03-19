@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
-import { BadCommandError } from '../@error'
+import { NotFoundError } from '../@error'
 import { Calc } from '../@static'
 import { ChoiceCommand } from '../commands'
 import { ChoiceResult } from '../results'
@@ -9,11 +9,11 @@ import { Action } from './action.interface'
 @injectable()
 export class ChoiceAction implements Action {
   parse (content: string): ChoiceCommand {
-    content = content.replace(/^choice +/, '')
+    content = content.replace(/^choice */, '')
 
     const args = content.split(/ +/).filter(Boolean)
-    if (!args.length) {
-      throw new BadCommandError()
+    if (args.length === 0) {
+      throw new NotFoundError()
     }
 
     return new ChoiceCommand(args)

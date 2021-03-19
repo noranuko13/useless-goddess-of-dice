@@ -2,7 +2,7 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { MessageEmbed } from 'discord.js'
 import { container } from 'tsyringe'
-import { BadCommandError } from '../../src/@error'
+import { NotFoundError } from '../../src/@error'
 import { ChoiceAction } from '../../src/actions'
 import { ChoiceCommand } from '../../src/commands'
 
@@ -19,7 +19,7 @@ describe('ChoiceAction', function () {
     })
 
     it('Other', function () {
-      assert.throws(() => { action.parse('') }, BadCommandError)
+      assert.throws(() => { action.parse('') }, NotFoundError)
     })
   })
 
