@@ -5,5 +5,5 @@
   "skip-full": true,
   "reporter": ["text", "html"],
   "include": ["src/**/*.ts"],
-  "exclude": ["src/main.ts"]
+  "exclude": ["src/main.ts", "src/kernel.ts"]
 }
