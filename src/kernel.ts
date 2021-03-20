@@ -28,7 +28,7 @@ export class Kernel {
     client.login(this.config.getToken()).then()
   }
 
-  listener = (message: Message): void => {
+  private listener = (message: Message): void => {
     if (!this.messageService.isValid(message)) {
       return
     }
