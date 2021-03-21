@@ -49,11 +49,4 @@ describe('NSidedDiceAction', () => {
       assert.throws(() => { action.parse('ダイスの駄女神') }, WrongFormulaError)
     })
   })
-
-  describe('#cast()', () => {
-    it('All', () => {
-      const expected = new NSidedDiceCommand(['2d6', '-', '1d3', '+', '10', '-', '7'])
-      assert.doesNotThrow(() => { action.cast(expected) })
-    })
-  })
 })

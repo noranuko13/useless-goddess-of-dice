@@ -1,10 +1,8 @@
 import assert from 'assert'
-import { MessageEmbed } from 'discord.js'
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { NotFoundError } from '../../src/@error'
 import { ChoiceAction } from '../../src/actions'
-import { ChoiceCommand } from '../../src/commands'
 
 describe('ChoiceAction', () => {
   const action = container.resolve(ChoiceAction)
@@ -20,24 +18,6 @@ describe('ChoiceAction', () => {
 
     it('Other', () => {
       assert.throws(() => { action.parse('') }, NotFoundError)
-    })
-  })
-
-  describe('#cast()', () => {
-    it('All', () => {
-      const expected = new ChoiceCommand(['餃子', 'カレー'])
-      assert.doesNotThrow(() => { action.cast(expected) })
-    })
-
-    it('Empty ChoiceCommand', () => {
-      const expected = new ChoiceCommand([])
-      assert.doesNotThrow(() => { action.cast(expected) })
-      assert.deepStrictEqual(
-        JSON.stringify(action.cast(expected)),
-        JSON.stringify(new MessageEmbed({
-          description: ':black_circle: ( ＝Д＝)  ！'
-        }))
-      )
     })
   })
 })

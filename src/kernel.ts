@@ -58,7 +58,9 @@ export class Kernel {
     }
     this.loggerService.getLogger().silly(command)
 
-    const embed: MessageEmbed = action.cast(command)
+    const embed: MessageEmbed = new MessageEmbed({
+      description: command.toString()
+    })
     if (message.member?.displayHexColor) {
       embed.setColor(message.member?.displayHexColor)
     }

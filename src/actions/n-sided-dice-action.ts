@@ -1,4 +1,3 @@
-import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { BadCommandError } from '../@error'
 import { Formula } from '../@static'
@@ -16,11 +15,5 @@ export class NSidedDiceAction implements Action {
     Formula.validate(content)
 
     return new NSidedDiceCommand(args)
-  }
-
-  cast (command: NSidedDiceCommand): MessageEmbed {
-    return new MessageEmbed({
-      description: command.toString()
-    })
   }
 }

@@ -1,4 +1,3 @@
-import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { NotFoundError } from '../@error'
 import { ChoiceCommand } from '../commands'
@@ -15,11 +14,5 @@ export class ChoiceAction implements Action {
     }
 
     return new ChoiceCommand(args)
-  }
-
-  cast (command: ChoiceCommand): MessageEmbed {
-    return new MessageEmbed({
-      description: command.toString()
-    })
   }
 }
