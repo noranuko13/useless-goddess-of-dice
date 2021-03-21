@@ -12,7 +12,8 @@ describe('ChoiceAction', () => {
       assert.deepStrictEqual(
         JSON.stringify(action.parse('choice 餃子 カレー')),
         JSON.stringify({
-          words: ['餃子', 'カレー'], index: 0
+          index: 0,
+          words: ['餃子', 'カレー']
         }))
     })
 

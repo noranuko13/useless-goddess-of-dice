@@ -49,6 +49,7 @@ export class Kernel {
     let command: Command
     try {
       command = action.parse(content)
+      command.cast()
     } catch (error) {
       if (error instanceof ReplyError) {
         this.sendErrorMessage(message, error)

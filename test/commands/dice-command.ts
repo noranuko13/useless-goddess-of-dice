@@ -5,13 +5,8 @@ import { DiceCommand } from '../../src/commands'
 
 describe('DiceCommand', () => {
   it('Create instance', () => {
-    const d100 = new DiceCommand('1d100')
-    assert.strictEqual(d100.getTime(), 1)
-    assert.deepStrictEqual(d100.getRange(), [1, 100])
-
-    const d6 = new DiceCommand('2d6')
-    assert.strictEqual(d6.getTime(), 2)
-    assert.deepStrictEqual(d6.getRange(), [1, 6])
+    assert.doesNotThrow(() => { return new DiceCommand('1d100') })
+    assert.doesNotThrow(() => { return new DiceCommand('2d6') })
   })
 
   it('Instance creation fails', () => {

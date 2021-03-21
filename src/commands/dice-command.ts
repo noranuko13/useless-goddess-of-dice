@@ -1,10 +1,13 @@
 import { BadCommandError } from '../@error'
+import { Calc } from '../@static'
 import { Command } from './command.interface'
 
 export class DiceCommand implements Command {
   private readonly ndm: string;
   private readonly time: number;
   private readonly side: number;
+  private dices: number[] = [];
+  private total: number = 0;
 
   constructor (ndm: string) {
     const numbers = ndm.match(/^(\d+)d(\d+)$/)
@@ -17,11 +20,21 @@ export class DiceCommand implements Command {
     this.side = parseInt(numbers[2])
   }
 
-  getTime (): number {
-    return this.time
+  cast (): void {
+    this.dices = []
+    this.total = 0
+
+    for (let time = 1; time <= this.time; time++) {
+      this.dices.push(Calc.getIntByRange(1, this.side))
+    }
+    this.total = Calc.sumOfNumbers(this.dices)
   }
 
-  getRange (): [min: number, max: number] {
-    return [1, this.side]
+  getTotal (): number {
+    return this.total
+  }
+
+  toString (): string {
+    return `<${this.dices.join(',')}>`
   }
 }

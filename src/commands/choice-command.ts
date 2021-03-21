@@ -2,10 +2,12 @@ import { Calc } from '../@static'
 import { Command } from './command.interface'
 
 export class ChoiceCommand implements Command {
-  constructor (
-    private readonly words: string[],
-    private index: number = 0
-  ) {}
+  private readonly words: string[];
+  private index: number = 0;
+
+  constructor (words: string[]) {
+    this.words = words
+  }
 
   getWords (): string[] {
     return this.words
@@ -15,9 +17,11 @@ export class ChoiceCommand implements Command {
     return [0, this.words.length - 1]
   }
 
-  toString (): string {
+  cast (): void {
     this.index = Calc.getIntByRange(...this.getRange())
+  }
 
+  toString (): string {
     const contents: string[] = []
     contents.push(':black_circle:')
 
