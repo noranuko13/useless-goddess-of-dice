@@ -4,13 +4,13 @@ import { NSidedDiceResult } from '../../src/results'
 
 describe('NSidedDiceResult', () => {
   const diceResult = new NSidedDiceResult(
-    [4, 5], [2, 1], [3, 6], [7, 8]
+    ['1d100<99>', '+', '2d6<1,6>', '-', '1d100<4>', '-', '2d6<5,4>', '+', '6', '+', '3', '-', '6', '-', '3'], 93
   )
-  const emptyResult = new NSidedDiceResult([], [], [], [])
+  const emptyResult = new NSidedDiceResult([], 0)
 
   describe('#toString()', () => {
     it('Number of dice is the total number of times', () => {
-      assert.strictEqual(diceResult.toString(), ':black_circle: + ( 4 + 5 ) - ( 2 + 1 ) + ( 3 + 6 ) - ( 7 + 8 ) = 0')
+      assert.strictEqual(diceResult.toString(), ':black_circle: 1d100<99> + 2d6<1,6> - 1d100<4> - 2d6<5,4> + 6 + 3 - 6 - 3 = 93')
     })
 
     it('Empty Dices', () => {

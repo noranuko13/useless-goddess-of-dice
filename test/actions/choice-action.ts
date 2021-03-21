@@ -1,6 +1,6 @@
 import assert from 'assert'
-import 'reflect-metadata'
 import { MessageEmbed } from 'discord.js'
+import 'reflect-metadata'
 import { container } from 'tsyringe'
 import { NotFoundError } from '../../src/@error'
 import { ChoiceAction } from '../../src/actions'

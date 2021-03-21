@@ -1,6 +1,6 @@
-import 'reflect-metadata'
 import assert from 'assert'
 import { Message, MessageOptions } from 'discord.js'
+import 'reflect-metadata'
 import { TLogLevelName } from 'tslog'
 import { container } from 'tsyringe'
 import { Config } from '../src/config'
@@ -41,18 +41,18 @@ describe('End To End Testing(E2E).', () => {
     { content: '/ugd none', pattern: PATTERN_BAD_COMMAND_ERROR },
 
     // Calculation
-    { content: '/ugd 1 + 2 + 3', pattern: '\\+ \\( 1 \\+ 2 \\+ 3 \\) = 6' },
-    { content: '/ugd 10 - 6', pattern: '\\+ \\( 10 \\) - \\( 6 \\) = 4' },
+    { content: '/ugd 1 + 2 + 3', pattern: ':black_circle: 1 \\+ 2 \\+ 3 = 6' },
+    { content: '/ugd 10 - 6', pattern: ':black_circle: 10 - 6 = 4' },
 
     // NSidedDice
     { content: '/ugd BadCommand', pattern: PATTERN_BAD_COMMAND_ERROR },
-    { content: '/ugd 1d100', pattern: '\\+ \\( \\d+ \\) = \\d+' },
-    { content: '/ugd 2d6 + 1d3', pattern: '\\+ \\( [1-6] \\+ [1-6] \\+ [1-3] \\) = \\d+' },
-    { content: '/ugd 2d6 + 1d3 + 1d2', pattern: '\\+ \\( [1-6] \\+ [1-6] \\+ [1-3] \\+ [1-2] \\) = \\d+' },
-    { content: '/ugd 2d6 - 1d3', pattern: '\\+ \\( [1-6] \\+ [1-6] \\) - \\( [1-3] \\) = -?\\d+' },
-    { content: '/ugd 2d6 - 1d3 - 1d2', pattern: '\\+ \\( [1-6] \\+ [1-6] \\) - \\( [1-3] \\+ [1-2] \\) = -?\\d+' },
-    { content: '/ugd 2d6 + 6', pattern: '\\+ \\( [1-6] \\+ [1-6] \\) \\+ \\( 6 \\) = \\d+' },
-    { content: '/ugd 1d6 - 3', pattern: '\\+ \\( [1-6] \\) - \\( 3 \\) = -?\\d+' },
+    { content: '/ugd 1d100', pattern: ':black_circle: 1d100<\\d+> = \\d+' },
+    { content: '/ugd 2d6 + 1d3', pattern: ':black_circle: 2d6<[1-6],[1-6]> \\+ 1d3<[1-3]> = \\d+' },
+    { content: '/ugd 2d6 + 1d3 + 1d2', pattern: ':black_circle: 2d6<[1-6],[1-6]> \\+ 1d3<[1-3]> \\+ 1d2<[1-2]> = \\d+' },
+    { content: '/ugd 2d6 - 1d3', pattern: ':black_circle: 2d6<[1-6],[1-6]> - 1d3<[1-3]> = -?\\d+' },
+    { content: '/ugd 2d6 - 1d3 - 1d2', pattern: ':black_circle: 2d6<[1-6],[1-6]> - 1d3<[1-3]> - 1d2<[1-2]> = -?\\d+' },
+    { content: '/ugd 2d6 + 6', pattern: ':black_circle: 2d6<[1-6],[1-6]> \\+ 6 = \\d+' },
+    { content: '/ugd 1d6 - 3', pattern: ':black_circle: 1d6<[1-6]> - 3 = -?\\d+' },
 
     // Choice
     { content: '/ugd choice', pattern: PATTERN_NOT_FOUND_ERROR },
@@ -61,10 +61,10 @@ describe('End To End Testing(E2E).', () => {
   ]
 
   tests.forEach(({ content, pattern }) => {
-    it(`command: ${content}`, () => {
-      const str = fn(content)
+    const output = fn(content)
+    it(`input: ${content}, output: ${output}`, () => {
       const re = new RegExp(pattern)
-      assert.strictEqual(re.test(str), true)
+      assert.strictEqual(re.test(output), true)
     })
   })
 })

@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js'
+import { evaluate } from 'mathjs'
 import { injectable } from 'tsyringe'
-import { BadCommandError } from '../@error'
+import { BadCommandError, WrongFormulaError } from '../@error'
 import { Calc } from '../@static'
 import { DiceCommand, NSidedDiceCommand } from '../commands'
 import { NSidedDiceResult } from '../results'
@@ -14,26 +15,32 @@ export class NSidedDiceAction implements Action {
       throw new BadCommandError()
     }
 
-    return new NSidedDiceCommand(args)
+    try {
+      const formula = content.replace(/\d+d\d+/g, '0')
+      evaluate(formula)
+      return new NSidedDiceCommand(args)
+    } catch (error) {
+      throw new WrongFormulaError(error.message)
+    }
   }
 
   cast (command: NSidedDiceCommand): MessageEmbed {
-    const castDices = (diceCommands: DiceCommand[]): number[] => {
-      const dices: number[] = []
-      diceCommands.forEach(diceCommand => {
-        for (let i = 1; i <= diceCommand.getTime(); i++) {
-          dices.push(Calc.getIntByRange(1, diceCommand.getSide()))
+    const forCalculations: string[] = command.cloneInputs()
+    const outputs: string[] = command.cloneInputs()
+    for (let index = 0; index < command.cloneInputs().length; index++) {
+      if (/^\d+d\d+$/.test(command.getInput(index))) {
+        const dices: string[] = []
+        const diceCommand = new DiceCommand(command.getInput(index))
+        for (let time = 1; time <= diceCommand.getTime(); time++) {
+          dices.push(Calc.getIntByRange(...diceCommand.getRange()).toString())
         }
-      })
-      return dices
+        forCalculations[index] = '(' + dices.join('+') + ')'
+        outputs[index] = command.getInput(index) + '<' + dices.join(',') + '>'
+      }
     }
+    const total = evaluate(forCalculations.join(''))
 
-    const result = new NSidedDiceResult(
-      castDices(command.getAddDices()),
-      castDices(command.getSubDices()),
-      command.getAddNumbers(),
-      command.getSubNumbers()
-    )
+    const result = new NSidedDiceResult(outputs, total)
     return new MessageEmbed({
       description: result.toString()
     })

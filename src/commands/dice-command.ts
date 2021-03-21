@@ -25,7 +25,7 @@ export class DiceCommand implements Command {
     return this.time
   }
 
-  getSide (): number {
-    return this.side
+  getRange (): [min: number, max: number] {
+    return [1, this.side]
   }
 }
