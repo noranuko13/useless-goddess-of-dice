@@ -4,7 +4,7 @@ import { LoggerService } from '../../src/@service'
 import { Config } from '../../src/config'
 
 describe('LoggerService', () => {
-  describe('Create instance.', () => {
+  describe('Create instance', () => {
     it('UGD_DEBUG=0', () => {
       process.env = {
         UGD_DEBUG: '0'

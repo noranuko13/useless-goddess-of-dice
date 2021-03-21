@@ -5,11 +5,11 @@ import { Formula } from '../../src/@static'
 
 describe('Formula', () => {
   describe('#validate()', () => {
-    it('OK.', () => {
+    it('OK', () => {
       assert.doesNotThrow(() => { Formula.validate('( 1 + 2)') })
     })
 
-    it('NG.', () => {
+    it('NG', () => {
       assert.throws(() => { Formula.validate('( 1 + 2') }, WrongFormulaError)
       assert.throws(() => { Formula.validate('ダイスの駄女神') }, WrongFormulaError)
     })

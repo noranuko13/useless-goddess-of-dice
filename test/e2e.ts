@@ -34,7 +34,7 @@ const fn = (content: string): string => {
 const PATTERN_BAD_COMMAND_ERROR = '駄女神わかんにゃーい\\(´・ω・\\)'
 const PATTERN_NOT_FOUND_ERROR = '疲れてるの？\\(´・д・\\)引数がないの・・・'
 
-describe('End To End Testing(E2E).', () => {
+describe('End To End Testing(E2E)', () => {
   const tests = [
     { content: 'no prefix', pattern: '' },
     { content: '/ugd', pattern: PATTERN_NOT_FOUND_ERROR },

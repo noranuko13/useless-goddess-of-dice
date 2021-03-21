@@ -14,7 +14,7 @@ describe('ChoiceCommand', () => {
   })
 
   describe('#toString()', () => {
-    it('No duplication.', () => {
+    it('No duplication', () => {
       assert.strictEqual(/:black_circle: \( ＝Д＝\) (餃子|カレー) ！/.test(command.toString()), true)
     })
   })

@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { BadCommandError, ReplyError } from '../../src/@error'
 
 describe('BadCommandError', () => {
-  describe('Handle exceptions.', () => {
+  describe('Handle exceptions', () => {
     it('Handle BadCommandError', () => {
       let actual: Error = new Error('')
       const fn = () => {

@@ -44,7 +44,7 @@ describe('NSidedDiceAction', () => {
       )
     })
 
-    it('Throw exception.', () => {
+    it('Throw exception', () => {
       assert.throws(() => { action.parse('') }, BadCommandError)
       assert.throws(() => { action.parse('ダイスの駄女神') }, WrongFormulaError)
     })

@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { ReplyError, WrongFormulaError } from '../../src/@error'
 
 describe('WrongFormulaError', () => {
-  describe('Handle exceptions.', () => {
+  describe('Handle exceptions', () => {
     it('Handle WrongFormulaError', () => {
       let actual: Error = new Error('')
       const fn = () => {

@@ -14,7 +14,7 @@ describe('DiceCommand', () => {
     assert.deepStrictEqual(d6.getRange(), [1, 6])
   })
 
-  it('Instance creation fails.', () => {
+  it('Instance creation fails', () => {
     const fn = (str: string) => {
       return new DiceCommand(str)
     }

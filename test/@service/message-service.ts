@@ -18,13 +18,13 @@ describe('MessageService', () => {
   const message: Message = { author: {} } as Message
 
   describe('#isValid()', () => {
-    it('The message is valid.', () => {
+    it('The message is valid', () => {
       message.content = '/ugd 2d6 + 6'
       message.author.bot = false
       assert.strictEqual(service.isValid(message), true)
     })
 
-    it('The message is invalid.', () => {
+    it('The message is invalid', () => {
       message.content = '/prefix 2d6 + 6'
       message.author.bot = false
       assert.strictEqual(service.isValid(message), false)

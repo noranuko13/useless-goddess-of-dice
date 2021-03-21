@@ -4,12 +4,12 @@ import { Calc } from '../../src/@static'
 
 describe('Calc', () => {
   describe('#sumOfNumbers()', () => {
-    it('Array with values.', () => {
+    it('Array with values', () => {
       assert.strictEqual(Calc.sumOfNumbers([3, 6]), 9)
       assert.strictEqual(Calc.sumOfNumbers([7, 8]), 15)
     })
 
-    it('Empty array.', () => {
+    it('Empty array', () => {
       assert.strictEqual(Calc.sumOfNumbers([]), 0)
     })
   })
