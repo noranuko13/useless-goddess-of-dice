@@ -1,9 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { NotFoundError } from '../@error'
-import { Calc } from '../@static'
 import { ChoiceCommand } from '../commands'
-import { ChoiceResult } from '../results'
 import { Action } from './action.interface'
 
 @injectable()
@@ -20,12 +18,8 @@ export class ChoiceAction implements Action {
   }
 
   cast (command: ChoiceCommand): MessageEmbed {
-    const index = Calc.getIntByRange(...command.getRange())
-    const word = command.getWords()[index]
-
-    const result = new ChoiceResult(word)
     return new MessageEmbed({
-      description: result.toString()
+      description: command.toString()
     })
   }
 }

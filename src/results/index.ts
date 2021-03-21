@@ -1,3 +1,0 @@
-export { ChoiceResult } from './choice-result'
-export { Result } from './result.interface'
-export { NSidedDiceResult } from './n-sided-dice-result'

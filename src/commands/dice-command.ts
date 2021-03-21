@@ -17,10 +17,6 @@ export class DiceCommand implements Command {
     this.side = parseInt(numbers[2])
   }
 
-  getNdm (): string {
-    return this.ndm
-  }
-
   getTime (): number {
     return this.time
   }
