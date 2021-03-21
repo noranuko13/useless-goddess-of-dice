@@ -10,7 +10,6 @@ describe('NSidedDiceAction', () => {
 
   describe('#parse()', () => {
     it('Additional dice', () => {
-      console.log(action.parse('1d100'))
       assert.deepStrictEqual(action.parse('1d100'), new NSidedDiceCommand(['1d100']))
       assert.deepStrictEqual(action.parse('1d100 + 1d6'), new NSidedDiceCommand(['1d100', '+', '1d6']))
     })

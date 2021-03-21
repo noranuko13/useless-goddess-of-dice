@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
-import { evaluate } from 'mathjs'
 import { injectable } from 'tsyringe'
-import { BadCommandError, WrongFormulaError } from '../@error'
+import { BadCommandError } from '../@error'
+import { Formula } from '../@static'
 import { NSidedDiceCommand } from '../commands'
 import { Action } from './action.interface'
 
@@ -13,13 +13,9 @@ export class NSidedDiceAction implements Action {
       throw new BadCommandError()
     }
 
-    try {
-      const formula = content.replace(/\d+d\d+/g, '0')
-      evaluate(formula)
-      return new NSidedDiceCommand(args)
-    } catch (error) {
-      throw new WrongFormulaError(error.message)
-    }
+    Formula.validate(content)
+
+    return new NSidedDiceCommand(args)
   }
 
   cast (command: NSidedDiceCommand): MessageEmbed {
