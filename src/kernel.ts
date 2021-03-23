@@ -2,7 +2,6 @@ import discord, { Message, MessageEmbed } from 'discord.js'
 import { injectable } from 'tsyringe'
 import { ReplyError } from './@error'
 import { ContentService, LoggerService, MessageService, ResolverService } from './@service'
-import { Action } from './actions'
 import { Command } from './commands'
 import { Config } from './config'
 
@@ -35,20 +34,9 @@ export class Kernel {
 
     const content = this.autoFormatContext(message.content)
 
-    let action: Action
-    try {
-      action = this.resolver.getAction(content)
-    } catch (error) {
-      if (error instanceof ReplyError) {
-        this.sendErrorMessage(message, error)
-        return
-      }
-      throw error
-    }
-
     let command: Command
     try {
-      command = action.parse(content)
+      command = this.resolver.getCommand(content)
       command.cast()
     } catch (error) {
       if (error instanceof ReplyError) {

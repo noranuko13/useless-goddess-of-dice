@@ -9,25 +9,15 @@ export class ChoiceCommand implements Command {
     this.words = words
   }
 
-  getWords (): string[] {
-    return this.words
-  }
-
-  getRange (): [min: number, max: number] {
-    return [0, this.words.length - 1]
-  }
-
   cast (): void {
-    this.index = Calc.getIntByRange(...this.getRange())
+    this.index = Calc.getIntByRange(0, this.words.length - 1)
   }
 
   toString (): string {
     const contents: string[] = []
-    contents.push(':black_circle:')
 
-    contents.push('( ＝Д＝)')
-    contents.push(this.words[this.index])
-    contents.push('！')
+    contents.push(':black_circle:')
+    contents.push(`( ＝Д＝) ${this.words[this.index]} ！`)
 
     return contents.join(' ')
   }
