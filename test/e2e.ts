@@ -68,7 +68,9 @@ describe('End To End Testing(E2E)', function () {
       { content: '/ugd 2d6 - 1d3', pattern: ':black_circle: 2d6<[1-6],[1-6]> - 1d3<[1-3]> = -?\\d+' },
       { content: '/ugd 2d6 - 1d3 - 1d2', pattern: ':black_circle: 2d6<[1-6],[1-6]> - 1d3<[1-3]> - 1d2<[1-2]> = -?\\d+' },
       { content: '/ugd 2d6 + 6', pattern: ':black_circle: 2d6<[1-6],[1-6]> \\+ 6 = \\d+' },
-      { content: '/ugd 1d6 - 3', pattern: ':black_circle: 1d6<[1-6]> - 3 = -?\\d+' }
+      { content: '/ugd 1d6 - 3', pattern: ':black_circle: 1d6<[1-6]> - 3 = -?\\d+' },
+      { content: '/ugd 1d6 / 2', pattern: ':black_circle: 1d6<[1-6]> / 2 = [\\d.]+' },
+      { content: '/ugd 1d6 * 2', pattern: ':black_circle: 1d6<[1-6]> \\* 2 = [\\d.]+' }
     ]
 
     // eslint-disable-next-line mocha/no-setup-in-describe
