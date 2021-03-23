@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { NotFoundError, ReplyError } from '../../src/@error'
 
-describe('NotFoundError', () => {
-  describe('Handle exceptions', () => {
-    it('Handle ReplyError', () => {
+describe('NotFoundError', function () {
+  describe('Handle exceptions', function () {
+    it('Handle ReplyError', function () {
       let actual: Error = new Error('')
       const fn = () => {
         throw new NotFoundError()

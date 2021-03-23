@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { BadCommandError, ReplyError } from '../../src/@error'
 
-describe('BadCommandError', () => {
-  describe('Handle exceptions', () => {
-    it('Handle ReplyError', () => {
+describe('BadCommandError', function () {
+  describe('Handle exceptions', function () {
+    it('Handle ReplyError', function () {
       let actual: Error = new Error('')
       const fn = () => {
         throw new BadCommandError()

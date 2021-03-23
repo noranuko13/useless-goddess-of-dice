@@ -2,9 +2,9 @@ import assert from 'assert'
 import 'reflect-metadata'
 import { ReplyError, WrongFormulaError } from '../../src/@error'
 
-describe('WrongFormulaError', () => {
-  describe('Handle exceptions', () => {
-    it('Handle ReplyError', () => {
+describe('WrongFormulaError', function () {
+  describe('Handle exceptions', function () {
+    it('Handle ReplyError', function () {
       let actual: Error = new Error('')
       const fn = () => {
         throw new WrongFormulaError('WrongFormulaError')

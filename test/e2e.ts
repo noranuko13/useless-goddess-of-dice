@@ -33,7 +33,7 @@ const fn = (content: string): string => {
 const assertTests = (tests: { content: string, pattern: string }[]) => {
   tests.forEach(({ content, pattern }) => {
     const output = fn(content)
-    it(`input: ${content}, output: ${output}`, () => {
+    it(`input: ${content}, output: ${output}`, function () {
       const re = new RegExp(pattern)
       assert.strictEqual(re.test(output), true)
     })
@@ -43,8 +43,8 @@ const assertTests = (tests: { content: string, pattern: string }[]) => {
 const PATTERN_BAD_COMMAND_ERROR = '駄女神わかんにゃーい\\(´・ω・\\)'
 const PATTERN_NOT_FOUND_ERROR = '疲れてるの？\\(´・д・\\)引数がないの・・・'
 
-describe('End To End Testing(E2E)', () => {
-  describe('Base', () => {
+describe('End To End Testing(E2E)', function () {
+  describe('Base', function () {
     const tests = [
       { content: 'no prefix', pattern: '' },
       { content: '/ugd', pattern: PATTERN_NOT_FOUND_ERROR },
@@ -54,10 +54,12 @@ describe('End To End Testing(E2E)', () => {
       { content: '/ugd 1 + 2 + 3', pattern: ':black_circle: 1 \\+ 2 \\+ 3 = 6' },
       { content: '/ugd 10 - 6', pattern: ':black_circle: 10 - 6 = 4' }
     ]
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
     assertTests(tests)
   })
 
-  describe('NSidedDice', () => {
+  describe('NSidedDice', function () {
     const tests = [
       { content: '/ugd BadCommand', pattern: PATTERN_BAD_COMMAND_ERROR },
       { content: '/ugd 1d100', pattern: ':black_circle: 1d100<\\d+> = \\d+' },
@@ -68,15 +70,19 @@ describe('End To End Testing(E2E)', () => {
       { content: '/ugd 2d6 + 6', pattern: ':black_circle: 2d6<[1-6],[1-6]> \\+ 6 = \\d+' },
       { content: '/ugd 1d6 - 3', pattern: ':black_circle: 1d6<[1-6]> - 3 = -?\\d+' }
     ]
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
     assertTests(tests)
   })
 
-  describe('Choice', () => {
+  describe('Choice', function () {
     const tests = [
       { content: '/ugd choice', pattern: PATTERN_NOT_FOUND_ERROR },
       { content: '/ugd choice 餃子 カレー', pattern: ':black_circle: \\( ＝Д＝\\) (餃子|カレー) ！' },
       { content: '/ugd choice 男 女 男 オカマ', pattern: ':black_circle: \\( ＝Д＝\\) (男|女|オカマ) ！' }
     ]
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
     assertTests(tests)
   })
 })

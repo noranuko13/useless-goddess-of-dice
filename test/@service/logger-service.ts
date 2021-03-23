@@ -3,9 +3,9 @@ import 'reflect-metadata'
 import { LoggerService } from '../../src/@service'
 import { Config } from '../../src/config'
 
-describe('LoggerService', () => {
-  describe('Create instance', () => {
-    it('UGD_DEBUG=0', () => {
+describe('LoggerService', function () {
+  describe('Create instance', function () {
+    it('UGD_DEBUG=0', function () {
       process.env = {
         UGD_DEBUG: '0'
       }
@@ -13,7 +13,7 @@ describe('LoggerService', () => {
       assert.strictEqual(service.getLogger().settings.type, 'json')
     })
 
-    it('UGD_DEBUG=1', () => {
+    it('UGD_DEBUG=1', function () {
       process.env = {
         UGD_DEBUG: '1'
       }
