@@ -3,19 +3,6 @@ import 'reflect-metadata'
 import { NSidedDiceCommand } from '../../src/commands'
 
 describe('NSidedDiceCommand', () => {
-  describe('Create instance', () => {
-    it('String array value', () => {
-      assert.deepStrictEqual(
-        JSON.stringify(new NSidedDiceCommand(['2d6', '-', '1d3', '+', '10', '-', '7'])),
-        JSON.stringify({
-          outputs: [],
-          total: 0,
-          inputs: ['2d6', '-', '1d3', '+', '10', '-', '7']
-        })
-      )
-    })
-  })
-
   describe('#cast(), #toString()', () => {
     const command = new NSidedDiceCommand(['1d100', '+', '2d6', '-', '1d100', '-', '2d6', '+', '6', '+', '3', '-', '6', '-', '3'])
     command.cast()

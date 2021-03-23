@@ -3,12 +3,6 @@ import 'reflect-metadata'
 import { Config } from '../src/config'
 
 describe('Config', () => {
-  describe('Create instance', () => {
-    it('new Config()', () => {
-      assert.doesNotThrow(() => { return new Config() })
-    })
-  })
-
   describe('#isDebug()', () => {
     it('UGD_DEBUG=0', () => {
       process.env = {

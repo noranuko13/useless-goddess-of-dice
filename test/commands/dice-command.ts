@@ -10,11 +10,16 @@ describe('DiceCommand', () => {
   })
 
   it('Instance creation fails', () => {
-    const fn = (str: string) => {
-      return new DiceCommand(str)
-    }
-    assert.throws(() => { fn('') }, BadCommandError)
-    assert.throws(() => { fn('2d') }, BadCommandError)
-    assert.throws(() => { fn('d6') }, BadCommandError)
+    assert.throws(() => { return new DiceCommand('') }, BadCommandError)
+    assert.throws(() => { return new DiceCommand('2d') }, BadCommandError)
+    assert.throws(() => { return new DiceCommand('d6') }, BadCommandError)
+  })
+
+  describe('#cast(), #toString()', () => {
+    it('No duplication', () => {
+      const command: DiceCommand = new DiceCommand('1d100')
+      command.cast()
+      assert.strictEqual(/<\d+>/.test(command.toString()), true)
+    })
   })
 })

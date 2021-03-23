@@ -3,11 +3,10 @@ import 'reflect-metadata'
 import { ChoiceCommand } from '../../src/commands'
 
 describe('ChoiceCommand', () => {
-  const words: string[] = ['餃子', 'カレー']
-  const command: ChoiceCommand = new ChoiceCommand(words)
-
-  describe('#toString()', () => {
+  describe('#cast(), #toString()', () => {
     it('No duplication', () => {
+      const command: ChoiceCommand = new ChoiceCommand(['餃子', 'カレー'])
+      command.cast()
       assert.strictEqual(/:black_circle: \( ＝Д＝\) (餃子|カレー) ！/.test(command.toString()), true)
     })
   })
