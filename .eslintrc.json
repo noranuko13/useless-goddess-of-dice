@@ -5,7 +5,8 @@
     "mocha": true
   },
   "extends": [
-    "standard"
+    "standard",
+    "plugin:mocha/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -13,10 +14,10 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "mocha"
   ],
   "rules": {
-    "no-useless-constructor": "off",
-    "no-extend-native": ["error", { "exceptions": ["Array"] }]
+    "no-useless-constructor": "off"
   }
 }

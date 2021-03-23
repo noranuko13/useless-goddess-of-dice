@@ -9,7 +9,7 @@
     "debug": "nodemon",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
-    "test": "mocha --require ts-node/register test/**/*.ts",
+    "test": "mocha test/**/*.ts",
     "coverage": "nyc npm run test"
   },
   "license": "MIT",
