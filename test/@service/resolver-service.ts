@@ -24,6 +24,8 @@ describe('ResolverService', function () {
 
     it('NotFoundError, BadCommandError', function () {
       assert.throws(() => { resolver.getCommand('') }, NotFoundError)
+      assert.throws(() => { resolver.getCommand('choice') }, NotFoundError)
+
       assert.throws(() => { resolver.getCommand('BadCommand') }, BadCommandError)
     })
   })

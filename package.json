@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "test": "mocha test/**/*.ts",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "e2e": "mocha e2e/e2e.ts"
   },
   "license": "MIT",
   "devDependencies": {
