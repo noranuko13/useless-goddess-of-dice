@@ -13,6 +13,7 @@ export class LoggerService {
       displayFunctionName: false,
       minLevel: config.getLogLevel(),
       colorizePrettyLogs: config.isDebug(),
+      exposeErrorCodeFrame: config.isDebug(),
       type: config.isDebug() ? 'pretty' : 'json'
     })
   }

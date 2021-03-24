@@ -18,13 +18,15 @@ export class Kernel {
   waitInput = (): void => {
     const client = new discord.Client()
 
+    client.login(this.config.getToken()).then(() => {
+      this.loggerService.getLogger().info('Login!')
+    })
+
     client.once('ready', () => {
-      console.log('Ready!')
+      this.loggerService.getLogger().info('Ready!')
     })
 
     client.on('message', this.listener)
-
-    client.login(this.config.getToken()).then()
   }
 
   private listener = (message: Message): void => {
@@ -32,15 +34,17 @@ export class Kernel {
       return
     }
 
+    this.loggerService.getLogger().info('Start message event.')
     const content = this.autoFormatContext(message.content)
 
     let command: Command
     try {
       command = this.resolver.getCommand(content)
+      this.loggerService.getLogger().info('Cast dice!')
       command.cast()
     } catch (error) {
       if (error instanceof ReplyError) {
-        this.sendErrorMessage(message, error)
+        this.sendWarn(message, error, content)
         return
       }
       throw error
@@ -55,6 +59,8 @@ export class Kernel {
     }
     message.channel.send({ embed: embed }).catch((error) => {
       this.loggerService.getLogger().error(error)
+    }).then(() => {
+      this.loggerService.getLogger().info('End message event.')
     })
   }
 
@@ -67,13 +73,13 @@ export class Kernel {
     return content
   }
 
-  private sendErrorMessage (message: Message, error: Error): void {
-    this.loggerService.getLogger().warn(error)
+  private sendWarn (message: Message, error: Error, content: string): void {
+    this.loggerService.getLogger().warn(`${content}, ${error.message}`)
 
     message.channel.send({
       embed: new MessageEmbed({
-        color: 'RED',
-        description: error.message
+        color: 'ORANGE',
+        description: ':warning: ' + error.message
       })
     }).catch((error) => {
       this.loggerService.getLogger().error(error)
