@@ -6,7 +6,6 @@
     "target": "ES2019",
     "module": "CommonJS",
     "outDir": "./dist",
-    "rootDir": "./src",
     "removeComments": true,
 
     /* Strict Type-Checking Options */
@@ -21,6 +20,7 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true
   },
   "include": [

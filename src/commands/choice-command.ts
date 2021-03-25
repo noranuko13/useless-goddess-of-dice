@@ -1,4 +1,4 @@
-import { Calc } from '../@static'
+import { Calc, Template } from '../@static'
 import { Command } from './command.interface'
 
 export class ChoiceCommand implements Command {
@@ -17,7 +17,7 @@ export class ChoiceCommand implements Command {
     const contents: string[] = []
 
     contents.push(':black_circle:')
-    contents.push(`( ＝Д＝) ${this.words[this.index]} ！`)
+    contents.push(Template.messages.commands.choiceCommand.replace(':WORD:', this.words[this.index]))
 
     return contents.join(' ')
   }
