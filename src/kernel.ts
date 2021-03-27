@@ -65,11 +65,11 @@ export class Kernel {
   }
 
   private autoFormatContext (content: string): string {
+    content = this.contentService.removeCommandPrefix(content)
     content = this.contentService.removeSubsequentLines(content)
     content = this.contentService.toHalfWidth(content)
     content = this.contentService.addWhitespaceToBothEnds(content)
     content = this.contentService.removeDuplicateWhitespace(content)
-    content = this.contentService.removeCommandPrefix(content)
     return content
   }
 

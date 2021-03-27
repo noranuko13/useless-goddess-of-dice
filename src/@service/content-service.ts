@@ -10,7 +10,7 @@ export class ContentService {
     return content.trimLeft()
   }
 
-  addWhitespaceToBothEnds (content: string, pattern: string = '+-') {
+  addWhitespaceToBothEnds (content: string, pattern: string = '+\\-*/()') {
     content = content.replace(new RegExp(`([${pattern}])`, 'g'), ' $1 ')
     content = content.replace(new RegExp(` +([${pattern}]) +`, 'g'), ' $1 ')
     return content

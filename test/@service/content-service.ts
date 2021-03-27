@@ -40,43 +40,19 @@ describe('ContentService', function () {
     })
   })
 
-  describe('#addWhitespaceToBothEnds()', function () {
-    it('Addition symbol', function () {
-      const expected = '/ugd 2d6 + 6'
-      assert.strictEqual(cs.addWhitespaceToBothEnds('/ugd 2d6 +6'), expected)
-      assert.strictEqual(cs.addWhitespaceToBothEnds('/ugd 2d6+ 6'), expected)
+  describe('#removeSubsequentLines()', function () {
+    it('With line breaks', function () {
+      assert.strictEqual(cs.removeSubsequentLines('2d6 + 6\n1d3'), '2d6 + 6')
+      assert.strictEqual(cs.removeSubsequentLines('2d6 + 6\r\n1d3'), '2d6 + 6')
     })
 
-    it('Subtraction symbol', function () {
-      const expected = '/ugd 2d6 - 6'
-      assert.strictEqual(cs.addWhitespaceToBothEnds('/ugd 2d6 -6'), expected)
-      assert.strictEqual(cs.addWhitespaceToBothEnds('/ugd 2d6- 6'), expected)
+    it('No line breaks', function () {
+      assert.strictEqual(cs.removeSubsequentLines('2d6 + 6'), '2d6 + 6')
     })
 
     it('Other', function () {
-      assert.strictEqual(cs.addWhitespaceToBothEnds(''), '')
-      assert.strictEqual(cs.addWhitespaceToBothEnds('ダイスの駄女神'), 'ダイスの駄女神')
-    })
-  })
-
-  describe('#removeDuplicateWhitespace()', function () {
-    it('Extra space: Simple dice roll', function () {
-      const expected = '/ugd 1d100'
-      assert.strictEqual(cs.removeDuplicateWhitespace('/ugd 1d100'), expected)
-      assert.strictEqual(cs.removeDuplicateWhitespace('  /ugd 1d100'), expected)
-      assert.strictEqual(cs.removeDuplicateWhitespace('/ugd  1d100'), expected)
-      assert.strictEqual(cs.removeDuplicateWhitespace('/ugd 1d100  '), expected)
-    })
-
-    it('Extra space: Complex dice roll', function () {
-      const expected = '/ugd 2d6 + 6'
-      assert.strictEqual(cs.removeDuplicateWhitespace('/ugd 2d6 + 6'), expected)
-      assert.strictEqual(cs.removeDuplicateWhitespace('/ugd  2d6  +   6'), expected)
-    })
-
-    it('Other', function () {
-      assert.strictEqual(cs.removeDuplicateWhitespace(''), '')
-      assert.strictEqual(cs.removeDuplicateWhitespace('ダイスの駄女神'), 'ダイスの駄女神')
+      assert.strictEqual(cs.removeSubsequentLines(''), '')
+      assert.strictEqual(cs.removeSubsequentLines('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 
@@ -109,19 +85,38 @@ describe('ContentService', function () {
     })
   })
 
-  describe('#removeSubsequentLines()', function () {
-    it('With line breaks', function () {
-      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6\n/ugd 1d3'), '/ugd 2d6 + 6')
-      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6\r\n/ugd 1d3'), '/ugd 2d6 + 6')
-    })
-
-    it('No line breaks', function () {
-      assert.strictEqual(cs.removeSubsequentLines('/ugd 2d6 + 6'), '/ugd 2d6 + 6')
+  describe('#addWhitespaceToBothEnds()', function () {
+    it('Symbol', function () {
+      assert.strictEqual(cs.addWhitespaceToBothEnds('2d6 +6'), '2d6 + 6')
+      assert.strictEqual(cs.addWhitespaceToBothEnds('2d6- 6'), '2d6 - 6')
+      assert.strictEqual(cs.addWhitespaceToBothEnds('2d6*6'), '2d6 * 6')
+      assert.strictEqual(cs.addWhitespaceToBothEnds('2d6 /  6'), '2d6 / 6')
     })
 
     it('Other', function () {
-      assert.strictEqual(cs.removeSubsequentLines(''), '')
-      assert.strictEqual(cs.removeSubsequentLines('ダイスの駄女神'), 'ダイスの駄女神')
+      assert.strictEqual(cs.addWhitespaceToBothEnds(''), '')
+      assert.strictEqual(cs.addWhitespaceToBothEnds('ダイスの駄女神'), 'ダイスの駄女神')
+    })
+  })
+
+  describe('#removeDuplicateWhitespace()', function () {
+    it('Extra space: Simple dice roll', function () {
+      const expected = '1d100'
+      assert.strictEqual(cs.removeDuplicateWhitespace('1d100'), expected)
+      assert.strictEqual(cs.removeDuplicateWhitespace('  1d100'), expected)
+      assert.strictEqual(cs.removeDuplicateWhitespace(' 1d100'), expected)
+      assert.strictEqual(cs.removeDuplicateWhitespace('1d100  '), expected)
+    })
+
+    it('Extra space: Complex dice roll', function () {
+      const expected = '2d6 + 6'
+      assert.strictEqual(cs.removeDuplicateWhitespace('2d6 + 6'), expected)
+      assert.strictEqual(cs.removeDuplicateWhitespace(' 2d6  +   6'), expected)
+    })
+
+    it('Other', function () {
+      assert.strictEqual(cs.removeDuplicateWhitespace(''), '')
+      assert.strictEqual(cs.removeDuplicateWhitespace('ダイスの駄女神'), 'ダイスの駄女神')
     })
   })
 })
