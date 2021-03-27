@@ -28,7 +28,7 @@ export class NSidedDiceCommand implements Command {
         this.outputs[index] = this.inputs[index] + diceCommand.toString()
       }
     }
-    this.total = evaluate(forCalculations.join(''))
+    this.total = Math.floor(evaluate(forCalculations.join('')))
   }
 
   toString () : string {
@@ -38,5 +38,9 @@ export class NSidedDiceCommand implements Command {
     this.outputs.push(this.total.toString())
 
     return this.outputs.join(' ')
+  }
+
+  toNumber (): number {
+    return this.total
   }
 }

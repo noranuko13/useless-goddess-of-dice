@@ -10,4 +10,16 @@ describe('NSidedDiceCommand', function () {
       assert.strictEqual(/:black_circle: 1d100<\d+> \+ 2d6<\d+,\d+> - 1d100<\d+> - 2d6<\d+,\d+> \+ 6 \+ 3 - 6 - 3 = -?\d+/.test(command.toString()), true)
     })
   })
+
+  describe('#toNumber()', function () {
+    it('Number of dice is the total number of times', function () {
+      let command = new NSidedDiceCommand(['9', '/', '3'])
+      command.cast()
+      assert.strictEqual(command.toNumber(), 3)
+
+      command = new NSidedDiceCommand(['9', '/', '2'])
+      command.cast()
+      assert.strictEqual(command.toNumber(), 4)
+    })
+  })
 })
