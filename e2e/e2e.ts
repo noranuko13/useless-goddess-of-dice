@@ -33,7 +33,7 @@ const fn = (content: string): string => {
 const assertTests = (tests: { content: string, pattern: string }[]) => {
   tests.forEach(({ content, pattern }) => {
     const output = fn(content)
-    it(`input: ${content}, output: ${output}`, function () {
+    it(`input: ${content}, output: ${output.replace(/\n/g, '')}`, function () {
       const re = new RegExp(pattern)
       assert.strictEqual(re.test(output), true)
     })
@@ -82,6 +82,21 @@ describe('End To End Testing(E2E)', function () {
       { content: '/ugd choice', pattern: PATTERN_NOT_FOUND_ERROR },
       { content: '/ugd choice 餃子 カレー', pattern: ':black_circle: \\( ＝Д＝\\) (餃子|カレー) ！' },
       { content: '/ugd choice 男 女 男 オカマ', pattern: ':black_circle: \\( ＝Д＝\\) (男|女|オカマ) ！' }
+    ]
+
+    // eslint-disable-next-line mocha/no-setup-in-describe
+    assertTests(tests)
+  })
+
+  describe('Skill', function () {
+    const tests = [
+      { content: '/ugd skill', pattern: PATTERN_NOT_FOUND_ERROR },
+      {
+        content: '/ugd skill 1d100 * 1 目星(80/2) 聞き耳(40+2d6)',
+        pattern: ':black_circle: 1d100<\\d+> \\* 1 = \\d+\n' +
+          ' 　 目星 :black_circle: \\( 80 / 2 \\) = \\d+ 　 :[a-z0-9_]*: .*！\n' +
+          ' 　 聞き耳 :black_circle: \\( 40 \\+ 2d6<[1-6],[1-6]> \\) = \\d+ 　 :[a-z0-9_]*: .*！\n'
+      }
     ]
 
     // eslint-disable-next-line mocha/no-setup-in-describe
