@@ -1,6 +1,5 @@
 import { injectable } from 'tsyringe'
 import { BadCommandError, NotFoundError } from '../@error'
-import { Formula } from '../@static'
 import { ChoiceCommand, Command, NSidedDiceCommand } from '../commands'
 
 @injectable()
@@ -22,7 +21,6 @@ export class ResolverService {
 
     // NSidedDice
     if (/^\d+d\d+$|^\d+$|^\+$|^-$/.test(args[0])) {
-      Formula.validate(content)
       return new NSidedDiceCommand(args)
     }
 

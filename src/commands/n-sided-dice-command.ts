@@ -1,4 +1,5 @@
 import { evaluate } from 'mathjs'
+import { Formula } from '../@static'
 import { Command } from './command.interface'
 import { DiceCommand } from './dice-command'
 
@@ -8,6 +9,7 @@ export class NSidedDiceCommand implements Command {
   private total: number = 0;
 
   constructor (inputs: string[]) {
+    Formula.validate(inputs.join(' '))
     this.inputs = inputs
   }
 
