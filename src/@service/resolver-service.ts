@@ -1,7 +1,6 @@
 import { injectable } from 'tsyringe'
 import { BadCommandError, NotFoundError } from '../@error'
-import { ChoiceCommand, Command, NSidedDiceCommand } from '../commands'
-import { SkillCommand } from '../commands/skill-command'
+import { ChoiceCommand, Command, NSidedDiceCommand, SkillCommand } from '../commands'
 
 @injectable()
 export class ResolverService {
