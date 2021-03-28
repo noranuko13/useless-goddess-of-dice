@@ -59,7 +59,6 @@ export class SkillCommand implements Command {
     if (deme <= point) return Template.common.levels.success
 
     if (deme >= 96) return Template.common.levels.fumble
-    if (deme >= 100 + 1 - oneFifth) return Template.common.levels.fiasco
     return Template.common.levels.failure
   }
 }
