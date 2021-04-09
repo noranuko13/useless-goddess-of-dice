@@ -9,7 +9,7 @@
     "debug": "nodemon",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
-    "test": "mocha test/**/*.ts",
+    "test": "mocha",
     "coverage": "nyc npm run test",
     "e2e": "mocha e2e/e2e.ts"
   },
