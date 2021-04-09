@@ -4,17 +4,17 @@ import { Config } from '../src/config'
 
 describe('Config', function () {
   describe('#isDebug()', function () {
-    it('UGD_DEBUG=0', function () {
+    it('UGD_DEBUG=off', function () {
       process.env = {
-        UGD_DEBUG: '0'
+        UGD_DEBUG: 'off'
       }
       const config: Config = new Config()
       assert.strictEqual(config.isDebug(), false)
     })
 
-    it('UGD_DEBUG=1', function () {
+    it('UGD_DEBUG=on', function () {
       process.env = {
-        UGD_DEBUG: '1'
+        UGD_DEBUG: 'on'
       }
       const config: Config = new Config()
       assert.strictEqual(config.isDebug(), true)
@@ -50,18 +50,18 @@ describe('Config', function () {
       assert.strictEqual(config.getLogLevel(), 'trace')
     })
 
-    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=0', function () {
+    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=off', function () {
       process.env = {
-        UGD_DEBUG: '0',
+        UGD_DEBUG: 'off',
         UGD_LOG_LEVEL: 'dummy'
       }
       const config: Config = new Config()
       assert.strictEqual(config.getLogLevel(), 'error')
     })
 
-    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=1', function () {
+    it('UGD_LOG_LEVEL!=TLogLevelName and UGD_DEBUG=on', function () {
       process.env = {
-        UGD_DEBUG: '1',
+        UGD_DEBUG: 'on',
         UGD_LOG_LEVEL: 'dummy'
       }
       const config: Config = new Config()

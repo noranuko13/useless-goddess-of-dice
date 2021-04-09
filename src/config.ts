@@ -26,7 +26,7 @@ export class Config {
   }
 
   isDebug (): boolean {
-    return this.env.UGD_DEBUG === '1'
+    return this.env.UGD_DEBUG === 'on'
   }
 
   getToken (): string {

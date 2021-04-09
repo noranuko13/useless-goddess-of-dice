@@ -5,17 +5,17 @@ import { Config } from '../../src/config'
 
 describe('LoggerService', function () {
   describe('Create instance', function () {
-    it('UGD_DEBUG=0', function () {
+    it('UGD_DEBUG=off', function () {
       process.env = {
-        UGD_DEBUG: '0'
+        UGD_DEBUG: 'off'
       }
       const service = new LoggerService(new Config())
       assert.strictEqual(service.getLogger().settings.type, 'json')
     })
 
-    it('UGD_DEBUG=1', function () {
+    it('UGD_DEBUG=on', function () {
       process.env = {
-        UGD_DEBUG: '1'
+        UGD_DEBUG: 'on'
       }
       const service = new LoggerService(new Config())
       assert.strictEqual(service.getLogger().settings.type, 'pretty')
