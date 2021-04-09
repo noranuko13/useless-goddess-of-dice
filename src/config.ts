@@ -26,14 +26,26 @@ export class Config {
   }
 
   isDebug (): boolean {
+    if (!this.env.UGD_DEBUG) {
+      return false
+    }
+    if (!['on', 'off'].includes(this.env.UGD_DEBUG)) {
+      throw ReferenceError('UGD_DEBUG is invalid.')
+    }
     return this.env.UGD_DEBUG === 'on'
   }
 
   getToken (): string {
+    if (!this.env.UGD_DISCORD_TOKEN) {
+      throw ReferenceError('UGD_DISCORD_TOKEN is required.')
+    }
     return this.env.UGD_DISCORD_TOKEN
   }
 
   getPrefix (): string {
+    if (!this.env.UGD_COMMAND_PREFIX) {
+      return '/ugd'
+    }
     return this.env.UGD_COMMAND_PREFIX
   }
 
