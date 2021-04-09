@@ -12,6 +12,15 @@ A clear and concise description of what the problem is. Ex. I'm always frustrate
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.
 
+Input:
+```shell
+/ugd 1d100
+```
+Output:
+```text
+:black_circle: 1d100<61> = 61
+```
+
 **Describe alternatives you've considered**
 A clear and concise description of any alternative solutions or features you've considered.
 
