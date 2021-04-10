@@ -54,11 +54,11 @@ export class SkillCommand implements Command {
     const deme: number = this.nSidedDice.toNumber()
     const oneFifth = Math.floor(point / 5)
 
-    if (deme <= 5) return Template.common.levels.critical
-    if (deme <= oneFifth) return Template.common.levels.special
-    if (deme <= point) return Template.common.levels.success
+    if (deme <= 5) return Template.messages.levels.critical
+    if (deme <= oneFifth) return Template.messages.levels.special
+    if (deme <= point) return Template.messages.levels.success
 
-    if (deme >= 96) return Template.common.levels.fumble
-    return Template.common.levels.failure
+    if (deme >= 96) return Template.messages.levels.fumble
+    return Template.messages.levels.failure
   }
 }
