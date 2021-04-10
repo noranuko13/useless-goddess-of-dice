@@ -19,7 +19,7 @@ describe('NotFoundError', function () {
       }
 
       assert.strictEqual(actual.name, 'NotFoundError')
-      assert.strictEqual(actual.message, '疲れてるの？(´・д・)引数がないの・・・')
+      assert.strictEqual(actual.message, 'Not found error!')
     })
   })
 })

@@ -7,11 +7,11 @@
     "fumble": ":octopus: Fumble!"
   },
   "error": {
-    "badCommand": "駄女神わかんにゃーい(´・ω・)",
-    "notFound": "疲れてるの？(´・д・)引数がないの・・・",
-    "wrongFormula": "( 3ω3) < Hi! :MESSAGE:"
+    "badCommand": "Bad command error!",
+    "notFound": "Not found error!",
+    "wrongFormula": "Wrong formula: :MESSAGE:"
   },
   "commands": {
-    "choiceCommand": "( ＝Д＝) :WORD: ！"
+    "choiceCommand": ":WORD:"
   }
 }

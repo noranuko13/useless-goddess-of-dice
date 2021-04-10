@@ -19,7 +19,7 @@ describe('WrongFormulaError', function () {
       }
 
       assert.strictEqual(actual.name, 'WrongFormulaError')
-      assert.strictEqual(actual.message, '( 3ω3) < Hi! WrongFormulaError')
+      assert.strictEqual(actual.message, 'Wrong formula: WrongFormulaError')
     })
   })
 })

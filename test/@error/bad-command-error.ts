@@ -19,7 +19,7 @@ describe('BadCommandError', function () {
       }
 
       assert.strictEqual(actual.name, 'BadCommandError')
-      assert.strictEqual(actual.message, '駄女神わかんにゃーい(´・ω・)')
+      assert.strictEqual(actual.message, 'Bad command error!')
     })
   })
 })
