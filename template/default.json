@@ -1,10 +1,10 @@
 {
   "levels": {
-    "critical": ":star2: クリティカル！",
-    "special": ":dizzy: スペシャル！",
-    "success": ":green_circle: 成功！",
-    "failure": ":red_circle: 失敗！",
-    "fumble": ":octopus: ファンブル！"
+    "critical": ":star2: Critical!",
+    "special": ":dizzy: Special!",
+    "success": ":green_circle: Success!",
+    "failure": ":red_circle: Failure!",
+    "fumble": ":octopus: Fumble!"
   },
   "error": {
     "badCommand": "駄女神わかんにゃーい(´・ω・)",
