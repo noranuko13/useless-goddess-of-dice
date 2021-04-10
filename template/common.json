@@ -1,9 +1,0 @@
-{
-  "levels": {
-    "critical": ":star2: クリティカル！",
-    "special": ":dizzy: スペシャル！",
-    "success": ":green_circle: 成功！",
-    "failure": ":red_circle: 失敗！",
-    "fumble": ":octopus: ファンブル！"
-  }
-}
