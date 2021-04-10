@@ -40,8 +40,8 @@ const assertTests = (tests: { content: string, pattern: string }[]) => {
   })
 }
 
-const PATTERN_BAD_COMMAND_ERROR = '駄女神わかんにゃーい\\(´・ω・\\)'
-const PATTERN_NOT_FOUND_ERROR = '疲れてるの？\\(´・д・\\)引数がないの・・・'
+const PATTERN_BAD_COMMAND_ERROR = 'Bad command error!'
+const PATTERN_NOT_FOUND_ERROR = 'Not found error!'
 
 describe('End To End Testing(E2E)', function () {
   describe('Base', function () {
@@ -80,8 +80,8 @@ describe('End To End Testing(E2E)', function () {
   describe('Choice', function () {
     const tests = [
       { content: '/ugd choice', pattern: PATTERN_NOT_FOUND_ERROR },
-      { content: '/ugd choice 餃子 カレー', pattern: ':black_circle: \\( ＝Д＝\\) (餃子|カレー) ！' },
-      { content: '/ugd choice 男 女 男 オカマ', pattern: ':black_circle: \\( ＝Д＝\\) (男|女|オカマ) ！' }
+      { content: '/ugd choice 餃子 カレー', pattern: ':black_circle: (餃子|カレー)' },
+      { content: '/ugd choice 男 女 男 オカマ', pattern: ':black_circle: (男|女|オカマ)' }
     ]
 
     // eslint-disable-next-line mocha/no-setup-in-describe

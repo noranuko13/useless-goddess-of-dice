@@ -7,7 +7,7 @@ describe('ChoiceCommand', function () {
     it('No duplication', function () {
       const command: ChoiceCommand = new ChoiceCommand(['餃子', 'カレー'])
       command.cast()
-      assert.strictEqual(/:black_circle: \( ＝Д＝\) (餃子|カレー) ！/.test(command.toString()), true)
+      assert.strictEqual(/:black_circle: (餃子|カレー)/.test(command.toString()), true)
     })
   })
 })
