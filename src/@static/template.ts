@@ -1,12 +1,12 @@
-type CommonType = typeof import('../../template/common.json')
-type TemplateType = typeof import('../../template/messages/default.json')
+type CommonType = typeof import('../../template/default.json')
+type TemplateType = typeof import('../../template/default.json')
 
 export class Template {
   static get common (): CommonType {
-    return require('../../template/common.json')
+    return require('../../template/default.json')
   }
 
   static get messages (): TemplateType {
-    return require('../../template/messages/default.json')
+    return require('../../template/default.json')
   }
 }
