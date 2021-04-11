@@ -18,8 +18,8 @@ describe('ResolverService', function () {
     })
 
     it('ChoiceCommand', function () {
-      assert.deepStrictEqual(resolver.getCommand('choice 男 女'), new ChoiceCommand(['男', '女']))
-      assert.deepStrictEqual(resolver.getCommand('choice 餃子 カレー'), new ChoiceCommand(['餃子', 'カレー']))
+      assert.deepStrictEqual(resolver.getCommand('choice Pancake Tiramisu'), new ChoiceCommand(['Pancake', 'Tiramisu']))
+      assert.deepStrictEqual(resolver.getCommand('choice Gyoza Curry'), new ChoiceCommand(['Gyoza', 'Curry']))
     })
 
     it('NotFoundError, BadCommandError', function () {

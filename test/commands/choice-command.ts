@@ -5,9 +5,9 @@ import { ChoiceCommand } from '../../src/commands'
 describe('ChoiceCommand', function () {
   describe('#cast(), #toString()', function () {
     it('No duplication', function () {
-      const command: ChoiceCommand = new ChoiceCommand(['餃子', 'カレー'])
+      const command: ChoiceCommand = new ChoiceCommand(['Gyoza', 'Curry'])
       command.cast()
-      assert.strictEqual(/:black_circle: (餃子|カレー)/.test(command.toString()), true)
+      assert.strictEqual(/:black_circle: (Gyoza|Curry)/.test(command.toString()), true)
     })
   })
 })

@@ -80,8 +80,8 @@ describe('End To End Testing(E2E)', function () {
   describe('Choice', function () {
     const tests = [
       { content: '/ugd choice', pattern: PATTERN_NOT_FOUND_ERROR },
-      { content: '/ugd choice 餃子 カレー', pattern: ':black_circle: (餃子|カレー)' },
-      { content: '/ugd choice 男 女 男 オカマ', pattern: ':black_circle: (男|女|オカマ)' }
+      { content: '/ugd choice Gyoza Curry', pattern: ':black_circle: (Gyoza|Curry)' },
+      { content: '/ugd choice Pancake Tiramisu Pancake Churros', pattern: ':black_circle: (Pancake|Tiramisu|Churros)' }
     ]
 
     // eslint-disable-next-line mocha/no-setup-in-describe
@@ -92,10 +92,10 @@ describe('End To End Testing(E2E)', function () {
     const tests = [
       { content: '/ugd skill', pattern: PATTERN_NOT_FOUND_ERROR },
       {
-        content: '/ugd skill 1d100 * 1 目星(80/2) 聞き耳(40+2d6)',
+        content: '/ugd skill 1d100 * 1 SpotHidden(80/2) Listen(40+2d6)',
         pattern: ':black_circle: 1d100<\\d+> \\* 1 = \\d+\n' +
-          ' 　 目星 :black_circle: \\( 80 / 2 \\) = \\d+ 　 :[a-z0-9_]*: .*！\n' +
-          ' 　 聞き耳 :black_circle: \\( 40 \\+ 2d6<[1-6],[1-6]> \\) = \\d+ 　 :[a-z0-9_]*: .*！\n'
+          ' 　 SpotHidden :black_circle: \\( 80 / 2 \\) = \\d+ 　 :[a-z0-9_]*: .*！\n' +
+          ' 　 Listen :black_circle: \\( 40 \\+ 2d6<[1-6],[1-6]> \\) = \\d+ 　 :[a-z0-9_]*: .*！\n'
       }
     ]
 
