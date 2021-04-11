@@ -94,8 +94,8 @@ describe('End To End Testing(E2E)', function () {
       {
         content: '/ugd skill 1d100 * 1 SpotHidden(80/2) Listen(40+2d6)',
         pattern: ':black_circle: 1d100<\\d+> \\* 1 = \\d+\n' +
-          ' 　 SpotHidden :black_circle: \\( 80 / 2 \\) = \\d+ 　 :[a-z0-9_]*: .*！\n' +
-          ' 　 Listen :black_circle: \\( 40 \\+ 2d6<[1-6],[1-6]> \\) = \\d+ 　 :[a-z0-9_]*: .*！\n'
+          ' 　 SpotHidden :black_circle: \\( 80 / 2 \\) = \\d+ 　 :[a-z0-9_]*: .*!\n' +
+          ' 　 Listen :black_circle: \\( 40 \\+ 2d6<[1-6],[1-6]> \\) = \\d+ 　 :[a-z0-9_]*: .*!\n'
       }
     ]
 
