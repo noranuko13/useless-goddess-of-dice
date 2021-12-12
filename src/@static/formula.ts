@@ -9,8 +9,6 @@ export class Formula {
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new WrongFormulaError(error.message)
-      } else {
-        throw error
       }
     }
   }
