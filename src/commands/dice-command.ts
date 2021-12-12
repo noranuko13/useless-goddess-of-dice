@@ -3,11 +3,11 @@ import { Calc } from '../@static'
 import { Command } from './command.interface'
 
 export class DiceCommand implements Command {
-  private readonly ndm: string;
-  private readonly time: number;
-  private readonly side: number;
-  private dices: number[] = [];
-  private total: number = 0;
+  private readonly ndm: string
+  private readonly time: number
+  private readonly side: number
+  private dices: number[] = []
+  private total: number = 0
 
   constructor (ndm: string) {
     const numbers = ndm.match(/^(\d+)d(\d+)$/)

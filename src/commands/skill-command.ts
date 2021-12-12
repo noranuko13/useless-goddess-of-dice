@@ -4,8 +4,8 @@ import { NSidedDiceCommand } from './n-sided-dice-command'
 import { SkillDiceCommand } from './skill-dice-command'
 
 export class SkillCommand implements Command {
-  private readonly nSidedDice: NSidedDiceCommand;
-  private readonly skillDices: SkillDiceCommand[] = [];
+  private readonly nSidedDice: NSidedDiceCommand
+  private readonly skillDices: SkillDiceCommand[] = []
 
   constructor (inputs: string[]) {
     const nameArgs: string[] = []

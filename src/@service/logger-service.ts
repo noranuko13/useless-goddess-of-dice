@@ -4,7 +4,7 @@ import { Config } from '../config'
 
 @injectable()
 export class LoggerService {
-  private readonly logger: Logger;
+  private readonly logger: Logger
 
   constructor (private config: Config) {
     this.logger = new Logger({
