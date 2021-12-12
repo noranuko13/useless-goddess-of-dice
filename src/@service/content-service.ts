@@ -7,7 +7,7 @@ export class ContentService {
 
   removeCommandPrefix (content: string) {
     content = content.replace(this.config.getPrefix(), '')
-    return content.trimLeft()
+    return content.trimStart()
   }
 
   addWhitespaceToBothEnds (content: string, pattern: string = '+\\-*/()') {
