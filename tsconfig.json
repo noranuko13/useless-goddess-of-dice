@@ -6,7 +6,6 @@
     "target": "ES2019",
     "module": "CommonJS",
     "outDir": "./dist",
-    "removeComments": true,
 
     /* Strict Type-Checking Options */
     "strict": true,

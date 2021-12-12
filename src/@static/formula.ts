@@ -7,6 +7,7 @@ export class Formula {
       const formula = content.replace(/\d+d\d+/g, '0')
       evaluate(formula)
     } catch (error: unknown) {
+      /* istanbul ignore else  */
       if (error instanceof Error) {
         throw new WrongFormulaError(error.message)
       }
