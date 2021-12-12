@@ -4,9 +4,9 @@ import { Command } from './command.interface'
 import { DiceCommand } from './dice-command'
 
 export class NSidedDiceCommand implements Command {
-  private readonly inputs: string[];
-  private outputs: string[] = [];
-  private total: number = 0;
+  private readonly inputs: string[]
+  private outputs: string[] = []
+  private total: number = 0
 
   constructor (inputs: string[]) {
     Formula.validate(inputs.join(' '))

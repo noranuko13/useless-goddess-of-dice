@@ -2,8 +2,8 @@ import { Calc, Template } from '../@static'
 import { Command } from './command.interface'
 
 export class ChoiceCommand implements Command {
-  private readonly words: string[];
-  private index: number = 0;
+  private readonly words: string[]
+  private index: number = 0
 
   constructor (words: string[]) {
     this.words = words

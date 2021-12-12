@@ -3,8 +3,8 @@ import { Command } from './command.interface'
 import { NSidedDiceCommand } from './n-sided-dice-command'
 
 export class SkillDiceCommand implements Command {
-  names: string[] = [];
-  nSidedDice: NSidedDiceCommand;
+  names: string[] = []
+  nSidedDice: NSidedDiceCommand
 
   constructor (inputs: string[]) {
     const index: number = inputs.lastIndexOf('(')
