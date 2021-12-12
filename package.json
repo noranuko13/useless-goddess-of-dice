@@ -16,7 +16,6 @@
   "license": "MIT",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@types/mathjs": "^9.4.1",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.13",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
