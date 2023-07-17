@@ -57,7 +57,7 @@ export class Kernel {
     if (message.member?.displayHexColor) {
       embed.setColor(message.member?.displayHexColor)
     }
-    message.channel.send({ embed: embed }).catch((error) => {
+    message.channel.send({ embed }).catch((error) => {
       this.loggerService.getLogger().error(error)
     }).then(() => {
       this.loggerService.getLogger().info('End message event.')

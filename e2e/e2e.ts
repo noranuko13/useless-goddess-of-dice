@@ -19,7 +19,7 @@ const fn = (content: string): string => {
   const message = {
     author: { bot: false },
     member: { displayHexColor: 'DEFAULT' },
-    content: content,
+    content,
     channel: {
       send: (message: MessageOptions): Promise<Message> => {
         str = message.embed?.description ?? 'NONE'
